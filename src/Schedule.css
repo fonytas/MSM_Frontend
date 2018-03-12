@@ -55,7 +55,7 @@ body{
 
     margin: auto;
     width:90%;
-    height:70%;
+    height:60%;
     border: solid #e23c52 0.1rem;
     /*background-color: white;*/
     /*opacity: .3;*/
@@ -84,6 +84,14 @@ body{
 
 }
 
+.S-footer{
+    position: relative;
+    background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");
+    height: 10.1rem;
+    bottom:18rem;
+    transform: rotateX(180deg);
+}
+
 
 
 .Left-panel button {
@@ -91,7 +99,7 @@ body{
     /*height: 100%;*/
 
     width: 8.1rem;
-    height: 4.5rem;
+    height: 4rem;
 
 
     vertical-align: middle;

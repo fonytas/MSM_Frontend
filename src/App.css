@@ -15,6 +15,14 @@ Header{
 
 /*}*/
 
+Footer{
+  position: relative;
+  background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");
+  height: 10.1rem;
+  top:33rem;
+  transform: rotateX(180deg);
+
+}
 .App-title{
   position: relative;
   top: 3rem;

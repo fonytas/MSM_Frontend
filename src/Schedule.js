@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Schedule.css';
+
 // import Background from '/Users/fonytas/Desktop/project/msm/src/photo/5 Blurred Backgrounds Vol.2/03.jpg';
 
 import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
@@ -17,7 +18,11 @@ const Isize = {
 
 };
 
+
 class Schedule extends Component{
+
+
+
     render(){
         return <div className={"Main"}>
 
@@ -31,6 +36,7 @@ class Schedule extends Component{
 
 
                 <div className={"S-body"}>
+
 
                     <div className={"Left-panel"}>
 
@@ -87,18 +93,17 @@ class Schedule extends Component{
                         </div>
 
 
-
-
-
                     </div>
-
 
 
 
                 </div>
 
 
+
             </div>
+            <div className={"S-footer"}></div>
+
 
 
         </div>
