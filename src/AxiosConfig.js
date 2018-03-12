@@ -1,0 +1,12 @@
+import Axios from "axios";
+
+
+export default Axios.create({
+  baseURL: 'http://localhost:3000',
+  withCredentials: true,
+  headers: {
+    common: {
+      Accept: 'application/json'
+    },
+  }
+})

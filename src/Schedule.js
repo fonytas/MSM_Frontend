@@ -4,6 +4,8 @@ import './Schedule.css';
 
 import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
 
+import axios from "./AxiosConfig";
+
 
 // var sectionStyle = {
 //     backgroundImage: `url(${Background})`

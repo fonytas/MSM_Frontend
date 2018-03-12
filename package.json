@@ -8,6 +8,7 @@
     "css-loader": "^0.28.10",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
+    "frameworks": "webpack",
     "react": "^16.2.0",
     "react-body-images": "^1.0.1",
     "react-dom": "^16.2.0",
