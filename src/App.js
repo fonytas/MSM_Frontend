@@ -85,6 +85,11 @@ registerInfo(e){
 
 
     }
+    login(e){
+        e.preventDefault();
+        this.props.history.push("/schedule")
+
+    }
 
     componentDidMount(){
 
@@ -128,7 +133,7 @@ registerInfo(e){
                           <div className="Signin">Sign In</div>
                           <input type="text" placeholder="Username" required/>
                           <input type="password" placeholder="Password" required/>
-                          <button >login</button>
+                          <button onClick={(e) => this.login(e) }>login</button>
 
                           <p className="message">Not registered? <a href={"#register-form"}>Create an account</a></p>
 
