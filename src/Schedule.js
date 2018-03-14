@@ -27,6 +27,8 @@ class Schedule extends Component{
         return <div className={"Main"}>
 
             <header className={"Header"}>
+
+
                 {/*<h>This is header</h>*/}
                 <p className="Schedule-title">My Schedule</p>
             </header>
@@ -34,8 +36,8 @@ class Schedule extends Component{
             <div className="Body-S">
 
 
-
                 <div className={"S-body"}>
+
 
 
                     <div className={"Left-panel"}>
