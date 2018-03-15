@@ -1,0 +1,27 @@
+.Table{
+    overflow: scroll;
+    position: relative;
+    top:5rem;
+    margin: 0rem 2rem 0rem 2rem;
+    font-size: 0.8rem;
+}
+
+.AddButton{
+    position: relative;
+    font-family: "Geneva";
+    left: 33%;
+    background-color:#e23c52;
+    color: white;
+    font-size: 1rem;
+    /*color: white;*/
+    /*text-align: center;*/
+    /*border: 0.1rem solid black;*/
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+
+.AddButton:hover {
+    background-color: #e786ab; /* Green */
+    color: white;
+}

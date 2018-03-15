@@ -52,6 +52,8 @@ body{
 
 
 .S-body{
+    position: relative;
+    top: 6rem;
 
     margin: auto;
     width:90%;

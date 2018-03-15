@@ -104,7 +104,8 @@ class Schedule extends Component{
 
 
             </div>
-            <div className={"S-footer"}></div>
+            {/*<div className={"S-footer"}></div>*/}
+            <footer className={"App-footer"}></footer>
 
 
 

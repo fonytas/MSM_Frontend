@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
+import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
+
 import axios from "./AxiosConfig";
 
 // import Background from '/Users/fonytas/Desktop/project/msm/src/photo/cloud.jpg';
@@ -12,7 +14,10 @@ import axios from "./AxiosConfig";
 //     backgroundImage: `url(${Background})`
 // };
 
+const Isize = {
+    fontSize: '2.1rem'
 
+};
 // localhost:{port}/user/register/{username}/{email}/{password}
 
 class App extends Component {
@@ -119,8 +124,11 @@ registerInfo(e){
                       <form id="login-form" className={this.state.regClass}>
 
                           <div className="Signin">Register</div>
-                          <input type="text" placeholder="Username" required  onChange={this.updateInputValue} />
-                          <input type="text" placeholder="Email" required  onChange={this.updateEmailValue} />
+                          {/*<span><Icon name=" fa-user" style={Isize}/></span>*/}
+
+                          <input  type="text" placeholder="Username" required  onChange={this.updateInputValue} />
+
+                          <input type="email" placeholder="Email" required  onChange={this.updateEmailValue} />
                           <input type="password" placeholder="Password" required onChange={this.updatePasswordValue}/>
                           <input type="password" placeholder="Confirm password" required onChange={this.updateccPasswordValue}/>
                           <button onClick ={ (e) => this.registerInfo(e)}>create</button>
@@ -142,7 +150,7 @@ registerInfo(e){
                   </div>
               </div>
 
-              <footer className={"App-footer"}></footer>
+              <footer className={"App-footer"}> </footer>
 
           </div>
         );
