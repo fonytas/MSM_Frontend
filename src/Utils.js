@@ -10,22 +10,38 @@ const range = len => {
     return arr;
 };
 
+
+// {id: "CRS000333 SEC027705", subject: "ICCM104 Intermediate English Communication I 4(4-0-8)", type: "master",
+//     section: 2, capacity: 20, time: "Mon 14:00 - 15:50 Wed 14:00 - 15:50", room: 5308, instructor: "Mariejoy ",
+//     final: "Thu 21-07-2016 08:00 - 09:50"};
+
 const newPerson = () => {
     const statusChance = Math.random();
     return {
-        firstName: namor.generate({ words: 1, numbers: 0 }),
-        lastName: namor.generate({ words: 1, numbers: 0 }),
-        age: Math.floor(Math.random() * 30),
-        visits: Math.floor(Math.random() * 100),
-        progress: Math.floor(Math.random() * 100),
-        status:
-            statusChance > 0.66
-                ? "relationship"
-                : statusChance > 0.33 ? "complicated" : "single"
+        id: "CRS000333 SEC027705",
+        subject: "ICCM104 Intermediate English Communication I 4(4-0-8)",
+        type: "master",
+        section: 2,
+        capacity: 20,
+        time: "Mon 14:00 - 15:50 Wed 14:00 - 15:50",
+        room: 5308,
+        instructor: "Mariejoy ",
+        final: "Thu 21-07-2016 08:00 - 09:50"
+
+
+        // firstName: namor.generate({ words: 1, numbers: 0 }),
+        // lastName: namor.generate({ words: 1, numbers: 0 }),
+        // age: Math.floor(Math.random() * 30),
+        // visits: Math.floor(Math.random() * 100),
+        // progress: Math.floor(Math.random() * 100),
+        // status:
+        //     statusChance > 0.66
+        //         ? "relationship"
+        //         : statusChance > 0.33 ? "complicated" : "single"
     };
 };
 
-export function makeData(len = 2000) {
+export function makeData(len = 200) {
     return range(len).map(d => {
         return {
             ...newPerson(),

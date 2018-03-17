@@ -40,12 +40,24 @@ Footer{
   /*background:#999;*/
 
 }
-.App-title{
+
+.BG{
   position: relative;
-  top: 1.5rem;
-  padding: 1rem 25rem 1rem 25rem;
+  top: 3rem;
+  height: 6rem;
+  /*padding: 0rem 25rem 1rem 25rem;*/
 
   border: 0.05rem solid #e23c52 ;
+  background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+.App-title2{
+  position: relative;
+  top: -1rem;
+  /*padding: 1rem 25rem 3rem 25rem;*/
+
+  /*border: 0.05rem solid #e23c52 ;*/
   font-size: 2rem ;
   font-weight: bold;
   font-family: "Geneva";
@@ -54,7 +66,22 @@ Footer{
   color: #e23c52;
   text-shadow: 3px 1px white;
 
-  background-color: rgba(255, 255, 255, 0.5);
+  /*background-color: rgba(255, 255, 255, 0.6);*/
+}
+
+
+.App-title{
+  position: relative;
+  top: 0.5rem;
+
+  font-size: 2rem ;
+  font-weight: bold;
+  font-family: "Geneva";
+  text-align: center;
+
+  color: #e23c52;
+  text-shadow: 3px 1px white;
+
 }
 
 

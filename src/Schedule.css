@@ -17,6 +17,8 @@ body{
     height: 50rem;
 }
 
+
+
 .Schedule-title {
     /*position: relative;*/
     /*font-family: "Geneva";*/
@@ -27,10 +29,11 @@ body{
     /*letter-spacing: 0.1rem;*/
     /*color: #e23c52;*/
     position: relative;
-    top: 3rem;
+    top: 1rem;
 
 
-    padding: 1rem 25rem 1rem 25rem;
+    /*padding: 1rem 25rem 1rem 25rem;*/
+    padding: 0rem 25rem 3rem 25rem;
 
     border: 0.05rem solid #e23c52 ;
     font-size: 2rem ;
@@ -119,6 +122,7 @@ body{
     transition: all 0.3s ease;
     margin: 1.1rem;
     /*padding: 0.25rem 1rem;*/
+    cursor: pointer;
 
 
 

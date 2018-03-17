@@ -111,8 +111,17 @@ registerInfo(e){
         return (
           <div className="App">
 
+              {/*<div className={"BG"}>*/}
+                  {/*<h1 className={"App-title"}>MUIC Open Section</h1>*/}
+
+
+              {/*</div>*/}
               <header className={"App-header"}>
-                  <h1 className={"App-title"}>MUIC Schedule Maker</h1>
+                  <div className={"BG"}>
+                      <h1 className={"App-title"}>MUIC Schedule Maker</h1>
+
+                  </div>
+
               </header>
 
               <div className ="App-body">

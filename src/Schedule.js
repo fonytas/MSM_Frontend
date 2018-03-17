@@ -30,7 +30,11 @@ class Schedule extends Component{
 
 
                 {/*<h>This is header</h>*/}
-                <p className="Schedule-title">My Schedule</p>
+                <div className={"BG"}>
+                    <h1 className="App-title2">My Schedule</h1>
+
+                </div>
+                {/*<h1 className="Schedule-title">My Schedule</h1>*/}
             </header>
 
             <div className="Body-S">

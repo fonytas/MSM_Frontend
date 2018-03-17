@@ -21,6 +21,7 @@ const requestData = (pageSize, page, sorted, filtered) => {
         if (filtered.length) {
             filteredData = filtered.reduce((filteredSoFar, nextFilter) => {
                 return filteredSoFar.filter(row => {
+                    // console.log(row[nextFilter.id] + "").ignoreCase.incl);
                     return (row[nextFilter.id] + "").includes(nextFilter.value);
                 });
             }, filteredData);
@@ -90,42 +91,72 @@ class OpenSection extends React.Component {
         return (
             <div>
                 <header className={"App-header"}>
-                    <h1 className={"App-title"}>MUIC Open Section</h1>
+                    <div className={"BG"}>
+                        <h1 className={"App-title2"}>MUIC Open Section</h1>
+                        
+
+
+                    </div>
+                    {/*<h1 className={"App-title"}>MUIC Open Section</h1>*/}
+
+
                 </header>
                 <div className={"Table"}>
-                <ReactTable
-                    columns={[
+                <ReactTable  //striped
+
+                    columns={ [
                         {
                             Header: "ID",
-                            // accessor: "firstName"
+                            accessor: "id",
+                            // minWidth: 100,
+                            maxWidth: 100,
+                            style:{ "whiteSpace": "normal"}
+
                         },
                         {
                             Header: "Subject",
+                            accessor: "subject",
+                            maxWidth: 500,
                             // id: "lastName",
                             // accessor: d => d.lastName
+                            style:{ "whiteSpace": "normal"}
                         },
                         {
                             Header: "Type",
-                            // accessor: "age"
+                            accessor: "type",
+                            maxWidth:75
                         },
                         {
-                            Header: "Section"
+                            Header: "Section",
+                            accessor: "section",
+                            maxWidth:75
                         },
                         {
-                            Header: "Time"
+                            Header: "Time",
+                            accessor: "time",
+                            maxWidth: 126.5,
+                            style:{ "whiteSpace": "normal"}
                         },
                         {
-                            Header: "Room"
+                            Header: "Room",
+                            accessor: "room",
+                            maxWidth:100
                         },
                         {
-                            Header: "Instructor"
+                            Header: "Instructor",
+                            accessor: "instructor",
+                            maxWidth: 200
                         },
                         {
-                            Header: "Final"
+                            Header: "Final",
+                            accessor: "final",
+                            style:{ "whiteSpace": "normal"},
+                            maxWidth: 121
                         },
                         {
                             // Header: "ADD",
-                            Cell:(<button className={"AddButton"}>ADD</button>)
+                            Cell:(<button className={"AddButton"}>ADD</button>),
+                            maxWidth:75,
                         }
                     ]}
                     manual // Forces table not to paginate or sort automatically, so we can handle it server-side
@@ -135,7 +166,8 @@ class OpenSection extends React.Component {
                     onFetchData={this.fetchData} // Request new data when things change
                     filterable
                     defaultPageSize={10}
-                    className="OpenSectionTable"
+                    className="-striped -highlight"
+
                 />
                 </div>
                 <br />
