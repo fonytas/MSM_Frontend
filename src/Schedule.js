@@ -19,7 +19,14 @@ const Isize = {
 };
 
 
+
+
 class Schedule extends Component{
+
+    goTo(e){
+        e.preventDefault();
+        this.props.history.push("/opensection");
+    }
 
 
 
@@ -48,8 +55,7 @@ class Schedule extends Component{
 
                         <div className={"Add-course"}>
 
-
-                            <button><Icon name=" fa-plus-circle" style={Isize}/> <br/>Add Course<br/></button>
+                            <button onClick={(e) => this.goTo(e)}><Icon name=" fa-plus-circle" style={Isize}/> <br/>Add Course<br/></button>
                         </div>
                         {/*fa-plus-circle*/}
 

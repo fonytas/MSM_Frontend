@@ -92,7 +92,14 @@ registerInfo(e){
     }
     login(e){
         e.preventDefault();
+
+
+        /// check if the username and password are correct from database
+
+        // if YES
         this.props.history.push("/schedule")
+
+        // if NO, display the warning
 
     }
 

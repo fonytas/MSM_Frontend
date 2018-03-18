@@ -10,6 +10,8 @@ import "react-table/react-table.css";
 import { makeData} from "./Utils";
 
 
+import {Icon} from 'react-fa';
+
 const rawData = makeData();
 
 const requestData = (pageSize, page, sorted, filtered) => {
@@ -53,6 +55,13 @@ const requestData = (pageSize, page, sorted, filtered) => {
     });
 };
 
+
+const Isize = {
+    fontSize: '1.5rem'
+
+};
+
+
 class OpenSection extends React.Component {
     constructor() {
         super();
@@ -83,6 +92,11 @@ class OpenSection extends React.Component {
         });
     }
 
+    goBack(e){
+        e.preventDefault();
+        this.props.history.push("/schedule");
+    }
+
     // {id: "CRS000333 SEC027705", subject: "ICCM104 Intermediate English Communication I 4(4-0-8)", type: "master",
 //     section: 2, capacity: 20, time: "Mon 14:00 - 15:50 Wed 14:00 - 15:50", room: 5308, instructor: "Mariejoy ",
 //     final: "Thu 21-07-2016 08:00 - 09:50"};
@@ -93,7 +107,17 @@ class OpenSection extends React.Component {
                 <header className={"App-header"}>
                     <div className={"BG"}>
                         <h1 className={"App-title2"}>MUIC Open Section</h1>
-                        
+                        <a href="#" className="back" onClick={(e) => this.goBack(e)}>
+                            <div></div>
+                            <h2>Back</h2>
+                            <span> Back to Schedule</span>
+                        </a>
+
+                        <nav>
+                        <ul class="navbar-right">
+                            <li><a href="#" id="cart"><Icon name=" fa-list-ul" style={Isize}/> Cart <span class="badge">3</span></a></li>
+                        </ul>
+                        </nav>
 
 
                     </div>

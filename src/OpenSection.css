@@ -29,3 +29,156 @@
     background-color: #e786ab; /* Green */
     color: white;
 }
+
+.back {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 10px 10px 40px;
+    top: -5rem;
+    left: 8rem;
+}
+
+.back h2 {
+
+    color:#e23c52;
+    font-size: 16px;
+    transform: translateY(8px);
+    transition: transform 500ms 0s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.back span {
+
+    font-family: "Geneva";
+    opacity: 0;
+    color:  #e786ab;
+    font-size: 15px;
+    font-weight: 300;
+    display: inline-block;
+    transform: translateY(10px);
+    transition:
+            transform 500ms 0s cubic-bezier(0.2, 0, 0, 1),
+            opacity 500ms 0s cubic-bezier(0.2, 0, 0, 1)
+}
+
+.back div {
+    top: 1.5rem;
+    left: 0;
+    content: '';
+    width: 30px;
+    height: 30px;
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(1);
+    background-color: #E9E7F2;
+    transition: transform 400ms 0s cubic-bezier(0.2, 0, 0, 1.6);
+}
+
+.back div::after {
+    top: 0;
+    left: 0;
+    content: '';
+    width: 60px;
+    height: 30px;
+    position: absolute;
+    background-position: 0 0;
+    background-image: url('https://s3-eu-west-1.amazonaws.com/thomascullen-codepen/back.svg');
+    transition: transform 400ms 0s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.back:hover h2 {
+    color: #e786ab;
+
+}
+
+.back:hover h2,
+.back:hover span {
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
+.back:hover div {
+    transform: scale(1.1);
+    background-color: white;
+    box-shadow:
+            0 2px 10px 0 rgba(185,182,198,0.00),
+            0 1px 3px 0 rgba(175,172,189,0.25);
+}
+
+.back:hover div::after {
+    transform: translateX(-30px);
+}
+
+
+nav ul li a {
+    float: right;
+    position: relative;
+    left: -5rem;
+    top: -9.3rem;
+
+    color: #e23c52;
+    text-decoration: none;
+
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.badge {
+    background-color:#e23c52;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    padding: 3px 7px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+/*nav {*/
+    /*padding: 20px 0 40px 0;*/
+    /*background: #F8F8F8;*/
+    /*font-size: 16px;*/
+/*}*/
+
+/*.navbar-right {*/
+
+    /*float: right;*/
+    /*position: relative;*/
+    /*left: -6rem;*/
+    /*top: -2.5rem;*/
+/*}*/
+
+
+
+
+/*li {*/
+    /*!*display: inline;*!*/
+    /*padding-left: 20px;*/
+
+
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
