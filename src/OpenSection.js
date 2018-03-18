@@ -10,11 +10,11 @@ import "react-table/react-table.css";
 import { makeData} from "./Utils";
 
 
-import {Icon} from 'react-fa';
 
 const rawData = makeData();
 
 const requestData = (pageSize, page, sorted, filtered) => {
+    console.log("1");
     return new Promise((resolve, reject) => {
         // You can retrieve your data however you want, in this case, we will just use some local data.
         let filteredData = rawData;
@@ -63,16 +63,20 @@ const Isize = {
 
 
 class OpenSection extends React.Component {
+
     constructor() {
+        console.log("2");
         super();
         this.state = {
             data: [],
             pages: null,
-            loading: true
+            loading: true,
+            firstTime: false
         };
         this.fetchData = this.fetchData.bind(this);
     }
     fetchData(state, instance) {
+        console.log("3");
         // Whenever the table model changes, or the user sorts or changes pages, this method gets called and passed the current table model.
         // You can set the `loading` prop of the table to true to use the built-in one or show you're own loading bar if you want.
         this.setState({ loading: true });
@@ -87,10 +91,18 @@ class OpenSection extends React.Component {
             this.setState({
                 data: res.rows,
                 pages: res.pages,
-                loading: false
+                loading: false,
+
             });
         });
+
+        if (this.state.firstTime == false){
+            const rawData = makeData();
+            this.state.firstTime = true;
+
+        }
     }
+
 
     goBack(e){
         e.preventDefault();
@@ -112,13 +124,6 @@ class OpenSection extends React.Component {
                             <h2>Back</h2>
                             <span> Back to Schedule</span>
                         </a>
-
-                        <nav>
-                        <ul class="navbar-right">
-                            <li><a href="#" id="cart"><Icon name=" fa-list-ul" style={Isize}/> Cart <span class="badge">3</span></a></li>
-                        </ul>
-                        </nav>
-
 
                     </div>
                     {/*<h1 className={"App-title"}>MUIC Open Section</h1>*/}
@@ -178,6 +183,12 @@ class OpenSection extends React.Component {
                             maxWidth: 121
                         },
                         {
+                            Header: "Remark",
+                            accessor: "remark",
+                            style:{ "whiteSpace": "normal"},
+                            maxWidth: 121
+                        },
+                        {
                             // Header: "ADD",
                             Cell:(<button className={"AddButton"}>ADD</button>),
                             maxWidth:75,
@@ -202,60 +213,6 @@ class OpenSection extends React.Component {
         );
     }
 }
-    // render(){
-    //     const { data } = this.state;
-    //     return(
-    //         <div>
-    //             <ReactTable
-    //                 data={data}
-    //                 columns={[
-    //                     {
-    //                         // Header: "Name",
-    //                         columns: [
-    //                             {
-    //                                 Header: "First Name",
-    //                                 accessor: "firstName"
-    //                             },
-    //                             {
-    //                                 Header: "Last Name",
-    //                                 id: "lastName",
-    //                                 accessor: d => d.lastName
-    //                             }
-    //                         ]
-    //                     },
-    //                     {
-    //                         // Header: "Info",
-    //                         columns: [
-    //                             {
-    //                                 Header: "Age",
-    //                                 accessor: "age"
-    //                             },
-    //                             {
-    //                                 Header: "Status",
-    //                                 accessor: "status"
-    //                             }
-    //                         ]
-    //                     },
-    //                     {
-    //                         Header: 'Stats',
-    //                         columns: [
-    //                             {
-    //                                 Header: "Visits",
-    //                                 accessor: "visits"
-    //                             }
-    //                         ]
-    //                     }
-    //                 ]}
-    //                 defaultPageSize={10}
-    //                 className="-striped -highlight"
-    //             />
-    //             <br />
-    //             {/*<Tips />*/}
-    //             {/*<Logo />*/}
-    //         </div>
-    //
-    //     );
-    //
-    // }
+
 
 export default OpenSection;

@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import urlencode from 'form-urlencoded';
 
-import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
+// import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
 
 import axios from "./AxiosConfig";
 
-// import Background from '/Users/fonytas/Desktop/project/msm/src/photo/cloud.jpg';
-//
-// var sectionStyle = {
-//     // width: "100%",
-//     // height: "200px",
-//     backgroundImage: `url(${Background})`
-// };
+
 
 const Isize = {
     fontSize: '2.1rem'
@@ -23,11 +17,14 @@ const Isize = {
 class App extends Component {
     constructor(props){
         super(props);
-        this.state = {userName:"Anonymous", email:"none@sth.com",password: "None",ccPassword: "None",logClass: "login-form", regClass: "login-form",regform: false, logform: true,active: 0};
+        this.state = {userName:"Anonymous", email:"none@sth.com",password: "None",
+                    ccPassword: "None",logClass: "login-form", regClass: "login-form",regform: false, logform: true,active: 0,
+                    error: false};
         this.updateInputValue = this.updateInputValue.bind(this);
         this.updatePasswordValue = this.updatePasswordValue.bind(this);
         this.updateccPasswordValue = this.updateccPasswordValue.bind(this);
         this.updateEmailValue = this.updateEmailValue.bind(this);
+        // this.onLogin = this.onLogin.bind(this);
 
 
     }
@@ -48,10 +45,8 @@ class App extends Component {
         this.setState({ccPassword: evt.target.value});
     }
 
-    // localhost:{port}/user/register/{username}/{email}/{password}
 
-
-registerInfo(e){
+    registerInfo(e){
         if(this.state.password.length < 6){
             e.preventDefault();
             alert("Password must be more than 6 letters");
@@ -66,7 +61,7 @@ registerInfo(e){
 
             var js = axios.post("/user/register/" + this.state.userName + "/" +this.state.email+"/" +this.state.password);
             js.then((response)=>{
-                if(response.data.nameStatus ==="valid"){
+                if(response.data.nameStatus === "valid"){
                     this.props.history.push("/Schedule/"+this.state.userName);
                 }
                 else{
@@ -76,8 +71,35 @@ registerInfo(e){
             }).catch(function (error){
                 console.log(error);
             });
+            this.props.history.push('/login');
         }
     }
+
+
+    login(e){
+        e.preventDefault();
+
+        const loginParams = {
+            username: this.state.userName,
+            password: this.state.password
+        };
+
+        axios.post("/login", urlencode(loginParams))
+            .then((response) => {
+
+                console.log(response.data.login);
+                if (response.data.login === true){
+                    // console.log(response);
+                    // console.log(response.data.message);
+                    this.props.history.push('/Schedule');
+                }
+            })
+            .catch((error) => {
+                alert("Username or Password are incorrect, Please try again.");
+                console.log(error.response.data);
+            })
+    }
+
 
     componentDidUpdate(){
 
@@ -90,39 +112,17 @@ registerInfo(e){
 
 
     }
-    login(e){
-        e.preventDefault();
 
-
-        /// check if the username and password are correct from database
-
-        // if YES
-        this.props.history.push("/schedule")
-
-        // if NO, display the warning
-
-    }
 
     componentDidMount(){
-
-        // console.log("component did mount");
-        // console.log(this.state.regClass);
-        // console.log(this.state.active);
         document.body.style.overflow = "hidden"
     }
 
     render() {
-        // if(this.state.active === 0 &&this.state.logform && window.location.href.indexOf("#register-form") !== -1 ){
-        //     this.setState({regClass: "register-form show", logform: false, regform: true, active: this.state.active+1})
-        // }
+
         return (
           <div className="App">
 
-              {/*<div className={"BG"}>*/}
-                  {/*<h1 className={"App-title"}>MUIC Open Section</h1>*/}
-
-
-              {/*</div>*/}
               <header className={"App-header"}>
                   <div className={"BG"}>
                       <h1 className={"App-title"}>MUIC Schedule Maker</h1>
@@ -132,7 +132,6 @@ registerInfo(e){
               </header>
 
               <div className ="App-body">
-                  {/*<header className={"Header-form"}></header>*/}
 
                   <div className="form">
 
@@ -140,7 +139,6 @@ registerInfo(e){
                       <form id="login-form" className={this.state.regClass}>
 
                           <div className="Signin">Register</div>
-                          {/*<span><Icon name=" fa-user" style={Isize}/></span>*/}
 
                           <input  type="text" placeholder="Username" required  onChange={this.updateInputValue} />
 
@@ -155,8 +153,8 @@ registerInfo(e){
                       <form id="register-form" className={this.state.logClass}>
 
                           <div className="Signin">Sign In</div>
-                          <input type="text" placeholder="Username" required/>
-                          <input type="password" placeholder="Password" required/>
+                          <input type="text" placeholder="Username" required onChange={this.updateInputValue}/>
+                          <input type="password" placeholder="Password" required onChange={this.updatePasswordValue} />
                           <button onClick={(e) => this.login(e) }>login</button>
 
                           <p className="message">Not registered? <a href={"#register-form"}>Create an account</a></p>

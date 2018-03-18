@@ -2,6 +2,9 @@ import React from "react";
 import namor from "namor";
 import "./index.css";
 
+import urlencode from 'form-urlencoded';
+
+
 const range = len => {
     const arr = [];
     for (let i = 0; i < len; i++) {
@@ -11,12 +14,14 @@ const range = len => {
 };
 
 
+
+
 // {id: "CRS000333 SEC027705", subject: "ICCM104 Intermediate English Communication I 4(4-0-8)", type: "master",
 //     section: 2, capacity: 20, time: "Mon 14:00 - 15:50 Wed 14:00 - 15:50", room: 5308, instructor: "Mariejoy ",
 //     final: "Thu 21-07-2016 08:00 - 09:50"};
 
 const newPerson = () => {
-    const statusChance = Math.random();
+    // const statusChance = Math.random();
     return {
         id: "CRS000333 SEC027705",
         subject: "ICCM104 Intermediate English Communication I 4(4-0-8)",
@@ -26,7 +31,8 @@ const newPerson = () => {
         time: "Mon 14:00 - 15:50 Wed 14:00 - 15:50",
         room: 5308,
         instructor: "Mariejoy ",
-        final: "Thu 21-07-2016 08:00 - 09:50"
+        final: "Thu 21-07-2016 08:00 - 09:50",
+        remark: "fwewefwfe"
 
 
         // firstName: namor.generate({ words: 1, numbers: 0 }),

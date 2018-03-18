@@ -113,59 +113,6 @@
 }
 
 
-nav ul li a {
-    float: right;
-    position: relative;
-    left: -5rem;
-    top: -9.3rem;
-
-    color: #e23c52;
-    text-decoration: none;
-
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-.badge {
-    background-color:#e23c52;
-    border-radius: 10px;
-    color: white;
-    display: inline-block;
-    font-size: 12px;
-    line-height: 1;
-    padding: 3px 7px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-}
-/*nav {*/
-    /*padding: 20px 0 40px 0;*/
-    /*background: #F8F8F8;*/
-    /*font-size: 16px;*/
-/*}*/
-
-/*.navbar-right {*/
-
-    /*float: right;*/
-    /*position: relative;*/
-    /*left: -6rem;*/
-    /*top: -2.5rem;*/
-/*}*/
-
-
-
-
-/*li {*/
-    /*!*display: inline;*!*/
-    /*padding-left: 20px;*/
-
-
-/*}*/
-
 
 
 
