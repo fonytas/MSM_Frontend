@@ -1,8 +1,5 @@
 import React from "react";
-import namor from "namor";
 import "./index.css";
-
-import urlencode from 'form-urlencoded';
 
 
 const range = len => {
@@ -14,59 +11,43 @@ const range = len => {
 };
 
 
+var mapData = {};
 
-
-// {id: "CRS000333 SEC027705", subject: "ICCM104 Intermediate English Communication I 4(4-0-8)", type: "master",
-//     section: 2, capacity: 20, time: "Mon 14:00 - 15:50 Wed 14:00 - 15:50", room: 5308, instructor: "Mariejoy ",
-//     final: "Thu 21-07-2016 08:00 - 09:50"};
-
-const newPerson = () => {
-    // const statusChance = Math.random();
+const newPerson = (data) => {
     return {
-        id: "CRS000333 SEC027705",
-        subject: "ICCM104 Intermediate English Communication I 4(4-0-8)",
-        type: "master",
-        section: 2,
-        capacity: 20,
-        time: "Mon 14:00 - 15:50 Wed 14:00 - 15:50",
-        room: 5308,
-        instructor: "Mariejoy ",
-        final: "Thu 21-07-2016 08:00 - 09:50",
-        remark: "fwewefwfe"
 
-
-        // firstName: namor.generate({ words: 1, numbers: 0 }),
-        // lastName: namor.generate({ words: 1, numbers: 0 }),
-        // age: Math.floor(Math.random() * 30),
-        // visits: Math.floor(Math.random() * 100),
-        // progress: Math.floor(Math.random() * 100),
-        // status:
-        //     statusChance > 0.66
-        //         ? "relationship"
-        //         : statusChance > 0.33 ? "complicated" : "single"
+        id: data.courseSkyID,
+        subject: data.courseName,
+        type: data.courseType,
+        section: data.courseSection,
+        capacity: data.courseCapacity,
+        time: data.courseTime,
+        room: data.courseRoom,
+        instructor: data.courseInstructor,
+        final: data.courseFinal,
+        remark: data.remark
     };
 };
 
-export function makeData(len = 200) {
-    return range(len).map(d => {
+
+
+export function makeData(allData) {
+    // console.log(">>>"+num);
+    // nn = num;
+    mapData = allData;
+    // console.log(mapData[0].courseSkyID);
+
+
+    // console.log(mapData);
+    return Object.keys(mapData).map((key, index) => {
+
         return {
-            ...newPerson(),
+            ...newPerson(mapData[key]),
             children: range(10).map(newPerson)
         };
     });
 }
 
-// export const Logo = () =>
-//     <div style={{ margin: '1rem auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
-//         For more examples, visit {''}
-//         <br />
-//         <a href="https://github.com/react-tools/react-table" target="_blank">
-//             <img
-//                 src="https://github.com/react-tools/media/raw/master/logo-react-table.png"
-//                 style={{ width: `150px`, margin: ".5em auto .3em" }}
-//             />
-//         </a>
-//     </div>;
 
 export const Tips = () =>
     <div style={{ textAlign: "center" }}>

@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import './Schedule.css';
-
-// import Background from '/Users/fonytas/Desktop/project/msm/src/photo/5 Blurred Backgrounds Vol.2/03.jpg';
+import {withRouter} from "react-router-dom";
 
 import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
 
-import axios from "./AxiosConfig";
+import './Schedule.css';
+import Page from './Page.js'
 
-
-// var sectionStyle = {
-//     backgroundImage: `url(${Background})`
-// };
 
 
 const Isize = {
@@ -18,6 +13,17 @@ const Isize = {
 
 };
 
+
+function HeaderText(){
+    return <h1 className={"App-title2"}>My Schedule</h1>
+}
+
+function LogoutButtonBase({history}){
+    return <button className="logout" onClick={() => history.push("/login#login-form")} >
+        Logout
+    </button>
+}
+const LogoutButton = withRouter(LogoutButtonBase);
 
 
 
@@ -28,28 +34,14 @@ class Schedule extends Component{
         this.props.history.push("/opensection");
     }
 
-
-
     render(){
-        return <div className={"Main"}>
+        return (<div className={"Main"}>
 
-            <header className={"Header"}>
-
-
-                {/*<h>This is header</h>*/}
-                <div className={"BG"}>
-                    <h1 className="App-title2">My Schedule</h1>
-
-                </div>
-                {/*<h1 className="Schedule-title">My Schedule</h1>*/}
-            </header>
+            <Page ButtonComponent={LogoutButton} TextComponent={HeaderText}>
 
             <div className="Body-S">
 
-
                 <div className={"S-body"}>
-
-
 
                     <div className={"Left-panel"}>
 
@@ -57,7 +49,6 @@ class Schedule extends Component{
 
                             <button onClick={(e) => this.goTo(e)}><Icon name=" fa-plus-circle" style={Isize}/> <br/>Add Course<br/></button>
                         </div>
-                        {/*fa-plus-circle*/}
 
                         <div className={"Delete-course"}>
                             <button><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
@@ -100,27 +91,16 @@ class Schedule extends Component{
 
                         <div className={"Table"}>
 
-                            {/*<Icon name=" fa-cog" />*/}
-                            {/*<p>.. This is Schedule ..</p>*/}
                         </div>
-
-
                     </div>
-
-
-
                 </div>
-
-
-
             </div>
-            {/*<div className={"S-footer"}></div>*/}
-            <footer className={"App-footer"}></footer>
+            </Page>
 
 
 
         </div>
-    }
+        )}
 }
 
 export default Schedule;

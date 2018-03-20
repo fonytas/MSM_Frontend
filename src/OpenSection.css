@@ -1,12 +1,21 @@
 
+.Table-body {
+    position: absolute;
+    overflow: auto;
+    margin: 160px 2rem 3rem 2rem;
+    width: 1360px;
+    height: 1769px;
+    z-index: -1;
 
-.Table{
-    overflow: scroll;
-    position: relative;
-    top:5rem;
-    margin: 0rem 2rem 0rem 2rem;
+}
+
+
+.Table-body-2 {
+
+    width: 1360px;
+    height: 1769px;
+
     font-size: 0.7rem;
-
 }
 
 .AddButton{
@@ -16,9 +25,6 @@
     background-color:#e23c52;
     color: white;
     font-size: 1rem;
-    /*color: white;*/
-    /*text-align: center;*/
-    /*border: 0.1rem solid black;*/
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
@@ -29,91 +35,6 @@
     background-color: #e786ab; /* Green */
     color: white;
 }
-
-.back {
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    padding: 10px 10px 10px 40px;
-    top: -5rem;
-    left: 8rem;
-}
-
-.back h2 {
-
-    color:#e23c52;
-    font-size: 16px;
-    transform: translateY(8px);
-    transition: transform 500ms 0s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.back span {
-
-    font-family: "Geneva";
-    opacity: 0;
-    color:  #e786ab;
-    font-size: 15px;
-    font-weight: 300;
-    display: inline-block;
-    transform: translateY(10px);
-    transition:
-            transform 500ms 0s cubic-bezier(0.2, 0, 0, 1),
-            opacity 500ms 0s cubic-bezier(0.2, 0, 0, 1)
-}
-
-.back div {
-    top: 1.5rem;
-    left: 0;
-    content: '';
-    width: 30px;
-    height: 30px;
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(1);
-    background-color: #E9E7F2;
-    transition: transform 400ms 0s cubic-bezier(0.2, 0, 0, 1.6);
-}
-
-.back div::after {
-    top: 0;
-    left: 0;
-    content: '';
-    width: 60px;
-    height: 30px;
-    position: absolute;
-    background-position: 0 0;
-    background-image: url('https://s3-eu-west-1.amazonaws.com/thomascullen-codepen/back.svg');
-    transition: transform 400ms 0s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.back:hover h2 {
-    color: #e786ab;
-
-}
-
-.back:hover h2,
-.back:hover span {
-    opacity: 1;
-    transform: translateY(0);
-
-}
-
-.back:hover div {
-    transform: scale(1.1);
-    background-color: white;
-    box-shadow:
-            0 2px 10px 0 rgba(185,182,198,0.00),
-            0 1px 3px 0 rgba(175,172,189,0.25);
-}
-
-.back:hover div::after {
-    transform: translateX(-30px);
-}
-
-
-
 
 
 

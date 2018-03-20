@@ -1,74 +1,19 @@
-.Main {
-    text-align: center;
-    background-color: white;
-}
 
-body{
-    overflow: hidden;
-}
-
-
-/*.Header{*/
-   /*background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");*/
-    /*height: 10.1rem;*/
-
-/*}*/
 .Body-S{
     height: 50rem;
+    padding: 12rem 0rem 0rem 0rem;
 }
 
-
-
-.Schedule-title {
-    /*position: relative;*/
-    /*font-family: "Geneva";*/
-    /*font-weight: bold;*/
-    /*font-size: 2.7rem;*/
-    /*top:2rem;*/
-    /*text-shadow: 3px 1px floralwhite;*/
-    /*letter-spacing: 0.1rem;*/
-    /*color: #e23c52;*/
-    position: relative;
-    top: 1rem;
-
-
-    /*padding: 1rem 25rem 1rem 25rem;*/
-    padding: 0rem 25rem 3rem 25rem;
-
-    border: 0.05rem solid #e23c52 ;
-    font-size: 2rem ;
-    font-weight: bold;
-    font-family: "Geneva";
-    text-align: center;
-
-    /*color: #e23c52;*/
-    color: #e23c52;
-    text-shadow: 3px 1px white;
-
-
-
-    /*border-color: #e23c52;*/
-    /*width: 10rem;*/
-    /*height: 4rem;*/
-    background-color: rgba(255, 255, 255, 0.5);
-}
 
 
 .S-body{
-    position: relative;
-    top: 6rem;
 
     margin: auto;
     width:90%;
     height:60%;
     border: solid #e23c52 0.1rem;
-    /*background-color: white;*/
-    /*opacity: .3;*/
-    /*background:rgba(255,255,255, 0.5);*/
     border-radius: 8px;
     background-color:white;
-
-
 
 
 }
@@ -81,7 +26,6 @@ body{
     margin: 1rem;
     float: left;
     font-size: 2rem;
-    /*background-color:rgba(231, 98, 116,0.8);*/
     background-color:  #e23c52;
     border: solid black 0.05rem;
     border-radius: 8px;
@@ -100,12 +44,8 @@ body{
 
 
 .Left-panel button {
-    /*width: 70%;*/
-    /*height: 100%;*/
-
     width: 8.1rem;
     height: 4rem;
-
 
     vertical-align: middle;
 
@@ -121,10 +61,7 @@ body{
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     margin: 1.1rem;
-    /*padding: 0.25rem 1rem;*/
     cursor: pointer;
-
-
 
 }
 
@@ -148,13 +85,7 @@ body{
 
     border: solid #e23c52 0.05rem;
 
-    /*border-radius: 8px;*/
-
     background-color: #fdfcfc;
-
-
-
-
 
 }
 
@@ -167,25 +98,17 @@ body{
     width: 20%;
     height: 90%;
 
-
     margin: 1rem;
     border: solid black 0.05rem;
 
     overflow: scroll;
-    /*border-radius: 8px;*/
-
-    /*background-color:rgba(231, 98, 116,0.8);*/
     background-color:  #e23c52;
-
-
 
 }
 
 .Table{
     font-family: "Geneva";
     font-size: 2rem;
-
-
 
 
 }

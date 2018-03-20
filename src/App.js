@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import './App.css';
+import axios from "./AxiosConfig";
 import urlencode from 'form-urlencoded';
 
-// import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
 
-import axios from "./AxiosConfig";
+import './App.css';
+import Page from "./Page";
 
 
 
-const Isize = {
-    fontSize: '2.1rem'
 
-};
-// localhost:{port}/user/register/{username}/{email}/{password}
+function HeaderText(){
+    return <h1 className={"App-title2"}>MUIC Schedule Maker</h1>
+}
+
 
 class App extends Component {
     constructor(props){
@@ -24,14 +24,12 @@ class App extends Component {
         this.updatePasswordValue = this.updatePasswordValue.bind(this);
         this.updateccPasswordValue = this.updateccPasswordValue.bind(this);
         this.updateEmailValue = this.updateEmailValue.bind(this);
-        // this.onLogin = this.onLogin.bind(this);
 
 
     }
 
     updateInputValue(evt){
         this.setState({userName: evt.target.value});
-        // console.log(this.state.userName);
     }
 
     updateEmailValue(evt){
@@ -89,6 +87,7 @@ class App extends Component {
 
                 console.log(response.data.login);
                 if (response.data.login === true){
+                    // console.log(response.data);
                     // console.log(response);
                     // console.log(response.data.message);
                     this.props.history.push('/Schedule');
@@ -123,13 +122,7 @@ class App extends Component {
         return (
           <div className="App">
 
-              <header className={"App-header"}>
-                  <div className={"BG"}>
-                      <h1 className={"App-title"}>MUIC Schedule Maker</h1>
-
-                  </div>
-
-              </header>
+              <Page TextComponent={HeaderText}>
 
               <div className ="App-body">
 
@@ -163,8 +156,7 @@ class App extends Component {
 
                   </div>
               </div>
-
-              <footer className={"App-footer"}> </footer>
+              </Page>
 
           </div>
         );

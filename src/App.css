@@ -2,62 +2,40 @@
   text-align: center;
 
 
+
 }
 
 Header{
-  /*background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");*/
-  /*height: 10.1rem;*/
-
-  position: fixed;
   background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");
-  top: -2rem;
-  left: 0;
-  height:20%;
-  width:100%;
+  position: fixed;
+  height: 160px;
+  width: 100%;
+  overflow: hidden;
+
+
 }
 
-/*.Header-form{*/
-  /*background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");*/
-  /*height: 10.1rem;*/
-
-/*}*/
 
 Footer{
   position: fixed;
   background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");
   left:0px;
-  bottom:-1rem;
+  bottom:-5rem;
   height:20%;
   width:100%;
   transform: rotateX(180deg);
 
 
-  /*position:fixed;*/
-  /*left:0px;*/
-  /*bottom:0px;*/
-  /*height:30px;*/
-  /*width:100%;*/
-  /*background:#999;*/
-
 }
 
 .BG{
-  position: relative;
-  top: 3rem;
-  height: 7rem;
-  /*padding: 0rem 25rem 1rem 25rem;*/
-
   border: 0.05rem solid #e23c52 ;
   background-color: rgba(255, 255, 255, 0.7);
-
 }
 
 .App-title2{
-  position: relative;
-  top: -1rem;
-  /*padding: 1rem 25rem 3rem 25rem;*/
 
-  /*border: 0.05rem solid #e23c52 ;*/
+
   font-size: 2rem ;
   font-weight: bold;
   font-family: "Geneva";
@@ -66,7 +44,6 @@ Footer{
   color: #e23c52;
   text-shadow: 3px 1px white;
 
-  /*background-color: rgba(255, 255, 255, 0.6);*/
 }
 
 
@@ -87,10 +64,13 @@ Footer{
 
 .App-body{
 
-  position:absolute;
-  width:100%;
-  height:100%;
-  background-color: white;
+
+    position: absolute;
+    /*overflow: auto;*/
+    margin: 80px 0rem 3rem 2rem;
+    width: 1360px;
+    height: 1769px;
+    z-index: -1;
 
 }
 
@@ -103,9 +83,10 @@ Footer{
   margin: 0 auto 100px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  top: 9rem;
+  top: 29rem;
   /*left: 17rem;*/
-  padding: 3.5rem 3rem 3rem 3rem;  /* top right bottom left */
+  /*padding: 3.5rem 3rem 3rem 3rem;  !* top right bottom left *!*/
+  padding: 30rem 3rem 0rem 3rem;
 
 }
 .form input {
@@ -150,12 +131,23 @@ Footer{
 }
 
 .register-form {
+
+
+
   visibility: hidden;
-  height: 0;
+  height: 0px;
+
+
 }
-.register-form.show {
+.register-form.show{
+  /*position: absolute;*/
+  margin: 220px 1rem 1rem 1rem;;
+
   visibility: visible;
-  height: 350px;
+  height: 160px;
+  max-width: 360px;
+  /*padding-top: 14rem;*/
+
 
 }
 
@@ -177,12 +169,17 @@ Footer{
 }
 
 #login-form:target {
+
+  /*padding-top: 1rem;*/
   transition: visibility 0.3s linear 300ms, opacity 300ms,  height 1000ms;
   visibility: hidden;
   opacity: 0;
   height: 0;
+
+  /*position: absolute;*/
 }
 #login-form{
+
 
 
 }
@@ -196,15 +193,18 @@ Footer{
   visibility: hidden;
   height: 0;
 
+
 }
 
 
 #register-form {
-
-
   visibility: visible;
-  opacity: 1.0;
-  height: 250px;
+  height: 350px;
+  max-width: 360px;
+  padding-top: 15rem;
+
+
+
 
 
 }
