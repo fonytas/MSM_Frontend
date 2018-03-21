@@ -11,20 +11,21 @@ const range = len => {
 };
 
 
+
 var mapData = {};
 
-const newPerson = (data) => {
+const newSubject = (data) => {
     return {
 
-        id: data.courseSkyID,
-        subject: data.courseName,
-        type: data.courseType,
-        section: data.courseSection,
-        capacity: data.courseCapacity,
-        time: data.courseTime,
-        room: data.courseRoom,
-        instructor: data.courseInstructor,
-        final: data.courseFinal,
+        id: data.skyid,
+        subject: data.name,
+        type: data.type,
+        section: data.section,
+        capacity: data.capacity,
+        time: data.time,
+        room: data.room,
+        instructor: data.instructor,
+        final: data.finaltime,
         remark: data.remark
     };
 };
@@ -32,24 +33,17 @@ const newPerson = (data) => {
 
 
 export function makeData(allData) {
-    // console.log(">>>"+num);
-    // nn = num;
+
     mapData = allData;
-    // console.log(mapData[0].courseSkyID);
 
 
-    // console.log(mapData);
     return Object.keys(mapData).map((key, index) => {
 
         return {
-            ...newPerson(mapData[key]),
-            children: range(10).map(newPerson)
+            ...newSubject(mapData[key]),
+            children: range(10).map(newSubject)
         };
     });
 }
 
 
-export const Tips = () =>
-    <div style={{ textAlign: "center" }}>
-        {/*<em>Tip: Hold shift when sorting to multi-sort!</em>*/}
-    </div>;

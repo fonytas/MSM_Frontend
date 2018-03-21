@@ -87,9 +87,7 @@ class App extends Component {
 
                 console.log(response.data.login);
                 if (response.data.login === true){
-                    // console.log(response.data);
-                    // console.log(response);
-                    // console.log(response.data.message);
+
                     this.props.history.push('/Schedule');
                 }
             })

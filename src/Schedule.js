@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
 
 import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
-
 import './Schedule.css';
 import Page from './Page.js'
 
@@ -33,6 +32,9 @@ class Schedule extends Component{
         e.preventDefault();
         this.props.history.push("/opensection");
     }
+
+
+
 
     render(){
         return (<div className={"Main"}>

@@ -10,6 +10,7 @@ import './OpenSection.css';
 import "react-table/react-table.css";
 import Page from './Page.js'
 import {makeData} from "./Utils";
+import urlencode from "form-urlencoded";
 
 
 
@@ -40,6 +41,8 @@ const requestData = (pageSize, page, sorted, filtered) => {
             .then(data => {
 
                 console.log(data);
+
+
                 let filteredData = makeData(data);
                 if (filtered.length) {
                     filteredData = filtered.reduce((filteredSoFar, nextFilter) => {
@@ -79,8 +82,15 @@ const requestData = (pageSize, page, sorted, filtered) => {
     });
 };
 
+
+
+
+
+
 function MyTable(props){
     // const { classes } = props;
+
+
     return  (<ReactTable  //striped
 
         columns={ [
@@ -139,25 +149,29 @@ function MyTable(props){
                 maxWidth: 140
             },
             {
-                // Header: "ADD",
+                filterable:false,
                 style: {"margin": "5px 0px 0px 10px"},
-                // Cell:(<button className={"AddButton"}>ADD</button>),
                 Cell: <Button variant={"fab"}  mini color="secondary" aria-label="add">
-                    <AddIcon /></Button> ,
+                    <AddIcon /></Button>,
                 maxWidth:50,
+                // accessor: "id",
+                // show: false,
+
+                // Cell: <Button onClick={console.log("HELLO")} variant={"fab"}  mini color="secondary" aria-label="add">
+                //     <AddIcon /></Button>,
+
             }
         ]}
         manual // Forces table not to paginate or sort automatically, so we can handle it server-side
         filterable
         defaultPageSize={10}
         className="-striped -highlight"
+        getTrProps={onRowClick}
         {...props}
     />)
 }
 
-// MyTable.propTypes = {
-//     classes: PropTypes.object.isRequired,
-// };
+
 
 
 function BackButtonBase({history}){
@@ -173,21 +187,96 @@ function HeaderText(){
 
 
 
+const onRowClick = (state, rowInfo) => {
+
+
+    return {
+        onClick: e => {
+
+            console.log('Course id', rowInfo.original.id);
+
+            const dataParams ={
+                courseskyid: rowInfo.original.id,
+                planname: 1
+
+            };
+
+            axios.post("/user/addCourseToPlan", urlencode(dataParams))
+                .then((response) =>{
+
+                    console.log(response);
+
+                    })
+                .catch((error) =>{
+                    console.log(error.response.data);
+
+                })
+
+
+            // console.log('A Td Element was clicked!');
+            // console.log('it produced this event:', e);
+            // console.log('It was in this column:', column);
+
+        }
+    }
+};
+
+
+
+// login(e){
+//     e.preventDefault();
+//
+//     const loginParams = {
+//         username: this.state.userName,
+//         password: this.state.password
+//     };
+//
+//     axios.post("/login", urlencode(loginParams))
+//         .then((response) => {
+//
+//             console.log(response.data.login);
+//             if (response.data.login === true){
+//
+//                 this.props.history.push('/Schedule');
+//             }
+//         })
+//         .catch((error) => {
+//             alert("Username or Password are incorrect, Please try again.");
+//             console.log(error.response.data);
+//         })
+// }
+
+
 class OpenSection extends React.Component {
+
+    // sendData(e){
+    //     e.preventDefault();
+    //
+    //     const dataParams = {
+    //         courseskyid:
+    //         planname:
+    //
+    //     };
+
+        // axios.post("/user/addCourseToPlan").then((response) =>{
+        //     console.log(response)
+        // })
+    // }
+
+
     constructor() {
         super();
         this.state = {
             data: [],
             pages: null,
             loading: true,
-            subject: {}
+
 
         };
         this.fetchData = this.fetchData.bind(this);
     }
 
     fetchData(state, instance) {
-
         // Whenever the table mod
 
         // el changes, or the user sorts or changes pages, this method gets called and passed the current table model.
@@ -217,7 +306,6 @@ class OpenSection extends React.Component {
         const { data, pages, loading } = this.state;
         return (
             <Page ButtonComponent={BackButton} TextComponent={HeaderText} >
-                {/*<div className={"Table"}>*/}
                     <div className={"Table-body"}>
                         <div className={"Table-body-2"}>
                             <MyTable data={data}
