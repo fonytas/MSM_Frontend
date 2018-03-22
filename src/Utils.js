@@ -11,7 +11,6 @@ const range = len => {
 };
 
 
-
 var mapData = {};
 
 const newSubject = (data) => {
@@ -29,7 +28,6 @@ const newSubject = (data) => {
         remark: data.remark
     };
 };
-
 
 
 export function makeData(allData) {

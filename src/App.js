@@ -7,8 +7,6 @@ import './App.css';
 import Page from "./Page";
 
 
-
-
 function HeaderText(){
     return <h1 className={"App-title2"}>MUIC Schedule Maker</h1>
 }

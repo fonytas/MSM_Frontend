@@ -13,7 +13,6 @@ import {makeData} from "./Utils";
 import urlencode from "form-urlencoded";
 
 
-
 export function fetchLocals() {
 
     const request = axios.post('course/findall')
@@ -40,14 +39,12 @@ const requestData = (pageSize, page, sorted, filtered) => {
         fetchLocals().payload
             .then(data => {
 
-                console.log(data);
-
+                // console.log(data);
 
                 let filteredData = makeData(data);
                 if (filtered.length) {
                     filteredData = filtered.reduce((filteredSoFar, nextFilter) => {
                         return filteredSoFar.filter(row => {
-                            // console.log(row[nextFilter.id] + "").ignoreCase.incl);
                             return (row[nextFilter.id] + "").includes(nextFilter.value);
                         });
                     }, filteredData);
@@ -81,9 +78,6 @@ const requestData = (pageSize, page, sorted, filtered) => {
             });
     });
 };
-
-
-
 
 
 
@@ -192,7 +186,6 @@ const onRowClick = (state, rowInfo) => {
 
     return {
         onClick: e => {
-
             console.log('Course id', rowInfo.original.id);
 
             const dataParams ={
@@ -203,9 +196,7 @@ const onRowClick = (state, rowInfo) => {
 
             axios.post("/user/addCourseToPlan", urlencode(dataParams))
                 .then((response) =>{
-
-                    console.log(response);
-
+                    // console.log(response);
                     })
                 .catch((error) =>{
                     console.log(error.response.data);
@@ -213,55 +204,11 @@ const onRowClick = (state, rowInfo) => {
                 })
 
 
-            // console.log('A Td Element was clicked!');
-            // console.log('it produced this event:', e);
-            // console.log('It was in this column:', column);
-
         }
     }
 };
 
-
-
-// login(e){
-//     e.preventDefault();
-//
-//     const loginParams = {
-//         username: this.state.userName,
-//         password: this.state.password
-//     };
-//
-//     axios.post("/login", urlencode(loginParams))
-//         .then((response) => {
-//
-//             console.log(response.data.login);
-//             if (response.data.login === true){
-//
-//                 this.props.history.push('/Schedule');
-//             }
-//         })
-//         .catch((error) => {
-//             alert("Username or Password are incorrect, Please try again.");
-//             console.log(error.response.data);
-//         })
-// }
-
-
 class OpenSection extends React.Component {
-
-    // sendData(e){
-    //     e.preventDefault();
-    //
-    //     const dataParams = {
-    //         courseskyid:
-    //         planname:
-    //
-    //     };
-
-        // axios.post("/user/addCourseToPlan").then((response) =>{
-        //     console.log(response)
-        // })
-    // }
 
 
     constructor() {
@@ -270,8 +217,6 @@ class OpenSection extends React.Component {
             data: [],
             pages: null,
             loading: true,
-
-
         };
         this.fetchData = this.fetchData.bind(this);
     }

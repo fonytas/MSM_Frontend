@@ -7,6 +7,15 @@ import Page from './Page.js'
 
 
 
+// import { storiesOf } from "@storybook/react";
+// import DayTimeTable from "../src/DayTimeTable";
+
+
+
+
+
+
+
 const Isize = {
     fontSize: '2.1rem'
 
@@ -73,21 +82,23 @@ class Schedule extends Component{
 
                     </div>
 
-                    <div className={"Right-panel"}>
-
-                        <div className={"Box"}>Subject 1</div>
-                        <div className={"Box"}>Subject 2</div>
-                        <div className={"Box"}>Subject 3</div>
-                        <div className={"Box"}>Subject 4</div>
-                        <div className={"Box"}>Subject 5</div>
-                        <div className={"Box"}>Subject 6</div>
-                        <div className={"Box"}>Subject 7</div>
-                        <div className={"Box"}>Subject 8</div>
-                        <div className={"Box"}>Subject 9</div>
-                        <div className={"Box"}>Subject 10</div>
 
 
-                    </div>
+                    {/*<div className={"Right-panel"}>*/}
+
+                        {/*<div className={"Box"}>Subject 1</div>*/}
+                        {/*<div className={"Box"}>Subject 2</div>*/}
+                        {/*<div className={"Box"}>Subject 3</div>*/}
+                        {/*<div className={"Box"}>Subject 4</div>*/}
+                        {/*<div className={"Box"}>Subject 5</div>*/}
+                        {/*<div className={"Box"}>Subject 6</div>*/}
+                        {/*<div className={"Box"}>Subject 7</div>*/}
+                        {/*<div className={"Box"}>Subject 8</div>*/}
+                        {/*<div className={"Box"}>Subject 9</div>*/}
+                        {/*<div className={"Box"}>Subject 10</div>*/}
+
+
+                    {/*</div>*/}
 
                     <div className={"Mid-panel"}>
 
