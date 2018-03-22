@@ -21,13 +21,25 @@ import {
     withRouter,
 } from 'react-router-dom'
 import DayTimeTable from "./DayTimeTable";
+import {createMuiTheme} from "material-ui";
 // import Login from "./Login";
 
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            light: '#f05545',
+            main: '#b71c1c',
+            dark: '#7f0000',
+            contrastText: '#ffffff',
+        }
+    }
+})
 
 function MainApp(){
     return (
         <div>
-        <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <MuiThemeProvider theme={theme}>
         <Router>
             <div>
                 <Route exact path="/login" component={App} />

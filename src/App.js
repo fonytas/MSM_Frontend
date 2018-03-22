@@ -5,6 +5,8 @@ import urlencode from 'form-urlencoded';
 
 import './App.css';
 import Page from "./Page";
+import {AppBar, Avatar, IconButton, Toolbar, Typography} from "material-ui/index";
+import {deepOrange, withStyles} from "material-ui";
 
 
 function HeaderText(){
@@ -12,8 +14,29 @@ function HeaderText(){
 }
 
 
+function TopBar(props){
+    const { classes } = props;
+
+    return  (
+        <AppBar position="static"  >
+            <Toolbar >
+                <Typography variant="title" color="inherit">
+                    MUIC Schedule Maker
+                </Typography>
+
+            </Toolbar>
+        </AppBar>
+    )
+}
+
+
+
+
+
 class App extends Component {
     constructor(props){
+
+
         super(props);
         this.state = {userName:"Anonymous", email:"none@sth.com",password: "None",
                     ccPassword: "None",logClass: "login-form", regClass: "login-form",regform: false, logform: true,active: 0,
@@ -29,10 +52,8 @@ class App extends Component {
     updateInputValue(evt){
         this.setState({userName: evt.target.value});
     }
-
     updateEmailValue(evt){
         this.setState({email: evt.target.value});
-        // console.log(this.state.userName);
     }
     updatePasswordValue(evt){
         this.setState({password: evt.target.value});
@@ -40,7 +61,6 @@ class App extends Component {
     updateccPasswordValue(evt){
         this.setState({ccPassword: evt.target.value});
     }
-
 
     registerInfo(e){
         if(this.state.password.length < 6){
@@ -105,7 +125,6 @@ class App extends Component {
             this.setState({regClass: "register-form", logform: true, regform: false,active: this.state.active+1})
         }
 
-
     }
 
 
@@ -113,50 +132,55 @@ class App extends Component {
         document.body.style.overflow = "hidden"
     }
 
+
+
+
+
     render() {
 
         return (
-          <div className="App">
+            <div className="App">
 
-              <Page TextComponent={HeaderText}>
+                <Page TextComponent={HeaderText}>
 
-              <div className ="App-body">
+                    <div className ="App-body">
 
-                  <div className="form">
-
-
-                      <form id="login-form" className={this.state.regClass}>
-
-                          <div className="Signin">Register</div>
-
-                          <input  type="text" placeholder="Username" required  onChange={this.updateInputValue} />
-
-                          <input type="email" placeholder="Email" required  onChange={this.updateEmailValue} />
-                          <input type="password" placeholder="Password" required onChange={this.updatePasswordValue}/>
-                          <input type="password" placeholder="Confirm password" required onChange={this.updateccPasswordValue}/>
-                          <button onClick ={ (e) => this.registerInfo(e)}>create</button>
-                          <p className="message">Already registered? <a href={"#login-form"}>Sign In</a></p>
-                      </form>
+                        <div className="form">
 
 
-                      <form id="register-form" className={this.state.logClass}>
+                            <form id="login-form" className={this.state.regClass}>
 
-                          <div className="Signin">Sign In</div>
-                          <input type="text" placeholder="Username" required onChange={this.updateInputValue}/>
-                          <input type="password" placeholder="Password" required onChange={this.updatePasswordValue} />
-                          <button onClick={(e) => this.login(e) }>login</button>
+                                <div className="Signin">Register</div>
 
-                          <p className="message">Not registered? <a href={"#register-form"}>Create an account</a></p>
+                                <input  type="text" placeholder="Username" required  onChange={this.updateInputValue} />
 
-                      </form>
+                                <input type="email" placeholder="Email" required  onChange={this.updateEmailValue} />
+                                <input type="password" placeholder="Password" required onChange={this.updatePasswordValue}/>
+                                <input type="password" placeholder="Confirm password" required onChange={this.updateccPasswordValue}/>
+                                <button onClick ={ (e) => this.registerInfo(e)}>create</button>
+                                <p className="message">Already registered? <a href={"#login-form"}>Sign In</a></p>
+                            </form>
 
-                  </div>
-              </div>
-              </Page>
 
-          </div>
+                            <form id="register-form" className={this.state.logClass}>
+
+                                <div className="Signin">Sign In</div>
+                                <input type="text" placeholder="Username" required onChange={this.updateInputValue}/>
+                                <input type="password" placeholder="Password" required onChange={this.updatePasswordValue} />
+                                <button onClick={(e) => this.login(e) }>login</button>
+
+                                <p className="message">Not registered? <a href={"#register-form"}>Create an account</a></p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </Page>
+
+            </div>
+
         );
       }
 }
 
-export default App;
+export default (App);
