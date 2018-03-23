@@ -10,7 +10,7 @@ export default function Page({children, ButtonComponent, TextComponent}) {
                 </div>
             </header>
             {children}
-            <footer></footer>
+            {/*<footer></footer>*/}
         </div>)
 }
 

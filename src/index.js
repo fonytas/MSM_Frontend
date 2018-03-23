@@ -5,13 +5,10 @@ import App from './App';
 import Schedule from './Schedule';
 import OpenSection from './OpenSection'
 import registerServiceWorker from './registerServiceWorker';
-import Test from './Test'
-
+// import basic from './basic';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-// import Main from './Main'
+
 
 import {
     BrowserRouter as Router,
@@ -20,6 +17,8 @@ import {
     Redirect,
     withRouter,
 } from 'react-router-dom'
+
+
 import DayTimeTable from "./DayTimeTable";
 import {createMuiTheme} from "material-ui";
 // import Login from "./Login";
@@ -45,7 +44,7 @@ function MainApp(){
                 <Route exact path="/login" component={App} />
                 <Route exact path = "/schedule" component = {Schedule}/>
                 <Route exact path = "/opensection" component = {OpenSection}/>
-                <Route exact path = "/test" component={Test}/>
+                {/*<Route exact path = "/test" component={Test}/>*/}
 
                 <Route exact path ="/DayTimeTable" component = {DayTimeTable}/>
 

@@ -5,4 +5,5 @@ body {
   font-size: 1rem;
   /*position: relative;*/
   /*top: 4rem;*/
+  overflow: scroll;
 }

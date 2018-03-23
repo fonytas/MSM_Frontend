@@ -9,6 +9,7 @@ import {AppBar, Avatar, IconButton, Toolbar, Typography} from "material-ui/index
 import {deepOrange, withStyles} from "material-ui";
 
 
+
 function HeaderText(){
     return <h1 className={"App-title2"}>MUIC Schedule Maker</h1>
 }
@@ -35,8 +36,6 @@ function TopBar(props){
 
 class App extends Component {
     constructor(props){
-
-
         super(props);
         this.state = {userName:"Anonymous", email:"none@sth.com",password: "None",
                     ccPassword: "None",logClass: "login-form", regClass: "login-form",regform: false, logform: true,active: 0,
@@ -117,6 +116,7 @@ class App extends Component {
 
 
     componentDidUpdate(){
+        console.log(this.state);
 
         if(this.state.logform && window.location.href.indexOf("#register-form") !== -1  ){
             this.setState({regClass: "register-form show", logform: false, regform: true, active: this.state.active+1})
@@ -131,7 +131,6 @@ class App extends Component {
     componentDidMount(){
         document.body.style.overflow = "hidden"
     }
-
 
 
 

@@ -1050,6 +1050,10 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
+basic@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/basic/-/basic-2.0.2.tgz#3e4e9fc0fb66dd324d1e93cbd739096e95c21d5e"
+
 batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
@@ -1481,7 +1485,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.1.3, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -1748,6 +1752,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-class@^15.6.0:
+  version "15.6.3"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 cross-spawn@5.1.0, cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -1936,6 +1948,10 @@ dashdash@^1.12.0:
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
   dependencies:
     assert-plus "^1.0.0"
+
+date-arithmetic@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/date-arithmetic/-/date-arithmetic-3.1.0.tgz#1fcd03dbd504b9dbee2b9078c85a5f1c7d3cc2d3"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -2132,7 +2148,7 @@ dom-converter@~0.1:
   dependencies:
     utila "~0.3"
 
-dom-helpers@^3.2.0, dom-helpers@^3.2.1:
+"dom-helpers@^2.3.0 || ^3.0.0", dom-helpers@^3.2.0, dom-helpers@^3.2.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
 
@@ -2755,7 +2771,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.1, fbjs@^0.8.16:
+fbjs@^0.8.1, fbjs@^0.8.16, fbjs@^0.8.9:
   version "0.8.16"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -2993,6 +3009,23 @@ fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2:
     inherits "~2.0.0"
     mkdirp ">=0.5 0"
     rimraf "2"
+
+fullcalendar-reactwrapper@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/fullcalendar-reactwrapper/-/fullcalendar-reactwrapper-1.0.7.tgz#c3818d7476e348a3207c59d7052c2d5c968951de"
+  dependencies:
+    fullcalendar "^3.4.0"
+    jquery "^3.2.1"
+    moment "^2.18.1"
+    react "^15.5.4"
+    react-dom "^15.5.4"
+
+fullcalendar@^3.4.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/fullcalendar/-/fullcalendar-3.9.0.tgz#b608a9989f3416f0b1d526c6bdfeeaf2ac79eda5"
+  dependencies:
+    jquery "2 - 3"
+    moment "^2.20.1"
 
 function-bind@^1.0.2, function-bind@^1.1.1:
   version "1.1.1"
@@ -3546,7 +3579,7 @@ interpret@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-invariant@^2.2.1:
+invariant@^2.1.0, invariant@^2.2.1:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
@@ -4155,6 +4188,10 @@ jest@20.0.4:
   resolved "https://registry.yarnpkg.com/jest/-/jest-20.0.4.tgz#3dd260c2989d6dad678b1e9cc4d91944f6d602ac"
   dependencies:
     jest-cli "^20.0.4"
+
+"jquery@2 - 3", jquery@^3.2.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-base64@^2.1.9:
   version "2.4.3"
@@ -4795,6 +4832,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1, mkdirp@~0.5.0, mkdi
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment@^2.18.1, moment@^2.20.1, moment@^2.21.0:
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
 
 ms@2.0.0:
   version "2.0.0"
@@ -5698,6 +5739,12 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
+prop-types-extra@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/prop-types-extra/-/prop-types-extra-1.0.1.tgz#a57bd4810e82d27a3ff4317ecc1b4ad005f79a82"
+  dependencies:
+    warning "^3.0.0"
+
 prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
@@ -5828,6 +5875,21 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-big-calendar@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/react-big-calendar/-/react-big-calendar-0.18.0.tgz#7a05735367289995023245b7b41c27d443cae54c"
+  dependencies:
+    classnames "^2.1.3"
+    date-arithmetic "^3.0.0"
+    dom-helpers "^2.3.0 || ^3.0.0"
+    invariant "^2.1.0"
+    lodash "^4.17.4"
+    prop-types "^15.5.8"
+    react-overlays "^0.7.0"
+    react-prop-types "^0.4.0"
+    uncontrollable "^4.0.0"
+    warning "^2.0.0"
+
 react-body-images@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-body-images/-/react-body-images-1.0.1.tgz#29a7627f3f425250f23d3f5095ba50dc87e9edca"
@@ -5856,6 +5918,15 @@ react-dev-utils@^5.0.0:
     sockjs-client "1.1.4"
     strip-ansi "3.0.1"
     text-table "0.2.0"
+
+react-dom@^15.5.4:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
 
 react-dom@^16.2.0:
   version "16.2.0"
@@ -5915,12 +5986,28 @@ react-lifecycles-compat@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.0.2.tgz#551d8b1d156346e5fcf30ffac9b32ce3f78b8850"
 
+react-overlays@^0.7.0:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.7.4.tgz#ef2ec652c3444ab8aa014262b18f662068e56d5c"
+  dependencies:
+    classnames "^2.2.5"
+    dom-helpers "^3.2.1"
+    prop-types "^15.5.10"
+    prop-types-extra "^1.0.1"
+    warning "^3.0.0"
+
 react-popper@^0.8.0:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.8.3.tgz#0f73333137c9fb0af6ec4074d2d0585a0a0461e1"
   dependencies:
     popper.js "^1.12.9"
     prop-types "^15.6.0"
+
+react-prop-types@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-prop-types/-/react-prop-types-0.4.0.tgz#f99b0bfb4006929c9af2051e7c1414a5c75b93d0"
+  dependencies:
+    warning "^3.0.0"
 
 react-router-dom@^4.2.2:
   version "4.2.2"
@@ -6021,6 +6108,16 @@ react-transition-group@^2.2.1:
     loose-envify "^1.3.1"
     prop-types "^15.5.8"
     warning "^3.0.0"
+
+react@^15.5.4:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
+  dependencies:
+    create-react-class "^15.6.0"
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
 
 react@^16.2.0:
   version "16.2.0"
@@ -7186,6 +7283,12 @@ uid-number@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
+uncontrollable@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/uncontrollable/-/uncontrollable-4.1.0.tgz#e0358291252e1865222d90939b19f2f49f81c1a9"
+  dependencies:
+    invariant "^2.1.0"
+
 underscore@^1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
@@ -7393,6 +7496,12 @@ walker@~1.0.5:
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
   dependencies:
     makeerror "1.0.x"
+
+warning@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-2.1.0.tgz#21220d9c63afc77a8c92111e011af705ce0c6901"
+  dependencies:
+    loose-envify "^1.0.0"
 
 warning@^3.0.0:
   version "3.0.0"

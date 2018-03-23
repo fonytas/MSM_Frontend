@@ -6,6 +6,7 @@
 
 }
 
+
 Header{
     background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");
     position: fixed;
@@ -81,14 +82,14 @@ Footer{
     height: 500px;
     width: 60px;
     padding-top: 200px;
-    padding-left: 460px;
+    padding-left: 485px;
     text-align: center;
 }
 
 
 .form {
     /*position: fixed;*/
-    height: 420px;
+    height: 430px;
     width: 400px;
 
     /*position: relative;*/
@@ -109,7 +110,7 @@ Footer{
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     /*border: black 2px solid;*/
     padding-top: 40px;
-    padding-left: 40px;
+    padding-left: 45px;
 
 
 
@@ -169,8 +170,9 @@ Footer{
     /*margin: 1rem 1rem 1rem 1rem;;*/
 
     visibility: visible;
-    height: 160px;
+    height: 250px;
     max-width: 360px;
+
     /*padding-top: 14rem;*/
 
 
@@ -225,7 +227,8 @@ Footer{
 
 #register-form {
     visibility: visible;
-    height: 350px;
+    height: 400px;
+
     max-width: 360px;
     /*padding-top: 15rem;*/
 
