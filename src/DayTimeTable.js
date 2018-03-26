@@ -5,8 +5,10 @@ import events from './events'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
+
 export default class DayTimeTable extends React.Component {
+
 
     render(){
         let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
@@ -27,8 +29,8 @@ export default class DayTimeTable extends React.Component {
             step={30}
             showMultiDayTimes
             defaultView='week'
-            defaultDate={new Date(2015, 3, 1)}
-            // min:
+            defaultDate={new Date()}
+
 
             min={ minTime}
             max={ maxTime}

@@ -86,7 +86,6 @@ const requestData = (pageSize, page, sorted, filtered) => {
 function MyTable(props){
     // const { classes } = props;
 
-
     return  (<ReactTable  //striped
 
         columns={ [
@@ -184,43 +183,23 @@ function HeaderText(){
 
 
 const onRowClick = (state, rowInfo) => {
-    // var data = store.course;
-    //
-    // console.log(rowInfo.original.id)
-    // data.push(rowInfo.original.id)
-    // store.course = data
-    // console.log(store.course)
 
 
     return {
         onClick: e => {
-            // console.log('Course id', rowInfo.original.id);
-
-            const dataParams ={
-                courseskyid: rowInfo.original.id,
-                planname: 1
-
-            };
+            // const dataParams ={
+            //     courseskyid: rowInfo.original.id,
+            //     planname: 1
+            //
+            // };
+            // console.log(rowInfo.original)
+            // getTime(rowInfo.original.time);
 
             var data = store.course
-            data.push(rowInfo.original.id)
+
+            data.push(rowInfo.original)
             store.course = data
             console.log(store.course)
-
-
-            // axios.post("/user/addCourseToPlan", urlencode(dataParams))
-            //     .then((response) =>{store.course += response;
-            //
-            //         data.push(rowInfo.original.id)
-            //         store.course = data
-            //         console.log(store.course)
-            //
-            //
-            //         })
-            //     .catch((error) =>{
-            //         console.log(error);
-            //     })
-
 
         }
     }
@@ -265,6 +244,14 @@ class OpenSection extends React.Component {
     }
 
 
+    // handleClick = {
+    //     this.props.onAddCourse(jdklfjdlkfjdlk)
+    // }
+    handleClick() {
+        this.props.onAddCourse("GGG")
+    }
+
+
     render() {
         const { data, pages, loading } = this.state;
         return (
@@ -275,9 +262,11 @@ class OpenSection extends React.Component {
                                      pages={pages} //Display the total number of pages
                                      loading={loading} // Display the loading overlay when we need it
                                      onFetchData={this.fetchData} // Request new data when things change
+
                             />
                         </div>
                     </div>
+                    {/*<button onClick={this.handleClick}</button>*/}
 
             </Page>
         );

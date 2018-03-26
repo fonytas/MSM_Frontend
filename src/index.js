@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Schedule from './Schedule';
 import OpenSection from './OpenSection'
 import registerServiceWorker from './registerServiceWorker';
+
 // import basic from './basic';
 
 import Calender from './Calender';
@@ -37,6 +38,49 @@ const theme = createMuiTheme({
     }
 })
 
+
+class Mother extends Component{
+    state = {
+        courses: {}
+    }
+
+    onAddCourse = (course) => {
+        const newCourse = (st) => ({ ...st.courses, [course.id]: course})
+        this.setState(newCourse)
+    }
+
+    onRemoveCourse = (course) => {
+        const removeCourse = (st) => {
+            const {[course.id]: omit, ...res} = st.courses
+            return res
+        }
+        this.setState(removeCourse)
+    }
+
+    render() {
+        return (
+            <div>
+                <Route exact path = "/schedule" render={(props) => {
+                    return (<Schedule
+                        courses={this.state.courses}
+                        onAddCourse={this.onAddCourse}
+                        onRemoveCourse={this.onRemoveCourse}
+                    />)
+                }}/>
+                <Route exact path = "/opensection" render={(props) => {
+                    return (<OpenSection
+                        courses={this.state.courses}
+                        onAddCourse={this.onAddCourse}
+                        onRemoveCourse={this.onRemoveCourse}
+                    />)
+                }}/>
+                {/*<Route exact path ="/DayTimeTable" component = {DayTimeTable}/>*/}
+            </div>
+        )
+    }
+
+}
+
 function MainApp(){
     return (
         <div>
@@ -44,9 +88,10 @@ function MainApp(){
         <Router>
             <div>
                 <Route exact path="/login" component={App} />
-                <Route exact path = "/schedule" component = {Schedule}/>
-                <Route exact path = "/opensection" component = {OpenSection}/>
-                {/*<Route exact path = "/test" component={Test}/>*/}
+                <Mother/>
+                {/*<Route exact path = "/schedule" component = {Schedule}/>*/}
+                {/*<Route exact path = "/opensection" component = {OpenSection}/>*/}
+                {/*/!*<Route exact path = "/test" component={Test}/>*!/*/}
 
                 <Route exact path ="/DayTimeTable" component = {DayTimeTable}/>
 
