@@ -7,6 +7,7 @@ import './App.css';
 import Page from "./Page";
 import {AppBar, Avatar, IconButton, Toolbar, Typography} from "material-ui/index";
 import {deepOrange, withStyles} from "material-ui";
+import store from "./StoreInput";
 
 
 
@@ -37,8 +38,8 @@ function TopBar(props){
 class App extends Component {
     constructor(props){
         super(props);
-        this.state = {userName:"Anonymous", email:"none@sth.com",password: "None",
-                    ccPassword: "None",logClass: "login-form", regClass: "login-form",regform: false, logform: true,active: 0,
+        this.state = {userName:"", email:"",password: "",
+                    ccPassword: "",logClass: "login-form", regClass: "login-form",regform: false, logform: true,active: 0,
                     error: false};
         this.updateInputValue = this.updateInputValue.bind(this);
         this.updatePasswordValue = this.updatePasswordValue.bind(this);
@@ -62,31 +63,68 @@ class App extends Component {
     }
 
     registerInfo(e){
+        console.log("hello")
+
+        e.preventDefault();
+
         if(this.state.password.length < 6){
-            e.preventDefault();
             alert("Password must be more than 6 letters");
         }
         if (this.state.password !== this.state.ccPassword){
-            e.preventDefault();
+
             alert("Password mismatch");
         }
         else{
-            e.preventDefault();
-            console.log(">> username : " + this.state.userName);
 
-            var js = axios.post("/user/register/" + this.state.userName + "/" +this.state.email+"/" +this.state.password);
-            js.then((response)=>{
-                if(response.data.nameStatus === "valid"){
-                    this.props.history.push("/Schedule/"+this.state.userName);
-                }
-                else{
-                    alert("Username already exists")
-                }
+            const regisParams ={
+                username: this.state.userName,
+                password: this.state.password,
+                email: this.state.email
+            };
 
-            }).catch(function (error){
-                console.log(error);
-            });
-            this.props.history.push('/login');
+            // console.log(this.state.userName)
+            // console.log(this.state.password)
+            // console.log(this.state.email)
+
+            axios.post("/user/register",urlencode(regisParams))
+                .then((response) =>{
+                    console.log(response);
+
+                    // this.props.history.push({
+                    //     pahtname: "/login",
+                    //     search: "#login-form"
+                    // });
+
+                    this.props.history.push('/login#login-form')
+
+
+
+                })
+                .catch((error) =>{
+                    console.log(error.message);
+
+
+
+                });
+
+            // this.props.history.push('/login#login-form');
+
+
+            // console.log(">> username : " + this.state.userName);
+            //
+            // var js = axios.post("/user/register/" + this.state.userName + "/" +this.state.email+"/" +this.state.password);
+            // js.then((response)=>{
+            //     if(response.data.nameStatus === "valid"){
+            //         this.props.history.push("/Schedule/"+this.state.userName);
+            //     }
+            //     else{
+            //         alert("Username already exists")
+            //     }
+            //
+            // }).catch(function (error){
+            //     console.log(error);
+            // });
+            // this.props.history.push('/login');
         }
     }
 
@@ -103,10 +141,10 @@ class App extends Component {
             .then((response) => {
 
                 console.log(response.data.login);
-                if (response.data.login === true){
+                // if (response.data.login === true){
 
-                    this.props.history.push('/Schedule');
-                }
+                this.props.history.push('/Schedule');
+                // }
             })
             .catch((error) => {
                 alert("Username or Password are incorrect, Please try again.");
@@ -116,7 +154,7 @@ class App extends Component {
 
 
     componentDidUpdate(){
-        console.log(this.state);
+        // console.log(this.state);
 
         if(this.state.logform && window.location.href.indexOf("#register-form") !== -1  ){
             this.setState({regClass: "register-form show", logform: false, regform: true, active: this.state.active+1})
@@ -136,6 +174,8 @@ class App extends Component {
 
 
     render() {
+
+        // console.log(this.props.location)
 
         return (
             <div className="App">

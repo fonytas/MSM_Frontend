@@ -7,6 +7,8 @@ import OpenSection from './OpenSection'
 import registerServiceWorker from './registerServiceWorker';
 // import basic from './basic';
 
+import Calender from './Calender';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 

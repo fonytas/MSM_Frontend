@@ -12,6 +12,8 @@ import Page from './Page.js'
 import {makeData} from "./Utils";
 import urlencode from "form-urlencoded";
 
+import store from './StoreInput';
+
 
 export function fetchLocals() {
 
@@ -182,11 +184,17 @@ function HeaderText(){
 
 
 const onRowClick = (state, rowInfo) => {
+    // var data = store.course;
+    //
+    // console.log(rowInfo.original.id)
+    // data.push(rowInfo.original.id)
+    // store.course = data
+    // console.log(store.course)
 
 
     return {
         onClick: e => {
-            console.log('Course id', rowInfo.original.id);
+            // console.log('Course id', rowInfo.original.id);
 
             const dataParams ={
                 courseskyid: rowInfo.original.id,
@@ -194,14 +202,24 @@ const onRowClick = (state, rowInfo) => {
 
             };
 
-            axios.post("/user/addCourseToPlan", urlencode(dataParams))
-                .then((response) =>{
-                    // console.log(response);
-                    })
-                .catch((error) =>{
-                    console.log(error.response.data);
+            var data = store.course
+            data.push(rowInfo.original.id)
+            store.course = data
+            console.log(store.course)
 
-                })
+
+            // axios.post("/user/addCourseToPlan", urlencode(dataParams))
+            //     .then((response) =>{store.course += response;
+            //
+            //         data.push(rowInfo.original.id)
+            //         store.course = data
+            //         console.log(store.course)
+            //
+            //
+            //         })
+            //     .catch((error) =>{
+            //         console.log(error);
+            //     })
 
 
         }

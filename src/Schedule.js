@@ -5,12 +5,15 @@ import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
 import './Schedule.css';
 import Page from './Page.js'
 
+import store from './StoreInput';
+
+import axios from "./AxiosConfig";
+import urlencode from "form-urlencoded";
+import DayTimeTable from "./DayTimeTable";
 
 
 // import { storiesOf } from "@storybook/react";
 // import DayTimeTable from "../src/DayTimeTable";
-
-
 
 
 
@@ -35,12 +38,34 @@ const LogoutButton = withRouter(LogoutButtonBase);
 
 
 
+
 class Schedule extends Component{
+
 
     goTo(e){
         e.preventDefault();
         this.props.history.push("/opensection");
     }
+
+
+    saveCourse(e){
+        e.preventDefault();
+
+        const dataParams ={
+            courseskyid: store.course,
+            planname: 1
+        };
+        axios.post("/user/addCourseToPlan"+urlencode(dataParams))
+            .then((response) =>{
+                console.log(response)
+
+            })
+            .catch((error) =>{
+                console.log(error);
+        })
+
+    }
+
 
 
 
@@ -62,12 +87,12 @@ class Schedule extends Component{
                         </div>
 
                         <div className={"Delete-course"}>
-                            <button><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
+                            <button><Icon  name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
                         </div>
 
 
                         <div className={"Save-schedule"}>
-                            <button><Icon name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
+                            <button onClick={(e) => this.saveCourse(e)}><Icon name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
                         </div>
 
 
@@ -77,7 +102,7 @@ class Schedule extends Component{
                         </div>
 
                         <div className={"Delete-Schedule"}>
-                            <button><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>
+                            <button onClick ={() => console.log(store.course)}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>
                         </div>
 
                     </div>
@@ -103,6 +128,7 @@ class Schedule extends Component{
                     <div className={"Mid-panel"}>
 
                         <div className={"Table"}>
+                            <DayTimeTable/>
 
                         </div>
                     </div>
