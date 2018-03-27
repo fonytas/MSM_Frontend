@@ -15,6 +15,7 @@ import urlencode from "form-urlencoded";
 import store from './StoreInput';
 
 
+
 export function fetchLocals() {
 
     const request = axios.post('course/findall')
@@ -83,8 +84,7 @@ const requestData = (pageSize, page, sorted, filtered) => {
 
 
 
-function MyTable(props){
-    // const { classes } = props;
+function MyTable({onRowClick, ...props}){
 
     return  (<ReactTable  //striped
 
@@ -146,9 +146,10 @@ function MyTable(props){
             {
                 filterable:false,
                 style: {"margin": "5px 0px 0px 10px"},
-                Cell: <Button variant={"fab"}  mini color="secondary" aria-label="add">
+                Cell: <Button variant={"fab"}  mini color="secondary" aria-label="add" >
                     <AddIcon /></Button>,
                 maxWidth:50,
+
                 // accessor: "id",
                 // show: false,
 
@@ -161,7 +162,11 @@ function MyTable(props){
         filterable
         defaultPageSize={10}
         className="-striped -highlight"
-        getTrProps={onRowClick}
+        getTrProps={(st, rowInfo) => ({
+            onClick: onRowClick(rowInfo)
+        })}
+        // getTrProps={onRowClick}
+
         {...props}
     />)
 }
@@ -181,32 +186,30 @@ function HeaderText(){
 }
 
 
-
-const onRowClick = (state, rowInfo) => {
-
-
-    return {
-        onClick: e => {
-            // const dataParams ={
-            //     courseskyid: rowInfo.original.id,
-            //     planname: 1
-            //
-            // };
-            // console.log(rowInfo.original)
-            // getTime(rowInfo.original.time);
-
-            var data = store.course
-
-            data.push(rowInfo.original)
-            store.course = data
-            console.log(store.course)
-
-        }
-    }
-};
+// const onRowClick = (state, rowInfo) => {
+//     return {
+//         onClick: e => {
+//             this.props.onAddCourse(rowInfo.original)
+//             console.log(this.state.course)
+//
+//             // const dataParams ={
+//             //     courseskyid: rowInfo.original.id,
+//             //     planname: 1
+//             // };
+//             // console.log(rowInfo.original)
+//             // getTime(rowInfo.original.time);
+//
+//             // var data = store.course
+//             //
+//             // data.push(rowInfo.original)
+//             // store.course = data
+//             // console.log(store.course)
+//
+//         }
+//     }
+// };
 
 class OpenSection extends React.Component {
-
 
     constructor() {
         super();
@@ -216,11 +219,12 @@ class OpenSection extends React.Component {
             loading: true,
         };
         this.fetchData = this.fetchData.bind(this);
+        // this.onRowClick = this.onRowClick.bind(this)
     }
+
 
     fetchData(state, instance) {
         // Whenever the table mod
-
         // el changes, or the user sorts or changes pages, this method gets called and passed the current table model.
         // You can set the `loading` prop of the table to true to use the built-in one or show you're own loading bar if you want.
         this.setState({ loading: true });
@@ -244,12 +248,20 @@ class OpenSection extends React.Component {
     }
 
 
-    // handleClick = {
-    //     this.props.onAddCourse(jdklfjdlkfjdlk)
-    // }
-    handleClick() {
-        this.props.onAddCourse("GGG")
+
+    onRowClick = (rowInfo) => (e) => {
+
+        this.props.onAddCourse(rowInfo.original)
+
+        // var a = this.props.courses
+        // Object.keys(a).forEach(function (key){
+        //     console.log(a[key]);
+        // });
+
+
     }
+
+
 
 
     render() {
@@ -262,6 +274,9 @@ class OpenSection extends React.Component {
                                      pages={pages} //Display the total number of pages
                                      loading={loading} // Display the loading overlay when we need it
                                      onFetchData={this.fetchData} // Request new data when things change
+                                     onRowClick = {this.onRowClick}
+
+
 
                             />
                         </div>

@@ -14,6 +14,7 @@ export default function Page({children, ButtonComponent, TextComponent}) {
         </div>)
 }
 
+
 Page.defaultProps = {
     ButtonComponent: null,
     TextComponent: ""

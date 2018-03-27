@@ -1,6 +1,6 @@
 import React from 'react'
 import BigCalendar from 'react-big-calendar'
-import events from '../events'
+import events from '../GetEvent'
 
 let MyOtherNestedComponent = () => <div>NESTED COMPONENT</div>
 

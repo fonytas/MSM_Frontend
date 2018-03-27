@@ -37,15 +37,26 @@ function LogoutButtonBase({history}){
 const LogoutButton = withRouter(LogoutButtonBase);
 
 
+function AddButtonBase({history}){
+    return <button onClick={() => history.push("/opensection")}><Icon name=" fa-plus-circle" style={Isize}/> <br/>Add Course<br/></button>
+}
+const AddButton = withRouter(AddButtonBase);
+
+
+function OnButton({ AddButtonComponent}){
+    return (
+        <div className={"Add-course"}>
+            {AddButtonComponent && <AddButtonComponent/>}
+            <AddButtonBase/>
+        </div>
+
+    )
+}
+
+
 
 
 class Schedule extends Component{
-
-
-    goTo(e){
-        e.preventDefault();
-        this.props.history.push("/opensection");
-    }
 
 
     saveCourse(e){
@@ -63,10 +74,17 @@ class Schedule extends Component{
             .catch((error) =>{
                 console.log(error);
         })
-
     }
 
 
+    // onGG(e){
+    //     console.log("HELLO")
+    //     // console.log(this.props.courses)
+    //     var a = this.props.courses
+    //     Object.keys(a).forEach(function (key){
+    //         console.log(a[key]);
+    //     });
+    // }
 
 
 
@@ -81,10 +99,7 @@ class Schedule extends Component{
 
                     <div className={"Left-panel"}>
 
-                        <div className={"Add-course"}>
-
-                            <button onClick={(e) => this.goTo(e)}><Icon name=" fa-plus-circle" style={Isize}/> <br/>Add Course<br/></button>
-                        </div>
+                        <OnButton AddButtonComponent={AddButton}/>
 
                         <div className={"Delete-course"}>
                             <button><Icon  name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
@@ -128,7 +143,7 @@ class Schedule extends Component{
                     <div className={"Mid-panel"}>
 
                         <div className={"Table"}>
-                            <DayTimeTable/>
+                            <DayTimeTable DataComponent={ this.props.courses}/>
 
                         </div>
                     </div>

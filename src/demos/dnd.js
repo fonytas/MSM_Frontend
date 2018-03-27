@@ -1,5 +1,5 @@
 import React from 'react'
-import events from '../events'
+import events from '../GetEvent'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import BigCalendar from 'react-big-calendar'

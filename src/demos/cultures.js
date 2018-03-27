@@ -1,6 +1,6 @@
 import React from 'react'
 import BigCalendar from 'react-big-calendar'
-import events from '../events'
+import events from '../GetEvent'
 
 require('globalize/lib/cultures/globalize.culture.en-GB')
 require('globalize/lib/cultures/globalize.culture.es')

@@ -1,4 +1,4 @@
-import React, {Componen} from 'react';
+import React, {Component} from 'react';
 
 
 const store = {

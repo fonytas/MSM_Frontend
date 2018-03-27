@@ -1,42 +1,48 @@
 import React from 'react';
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
-import events from './events'
+import GetEvent from './GetEvent';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
-export default class DayTimeTable extends React.Component {
 
 
-    render(){
-        let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
-        let formats = {
+export default function DayTimeTable({children, DataComponent}) {
 
-        };
-        const minTime = new Date();
-        minTime.setHours(8,0,0);
+    let format = {
+        dayFormat: (date, culture, localizer) =>
+            localizer.format(date, 'ddd', culture),
+    }
 
-        const maxTime = new Date();
-        maxTime.setHours(21,0,0);
+    return (
 
-        return (<BigCalendar
+        <BigCalendar
 
-            events={events}
+            events={GetEvent(DataComponent) }
             // views={allViews}
             views={['week','agenda']}
             step={30}
             showMultiDayTimes
             defaultView='week'
-            defaultDate={new Date()}
+
+            defaultDate={new Date("2018-03-25")}
+
+            min={ new Date(new Date().setHours(8,0,0))}
+            max={ new Date(new Date().setHours(21,0,0))}
+
+            scrollToTime={new Date()}
+
+            startAccessor='startDate'
+            endAccessor='endDate'
+            toolbar={false}
 
 
-            min={ minTime}
-            max={ maxTime}
-            // formats={formats}
+            formats={format}
+
 
 
         />)
-    }
 }
+

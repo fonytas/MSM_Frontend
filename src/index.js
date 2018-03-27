@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 // import basic from './basic';
 
-import Calender from './Calender';
+// import Calender from './Calender';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -16,9 +16,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
     BrowserRouter as Router,
     Route,
-    Link,
-    Redirect,
-    withRouter,
+    // Link,
+    // Redirect,
+    // withRouter,
 } from 'react-router-dom'
 
 
@@ -40,13 +40,35 @@ const theme = createMuiTheme({
 
 
 class Mother extends Component{
-    state = {
-        courses: {}
+
+    constructor(props){
+        super(props)
+        this.state = {
+            courses: {}
+        }
+
+    }
+
+
+
+    onGetCourse (){
+        // console.log("HELLO")
+        console.log(this.state.courses)
+
     }
 
     onAddCourse = (course) => {
-        const newCourse = (st) => ({ ...st.courses, [course.id]: course})
-        this.setState(newCourse)
+        console.log("call on add course")
+        let newState = this.state.courses
+        newState[course.id] = course
+        this.setState({courses: newState})
+
+        // console.log(this.state.courses)
+        // console.log(course)
+        // this.setState({courses: course})
+        // console.log(this.state)
+
+
     }
 
     onRemoveCourse = (course) => {
@@ -58,23 +80,27 @@ class Mother extends Component{
     }
 
     render() {
+
+        // console.log(this.state.courses)
         return (
             <div>
-                <Route exact path = "/schedule" render={(props) => {
-                    return (<Schedule
-                        courses={this.state.courses}
-                        onAddCourse={this.onAddCourse}
-                        onRemoveCourse={this.onRemoveCourse}
-                    />)
-                }}/>
                 <Route exact path = "/opensection" render={(props) => {
                     return (<OpenSection
                         courses={this.state.courses}
                         onAddCourse={this.onAddCourse}
                         onRemoveCourse={this.onRemoveCourse}
+                        onGetCourse = {this.onGetCourse}
                     />)
                 }}/>
-                {/*<Route exact path ="/DayTimeTable" component = {DayTimeTable}/>*/}
+                <Route exact path = "/Schedule" render={(props) => {
+                    return (<Schedule
+                        courses={this.state.courses}
+                        onAddCourse={this.onAddCourse}
+                        onRemoveCourse={this.onRemoveCourse}
+                        onGetCourse = {this.onGetCourse}
+                    />)
+                }}/>
+
             </div>
         )
     }
@@ -88,6 +114,7 @@ function MainApp(){
         <Router>
             <div>
                 <Route exact path="/login" component={App} />
+
                 <Mother/>
                 {/*<Route exact path = "/schedule" component = {Schedule}/>*/}
                 {/*<Route exact path = "/opensection" component = {OpenSection}/>*/}

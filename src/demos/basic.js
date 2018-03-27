@@ -1,6 +1,6 @@
 import React from 'react'
 import BigCalendar from 'react-big-calendar'
-import events from '../events'
+import events from '../GetEvent'
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
 
