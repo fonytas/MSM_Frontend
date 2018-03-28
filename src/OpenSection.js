@@ -135,23 +135,32 @@ function MyTable({onRowClick, ...props}){
                 Header: "Final",
                 accessor: "final",
                 style:{ "whiteSpace": "normal"},
-                maxWidth: 200
+                maxWidth: 200,
+                // Cell: <Button onClick={(e) =>{ e.stopPropagation()}} variant={"fab"}  mini color="secondary" aria-label="add" >
+                //     <AddIcon /></Button>,
             },
             {
                 Header: "Remark",
                 accessor: "remark",
                 style:{ "whiteSpace": "normal"},
-                maxWidth: 140
+                maxWidth: 140,
+                // Cell: <Button onClick={(e) =>{ e.stopPropagation()}} variant={"fab"}  mini color="secondary" aria-label="add" >
+                //     <AddIcon /></Button>,
+
             },
             {
                 filterable:false,
                 style: {"margin": "5px 0px 0px 10px"},
-                Cell: <Button variant={"fab"}  mini color="secondary" aria-label="add" >
+
+                Cell: <Button onClick={(e) =>{ }} variant={"fab"}  mini color="secondary" aria-label="add" >
                     <AddIcon /></Button>,
+
                 maxWidth:50,
+
 
                 // accessor: "id",
                 // show: false,
+            // e.stopPropagation()
 
                 // Cell: <Button onClick={console.log("HELLO")} variant={"fab"}  mini color="secondary" aria-label="add">
                 //     <AddIcon /></Button>,
@@ -163,9 +172,11 @@ function MyTable({onRowClick, ...props}){
         defaultPageSize={10}
         className="-striped -highlight"
         getTrProps={(st, rowInfo) => ({
-            onClick: onRowClick(rowInfo)
-        })}
-        // getTrProps={onRowClick}
+
+            onClick:  onRowClick(rowInfo)
+        })
+
+        }
 
         {...props}
     />)
@@ -186,28 +197,6 @@ function HeaderText(){
 }
 
 
-// const onRowClick = (state, rowInfo) => {
-//     return {
-//         onClick: e => {
-//             this.props.onAddCourse(rowInfo.original)
-//             console.log(this.state.course)
-//
-//             // const dataParams ={
-//             //     courseskyid: rowInfo.original.id,
-//             //     planname: 1
-//             // };
-//             // console.log(rowInfo.original)
-//             // getTime(rowInfo.original.time);
-//
-//             // var data = store.course
-//             //
-//             // data.push(rowInfo.original)
-//             // store.course = data
-//             // console.log(store.course)
-//
-//         }
-//     }
-// };
 
 class OpenSection extends React.Component {
 
@@ -217,8 +206,10 @@ class OpenSection extends React.Component {
             data: [],
             pages: null,
             loading: true,
+            status: false,
         };
         this.fetchData = this.fetchData.bind(this);
+        // this.onButtonClick = this.onButtonClick.bind(this)
         // this.onRowClick = this.onRowClick.bind(this)
     }
 
@@ -248,15 +239,40 @@ class OpenSection extends React.Component {
     }
 
 
+    // onButtonClick=()=>{
+    //     console.log("1")
+    //
+    //
+    //     this.setState({status: true})
+    //     console.log(this.state.status)
+    //
+    //
+    //
+    //
+    // }
+
 
     onRowClick = (rowInfo) => (e) => {
-
         this.props.onAddCourse(rowInfo.original)
-
-        // var a = this.props.courses
-        // Object.keys(a).forEach(function (key){
-        //     console.log(a[key]);
-        // });
+        // console.log("2")
+        // // e.stopPropagation()
+        // // console.log(this.state.status)
+        //
+        // // if (this.state.gg === true){
+        // //     this.props.onAddCourse(rowInfo.original)
+        // //     this.setState({gg: false})
+        // //
+        // // }
+        //
+        // if (this.state.status === true){
+        //     console.log("3")
+        //     this.props.onAddCourse(rowInfo.original)
+        //     this.setState({status: false})
+        //
+        // }
+        // else {
+        //     this.setState({status: false})
+        // }
 
 
     }
@@ -275,9 +291,9 @@ class OpenSection extends React.Component {
                                      loading={loading} // Display the loading overlay when we need it
                                      onFetchData={this.fetchData} // Request new data when things change
                                      onRowClick = {this.onRowClick}
+                                     // onButtonClick = {this.onButtonClick}
 
-
-
+                                     // status={this.state.status}
                             />
                         </div>
                     </div>

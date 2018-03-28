@@ -7,15 +7,15 @@
 }
 
 
-Header{
-    background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");
-    position: fixed;
-    height: 160px;
-    width: 100%;
-    overflow: hidden;
+/*Header{*/
+    /*background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");*/
+    /*position: fixed;*/
+    /*height: 160px;*/
+    /*width: 100%;*/
+    /*overflow: hidden;*/
 
 
-}
+/*}*/
 
 
 Footer{
@@ -92,24 +92,7 @@ Footer{
     /*position: fixed;*/
     height: 430px;
     width: 400px;
-
-    /*position: relative;*/
-    /*z-index: 1;*/
-    /*background: #FFFFFF;*/
-    /*max-width: 360px;*/
-    /*margin: 0 auto 100px;*/
-    /*text-align: center;*/
-    /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
-    /*top: 29rem;*/
-    /*!*left: 17rem;*!*/
-    /*!*padding: 3.5rem 3rem 3rem 3rem;  !* top right bottom left *!*!*/
-    /*padding: 30rem 3rem 0rem 3rem;*/
-
-    /*padding-top: 220px;*/
-    /*padding-left: 510px;*/
-
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    /*border: black 2px solid;*/
     padding-top: 40px;
     padding-left: 45px;
 

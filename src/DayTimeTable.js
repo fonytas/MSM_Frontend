@@ -16,6 +16,23 @@ export default function DayTimeTable({children, DataComponent}) {
             localizer.format(date, 'ddd', culture),
     }
 
+    function eventStyle() {
+        var randomColor = require('randomcolor');
+        var color = randomColor();
+
+        var style = {
+            backgroundColor: color,
+            border: '0.05rem solid #000' ,
+            opacity: 0.8,
+            color: 'black',
+            display: 'block'
+        };
+        return {
+            style: style
+        };
+
+    }
+
     return (
 
         <BigCalendar
@@ -37,11 +54,9 @@ export default function DayTimeTable({children, DataComponent}) {
             startAccessor='startDate'
             endAccessor='endDate'
             toolbar={false}
-
-
             formats={format}
-
-
+            eventPropGetter={eventStyle}
+            
 
         />)
 }

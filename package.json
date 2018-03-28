@@ -24,6 +24,7 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "moment": "^2.21.0",
     "namor": "^1.0.1",
+    "randomcolor": "^0.5.3",
     "react": "^16.2.0",
     "react-big-calendar": "^0.18.0",
     "react-body-images": "^1.0.1",

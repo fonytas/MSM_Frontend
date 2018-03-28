@@ -12,8 +12,32 @@ import urlencode from "form-urlencoded";
 import DayTimeTable from "./DayTimeTable";
 
 
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Switch from 'material-ui/Switch';
+import Fade from 'material-ui/transitions/Fade';
+
+import AppBar from 'material-ui/AppBar';
+import Tabs, { Tab } from 'material-ui/Tabs';
+
+
+
 // import { storiesOf } from "@storybook/react";
 // import DayTimeTable from "../src/DayTimeTable";
+
+import Typography from 'material-ui/Typography';
+
+function TabContainer(props) {
+    return (
+        <Typography component="div" style={{ padding: 8 * 3 }}>
+            {props.children}
+        </Typography>
+    );
+}
+
+TabContainer.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 
 
@@ -23,6 +47,7 @@ const Isize = {
     fontSize: '2.1rem'
 
 };
+
 
 
 function HeaderText(){
@@ -47,59 +72,148 @@ function OnButton({ AddButtonComponent}){
     return (
         <div className={"Add-course"}>
             {AddButtonComponent && <AddButtonComponent/>}
-            <AddButtonBase/>
+            {/*<AddButtonBase/>*/}
         </div>
 
     )
 }
+
+function HandleName({StateComponent}){
+
+    if (StateComponent === false){
+        return <div>Plan A</div>
+    }
+    return <div>Plan B</div>
+
+
+}
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        marginTop: theme.spacing.unit * 3,
+        backgroundColor: theme.palette.background.paper,
+    },
+});
 
 
 
 
 class Schedule extends Component{
 
+    state = {
+        checked: false,
+        value:0
+    };
 
-    saveCourse(e){
+    handleChange = () => {
+        this.setState({ checked: !this.state.checked });
+    };
+
+    handleIndex = (event, value) => {
+        this.setState({ value:value });
+    };
+
+
+    selectData(){
+
+        axios.get("user/getplan")
+            .then((response) =>{
+                // console.log(response)
+                // console.log(response.data.length == 0)
+                console.log(this.props.courses)
+                if (response.data.length == 0){
+                    return this.props.courses
+                }
+                else {
+                    return response.data
+
+                }
+
+
+            })
+
+    }
+
+
+
+    saveCourse(e, planNumber){
+        if (planNumber === false){
+            planNumber = 1
+        }
+        else{
+            planNumber = 2
+        }
+
+        console.log(planNumber)
+
         e.preventDefault();
-
         const dataParams ={
-            courseskyid: store.course,
-            planname: 1
+            // courseskyid: this.props.courses,
+            planname: planNumber
         };
-        axios.post("/user/addCourseToPlan"+urlencode(dataParams))
+        // axios.post(`/order_to_kitchen?tablenum=${localStorage.getItem("tableID")}`, cart)
+        // axios.post("/user/addCoursesToPlan"+urlencode(dataParams))
+        axios.post("/user/addCoursesToPlan"+urlencode(dataParams), this.props.courses)
             .then((response) =>{
                 console.log(response)
+                // return "success"
 
             })
             .catch((error) =>{
+
                 console.log(error);
+                // return "error"
         })
     }
 
 
-    // onGG(e){
-    //     console.log("HELLO")
-    //     // console.log(this.props.courses)
-    //     var a = this.props.courses
-    //     Object.keys(a).forEach(function (key){
-    //         console.log(a[key]);
-    //     });
-    // }
-
-
-
     render(){
+        // const { classes } = this.props;
+        const { classes } = this.props;
+        const { checked, value } = this.state;
+        // const { value } = this.state;
+
         return (<div className={"Main"}>
 
             <Page ButtonComponent={LogoutButton} TextComponent={HeaderText}>
 
-            <div className="Body-S">
+            {/*<div className="Body-S">*/}
+                {/*<div className={"S-body"}>*/}
+
+                    {/*<div className={classes.root}>*/}
+                    {/*<AppBar position="static">*/}
+                        {/*<Tabs value={value} onChange={this.handleIndex}>*/}
+                            {/*<Tab label="Item One" />*/}
+                            {/*<Tab label="Item Two" />*/}
+                            {/*<Tab label="Item Three" href="#basic-tabs" />*/}
+                        {/*</Tabs>*/}
+                    {/*</AppBar>*/}
+                    {/*{value === 0 && <TabContainer>Item One</TabContainer>}*/}
+                    {/*{value === 1 && <TabContainer>Item Two</TabContainer>}*/}
+                    {/*{value === 2 && <TabContainer>Item Three</TabContainer>}*/}
+                    {/*</div>*/}
+
+                {/*</div>*/}
+            {/*</div>*/}
+
+
+
 
                 <div className={"S-body"}>
 
                     <div className={"Left-panel"}>
 
+                        <div className={"switch"}>
+
+                            <Switch checked={checked} onChange={this.handleChange} aria-label="collapse" />
+                            <HandleName StateComponent={this.state.checked}/>
+
+
+                        </div>
+
                         <OnButton AddButtonComponent={AddButton}/>
+
 
                         <div className={"Delete-course"}>
                             <button><Icon  name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
@@ -107,14 +221,10 @@ class Schedule extends Component{
 
 
                         <div className={"Save-schedule"}>
-                            <button onClick={(e) => this.saveCourse(e)}><Icon name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
+                            <button onClick={(e) => this.saveCourse(e, this.state.checked)}><Icon name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
                         </div>
 
 
-
-                        <div className={"New-Schedule"}>
-                            <button><Icon name=" fa-calendar-plus-o" style={Isize}/><br/>New Schedule<br/></button>
-                        </div>
 
                         <div className={"Delete-Schedule"}>
                             <button onClick ={() => console.log(store.course)}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>
@@ -124,37 +234,34 @@ class Schedule extends Component{
 
 
 
-                    {/*<div className={"Right-panel"}>*/}
 
-                        {/*<div className={"Box"}>Subject 1</div>*/}
-                        {/*<div className={"Box"}>Subject 2</div>*/}
-                        {/*<div className={"Box"}>Subject 3</div>*/}
-                        {/*<div className={"Box"}>Subject 4</div>*/}
-                        {/*<div className={"Box"}>Subject 5</div>*/}
-                        {/*<div className={"Box"}>Subject 6</div>*/}
-                        {/*<div className={"Box"}>Subject 7</div>*/}
-                        {/*<div className={"Box"}>Subject 8</div>*/}
-                        {/*<div className={"Box"}>Subject 9</div>*/}
-                        {/*<div className={"Box"}>Subject 10</div>*/}
-
-
-                    {/*</div>*/}
-
+                    <Fade in={checked}>
                     <div className={"Mid-panel"}>
+
+
 
                         <div className={"Table"}>
                             <DayTimeTable DataComponent={ this.props.courses}/>
-
                         </div>
                     </div>
+                    </Fade>
+
+                    {/*<Fade in={!checked}>*/}
+                        {/*<div className={"Table"}>*/}
+                            {/*<DayTimeTable DataComponent={ this.props.courses}/>*/}
+                        {/*</div>*/}
+                    {/*</Fade>*/}
+
                 </div>
-            </div>
             </Page>
+            </div>
 
 
 
-        </div>
+
         )}
 }
-
-export default Schedule;
+Schedule.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+export default  withStyles(styles)(Schedule);
