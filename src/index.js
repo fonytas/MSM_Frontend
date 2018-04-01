@@ -7,9 +7,6 @@ import OpenSection from './OpenSection'
 import Login from './Login'
 import registerServiceWorker from './registerServiceWorker';
 
-// import basic from './basic';
-
-// import Calender from './Calender';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -25,6 +22,7 @@ import {
 
 import DayTimeTable from "./DayTimeTable";
 import {createMuiTheme} from "material-ui";
+import axios from "./AxiosConfig";
 // import Login from "./Login";
 
 
@@ -53,26 +51,64 @@ class Mother extends Component{
         this.state = {
             coursesA: [],
             coursesB: [],
-            coursesC: []
+            coursesC: [],
+            plan: 0,
+            whoAmI: "",
+            // isLogin: false
         }
+    }
 
+    // componentDidMount(){
+    //
+    //     console.log("component")
+    //
+    //     axios.get("/user/getplan")
+    //         .then((response) =>{
+    //             // console.log(response.data[0].courses)
+    //             this.setState({coursesA: response.data[0].courses})
+    //             this.setState({coursesB: response.data[1].courses})
+    //             this.setState({coursesC: response.data[2].courses})
+    //         })
+    //
+    //     // axios.get("/user/whoami")
+    //     //     .then((response) =>{
+    //     //         // console.log(response.data.user.substring(0,1).toUpperCase())
+    //     //         this.setState({whoAmI: response.data.user.substring(0,1).toUpperCase()})
+    //     //     })
+    // }
 
+    isAuthen = (name) =>{
+        // console.log("HI")
+
+        this.setState({whoAmI: name})
+        axios.get("/user/getplan")
+            .then((response) =>{
+                // console.log(response.data[0].courses)
+                this.setState({coursesA: response.data[0].courses})
+                this.setState({coursesB: response.data[1].courses})
+                this.setState({coursesC: response.data[2].courses})
+            })
 
     }
 
+    onSetPlan = (plan) => {
 
-    //
-    // onGetCourse (){
-    //     // console.log("HELLO")
-    //     console.log(this.state.coursesA)
-    //
-    // }
-
-    onAddCourse = (course) => {
+        this.setState({plan: plan})
+    }
+    onAddCourse = (course, val) => {
         console.log("call on add course")
+        if (val === 0){
+            this.state.coursesA.push(course)
 
+        }
+        else if (val ===1){
+            this.state.coursesB.push(course)
+        }
 
-        this.state.coursesA.push(course)
+        else if (val ===2){
+            this.state.coursesC.push(course)
+        }
+
     }
 
     onRemoveCourse = (course) => {
@@ -85,26 +121,53 @@ class Mother extends Component{
 
     render() {
 
-        // console.log(this.state.courses)
         return (
             <div>
                 <Route exact path = "/opensection" render={(props) => {
                     return (<OpenSection
                         coursesA={this.state.coursesA}
+                        coursesB={this.state.coursesB}
+                        coursesC={this.state.coursesC}
+                        plan = {this.state.plan}
+                        whoAmI ={this.state.whoAmI}
 
                         onAddCourse={this.onAddCourse}
                         onRemoveCourse={this.onRemoveCourse}
-                        // onGetCourse = {this.onGetCourse}
+                        onSetPlan = {this.onSetPlan}
+
+                        isAuthen = {this.isAuthen}
                     />)
                 }}/>
                 <Route exact path = "/Schedule" render={(props) => {
                     return (<Schedule
                         coursesA={this.state.coursesA}
+                        coursesB={this.state.coursesB}
+                        coursesC={this.state.coursesC}
+                        plan = {this.state.plan}
+                        whoAmI ={this.state.whoAmI}
+
+
                         onAddCourse={this.onAddCourse}
                         onRemoveCourse={this.onRemoveCourse}
-                        // onGetCourse = {this.onGetCourse}
+                        onSetPlan = {this.onSetPlan}
+
+                        isAuthen = {this.isAuthen}
+
                     />)
                 }}/>
+
+                {/*<Route exact path = "/login" render={(props) => {*/}
+                    {/*return (<Login*/}
+                        {/*coursesA={this.state.coursesA}*/}
+                        {/*coursesB={this.state.coursesB}*/}
+                        {/*coursesC={this.state.coursesC}*/}
+                        {/*isLogin={this.state.isLogin}*/}
+                        {/*onAddCourse={this.onAddCourse}*/}
+                        {/*onRemoveCourse={this.onRemoveCourse}*/}
+                        {/*initialTime ={this.initialTime}*/}
+                        {/*// onGetCourse = {this.onGetCourse}*/}
+                    {/*/>)*/}
+                {/*}}/>*/}
 
             </div>
         )
@@ -118,10 +181,11 @@ function MainApp(){
         <MuiThemeProvider theme={theme}>
         <Router>
             <div>
+                <Mother/>
                 <Route exact path="/register" component={App} />
                 <Route exact path="/login" component={Login} />
 
-                <Mother/>
+
                 {/*<Route exact path = "/schedule" component = {Schedule}/>*/}
                 {/*<Route exact path = "/opensection" component = {OpenSection}/>*/}
                 {/*/!*<Route exact path = "/test" component={Test}/>*!/*/}

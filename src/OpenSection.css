@@ -1,15 +1,18 @@
 
-.Table-body {
-    position: absolute;
-    overflow: auto;
-    margin: 160px 2rem 3rem 2rem;
-    width: 1360px;
-    height: 1769px;
-    z-index: -1;
+/*.Table-body {*/
+    /*!*position: absolute;*!*/
+    /*!*overflow: auto;*!*/
+    /*margin: 10px 2rem 3rem 2rem;*/
+    /*width: 1360px;*/
+    /*height: 1769px;*/
+    /*!*z-index: -1;*!*/
 
-}
+
+
+/*}*/
 
 .Table-body-2 {
+    margin: 10px 2rem 3rem 2rem;
 
     width: 1360px;
     height: 1769px;
@@ -35,14 +38,12 @@
     color: white;
 }
 
-
-
-
-
-
-
-
-
+.ReactTable .rt-thead.-header {
+    -webkit-box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15);
+    background-color: #2f4f4f;
+    color: #f7f3ed;
+}
 
 
 

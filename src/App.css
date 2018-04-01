@@ -1,223 +1,3 @@
-/*.App {*/
-    /*text-align: center;*/
-    /*font-family: 'Roboto', sans-serif;*/
-
-
-
-/*}*/
-
-
-/*!*Header{*!*/
-    /*!*background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");*!*/
-    /*!*position: fixed;*!*/
-    /*!*height: 160px;*!*/
-    /*!*width: 100%;*!*/
-    /*!*overflow: hidden;*!*/
-
-
-/*!*}*!*/
-
-
-/*Footer{*/
-    /*position: fixed;*/
-    /*background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");*/
-    /*left:0px;*/
-    /*bottom:-5rem;*/
-    /*height:20%;*/
-    /*width:100%;*/
-    /*transform: rotateX(180deg);*/
-
-
-/*}*/
-
-/*.BG{*/
-    /*border: 0.05rem solid #e23c52 ;*/
-    /*background-color: rgba(255, 255, 255, 0.7);*/
-/*}*/
-
-/*.App-title2{*/
-
-
-    /*font-size: 2rem ;*/
-    /*font-weight: bold;*/
-    /*font-family: "Geneva";*/
-    /*text-align: center;*/
-
-    /*color: #e23c52;*/
-    /*text-shadow: 3px 1px white;*/
-
-/*}*/
-
-
-/*.App-title{*/
-    /*position: relative;*/
-    /*top: 0.5rem;*/
-
-    /*font-size: 2rem ;*/
-    /*font-weight: bold;*/
-    /*font-family: "Geneva";*/
-    /*text-align: center;*/
-
-    /*color: #e23c52;*/
-    /*text-shadow: 3px 1px white;*/
-
-/*}*/
-
-
-/*!*.App-body{*!*/
-
-    /*!*position: absolute;*!*/
-    /*!*!*overflow: auto;*!*!*/
-    /*!*margin: 80px 0rem 3rem 2rem;*!*/
-    /*!*width: 1360px;*!*/
-    /*!*height: 1769px;*!*/
-    /*!*z-index: -1;*!*/
-
-/*!*}*!*/
-/*.App-body {*/
-    /*!*position: fixed;*!*/
-
-    /*!*height: 100%;*!*/
-    /*!*width: 100%;*!*/
-    /*height: 500px;*/
-    /*!*width: 60px;*!*/
-    /*padding-top: 200px;*/
-    /*padding-left: 485px;*/
-    /*text-align: center;*/
-    /*overflow: scroll;*/
-/*}*/
-
-
-/*.form {*/
-    /*!*position: fixed;*!*/
-    /*height: 430px;*/
-    /*width: 400px;*/
-    /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
-    /*padding-top: 40px;*/
-    /*padding-left: 45px;*/
-
-
-
-
-/*}*/
-/*.form input {*/
-    /*font-family: "Geneva";  outline: 0;*/
-    /*background: #f2f2f2;*/
-    /*width: 100%;*/
-    /*border: 0;*/
-    /*margin: 0 0 15px;*/
-    /*padding: 15px;*/
-    /*box-sizing: border-box;*/
-    /*font-size: 14px;*/
-
-
-/*}*/
-/*.form button {*/
-    /*font-family: "Geneva";*/
-    /*text-transform: uppercase;*/
-    /*outline: 0;*/
-    /*background: #e23c52;*/
-    /*width: 100%;*/
-    /*border: 0;*/
-    /*padding: 15px;*/
-    /*color: #FFFFFF;*/
-    /*font-size: 14px;*/
-    /*-webkit-transition: all 0.3s ease;*/
-    /*transition: all 0.3s ease;*/
-    /*cursor: pointer;*/
-
-
-/*}*/
-/*.form button:hover,.form button:active,.form button:focus {*/
-    /*background: pink;*/
-/*}*/
-/*.form .message {*/
-    /*margin: 15px 0 0;*/
-    /*color: #b3b3b3;*/
-    /*font-size: 12px;*/
-    /*font-family: "Geneva";*/
-/*}*/
-/*.form .message a {*/
-    /*color: #dc1010;*/
-    /*text-decoration: none;*/
-    /*font-family: "Geneva";*/
-/*}*/
-
-/*.register-form {*/
-
-    /*visibility: hidden;*/
-    /*height: 0px;*/
-
-/*}*/
-/*.register-form.show{*/
-    /*!*position: absolute;*!*/
-    /*!*margin: 1rem 1rem 1rem 1rem;;*!*/
-
-    /*visibility: visible;*/
-    /*height: 250px;*/
-    /*max-width: 360px;*/
-
-    /*!*padding-top: 14rem;*!*/
-
-
-/*}*/
-
-
-
-
-/*.form .Signin {*/
-
-    /*!*position: relative;*!*/
-    /*font-size: 1.8em;*/
-    /*font-family: "Geneva";*/
-    /*!*bottom: 1.7rem;*!*/
-    /*font-weight: bold;*/
-    /*color: #e23c52;*/
-    /*letter-spacing: 0.1rem;*/
-    /*padding-bottom: 1.7rem;*/
-
-
-
-/*}*/
-
-/*#login-form:target {*/
-
-    /*!*padding-top: 1rem;*!*/
-    /*transition: visibility 0.3s linear 300ms, opacity 300ms,  height 1000ms;*/
-    /*visibility: hidden;*/
-    /*opacity: 0;*/
-    /*height: 0;*/
-
-    /*!*position: absolute;*!*/
-/*}*/
-/*#login-form{*/
-
-
-
-/*}*/
-
-
-
-/*#register-form:target {*/
-
-    /*transition: visibility 0.3s linear 300ms, opacity 300ms, height 1000ms;*/
-    /*opacity: 0;*/
-    /*visibility: hidden;*/
-    /*height: 0;*/
-
-
-/*}*/
-
-
-/*#register-form {*/
-    /*visibility: visible;*/
-    /*height: 400px;*/
-
-    /*max-width: 360px;*/
-    /*!*padding-top: 15rem;*!*/
-
-
-/*}*/
 
 
 .bigBox{
@@ -260,20 +40,6 @@
 
 
 
-/*body{*/
-    /*!*background-image: url("https://images.unsplash.com/photo-1520545255830-2511979f3636?ixlib=rb-0.3.5&s=afd42a9d444abb3a5bccf3521192b17b&auto=format&fit=crop&w=1971&q=80");*!*/
-    /*background-image: url("https://image.ibb.co/j6P1QS/library_Blur.jpg");*/
-    /*background-attachment: fixed;*/
-    /*background-size:cover;*/
-    /*!*background-blend-mode: screen;*!*/
-
-/*}*/
-
-/*div{*/
-    /*!*font-family: 'Roboto',sans-serif;*!*/
-/*}*/
-
-
 
 .newBox{
     position:absolute;
@@ -299,19 +65,15 @@
 
     display: inline-block;
 
-    /*position:absolute;*/
-    /*top:30%;*/
-    /*left:45%;*/
+
     margin-top:100px;
     margin-left:210px;
     height: 600px;
     width: 400px;
     padding-top: 90px;
     padding-left: 10px;
-    /*background-color:rgba(83,114,84,0.8);*/
     background-color:rgba(47,79,79,0.8);
-    /*border-radius: 25px;*/
-    /*box-shadow: 5px 10px black;*/
+
     border: 1px solid transparent;
 
 }

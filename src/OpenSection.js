@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTable from "react-table";
-import {withRouter} from "react-router-dom";
+import {withRouter, Redirect} from "react-router-dom";
 import _ from "lodash";
 import axios from "./AxiosConfig";
 import Button from 'material-ui/Button';
@@ -8,12 +8,51 @@ import AddIcon from 'material-ui-icons/Add';
 
 import './OpenSection.css';
 import "react-table/react-table.css";
-import Page from './Page.js'
 import {makeData} from "./Utils";
-import urlencode from "form-urlencoded";
 
-import store from './StoreInput';
 
+import AppBar from 'material-ui/AppBar';
+import MenuIcon from 'material-ui-icons/Event';
+import Toolbar from 'material-ui/Toolbar';
+import Avatar from 'material-ui/Avatar';
+import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
+
+
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+    flex: {
+        flex: 1,
+    },
+    menuButton: {
+        marginLeft: 460,
+        marginRight: 20,
+    },
+    avatar: {
+        margin: 10,
+        color: '#f7f3ed',
+        backgroundColor: '#477575'
+    },
+    icon:{
+        fontSize:45,
+        marginLeft:12
+    },
+    paper:{
+        paddingTop: 16,
+        paddingBottom: 16,
+        backgroundColor: '#f7f3ed'
+    }
+};
+
+
+function ScheduleButtonBase({history}){
+    return <Button variant="raised" color="secondary"  onClick={() => history.push("/schedule")}> Back</Button>
+}
+const ScheduleButton = withRouter(ScheduleButtonBase);
 
 
 export function fetchLocals() {
@@ -79,8 +118,6 @@ const requestData = (pageSize, page, sorted, filtered) => {
     });
 };
 
-
-
 function MyTable({onRowClick, ...props}){
 
     return  (<ReactTable  //striped
@@ -133,16 +170,12 @@ function MyTable({onRowClick, ...props}){
                 accessor: "final",
                 style:{ "whiteSpace": "normal"},
                 maxWidth: 200,
-                // Cell: <Button onClick={(e) =>{ e.stopPropagation()}} variant={"fab"}  mini color="secondary" aria-label="add" >
-                //     <AddIcon /></Button>,
             },
             {
                 Header: "Remark",
                 accessor: "remark",
                 style:{ "whiteSpace": "normal"},
                 maxWidth: 140,
-                // Cell: <Button onClick={(e) =>{ e.stopPropagation()}} variant={"fab"}  mini color="secondary" aria-label="add" >
-                //     <AddIcon /></Button>,
 
             },
             {
@@ -153,8 +186,6 @@ function MyTable({onRowClick, ...props}){
                     <AddIcon /></Button>,
 
                 maxWidth:50,
-
-
             }
         ]}
         manual // Forces table not to paginate or sort automatically, so we can handle it server-side
@@ -171,23 +202,21 @@ function MyTable({onRowClick, ...props}){
     />)
 }
 
-
-
-
 function BackButtonBase({history}){
     return <button className="back" onClick={() => history.push("/schedule")} >
         Back
     </button>
 }
-const BackButton = withRouter(BackButtonBase);
-
-function HeaderText(){
-    return <h1 className={"App-title2"}>MUIC Open Section</h1>
-}
+// const BackButton = withRouter(BackButtonBase);
+//
+// function HeaderText(){
+//     return <h1 className={"App-title2"}>MUIC Open Section</h1>
+// }
 
 
 
 class OpenSection extends React.Component {
+
 
     constructor() {
         super();
@@ -196,13 +225,28 @@ class OpenSection extends React.Component {
             pages: null,
             loading: true,
             status: false,
+            redirect2: false
         };
         this.fetchData = this.fetchData.bind(this);
     }
 
 
+    componentDidMount() {
+
+        axios.get("/user/whoami")
+            .then((response) => {
+
+                this.props.isAuthen(response.data.user.substring(0, 1).toUpperCase())
+
+            }).catch((error) => {
+
+            this.setState({redirect2: true})
+        })
+
+    }
+
     fetchData(state, instance) {
-        this.setState({ loading: true });
+        this.setState({loading: true});
         requestData(
             state.pageSize,
             state.page,
@@ -219,47 +263,63 @@ class OpenSection extends React.Component {
 
     onRowClick = (rowInfo) => (e) => {
 
-        let count =0;
+        let count = 0;
 
         this.props.coursesA.forEach(function (element) {
             if (rowInfo.original.skyid === element.skyid) {
                 count = 1;
             }
         })
-        if (count !== 1){
-            this.props.onAddCourse(rowInfo.original)
-
+        if (count !== 1) {
+            this.props.onAddCourse(rowInfo.original, this.props.plan)
         }
-        // console.log(this.props.courses)
     }
 
 
-
     render() {
-        const { data, pages, loading } = this.state;
-        return (
-            <Page ButtonComponent={BackButton} TextComponent={HeaderText} >
-                    <div className={"Table-body"}>
+        const {classes} = this.props;
+        const {data, pages, loading, redirect2} = this.state;
+
+        if (redirect2) {
+            return <Redirect to='/login'/>;
+        }
+        else{
+            return (
+                <div>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <ScheduleButton/>
+
+                            <IconButton className={classes.menuButton} color="default" aria-label="Menu">
+                                <MenuIcon className={classes.icon}/>
+                            </IconButton>
+                            <Typography variant="title" color="inherit" className={classes.flex}>
+                                MUIC Opensection
+                            </Typography>
+                            <Avatar className={classes.avatar}>{this.props.whoAmI}</Avatar>
+
+
+                        </Toolbar>
+                    </AppBar>
+
+
+                    <Paper className={classes.paper} elevation={4}>
+
                         <div className={"Table-body-2"}>
                             <MyTable data={data}
                                      pages={pages} //Display the total number of pages
                                      loading={loading} // Display the loading overlay when we need it
                                      onFetchData={this.fetchData} // Request new data when things change
-                                     onRowClick = {this.onRowClick}
-                                     // onButtonClick = {this.onButtonClick}
+                                     onRowClick={this.onRowClick}
 
-                                     // status={this.state.status}
                             />
                         </div>
-                    </div>
-                    {/*<button onClick={this.handleClick}</button>*/}
+                    </Paper>
 
-            </Page>
-        );
+                </div>
+            );}
     }
-
-
 }
 
 
-export default OpenSection;
+export default withStyles(styles)(OpenSection);

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {withRouter} from "react-router-dom";
+import {withRouter, Redirect} from "react-router-dom";
 
 import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
 import './Schedule.css';
 import Page from './Page.js'
+// import { Redirect } from 'react-router'
 
 import store from './StoreInput';
 
@@ -25,9 +26,7 @@ import IconButton from 'material-ui/IconButton';
 // import MenuIcon from 'material-ui-icons/Menu';
 import MenuIcon from 'material-ui-icons/Event';
 import Toolbar from 'material-ui/Toolbar';
-
 import Avatar from 'material-ui/Avatar';
-
 import Typography from 'material-ui/Typography';
 import Dialog, {
     DialogActions,
@@ -78,12 +77,29 @@ const Isize = {
 
 };
 
+// function GG({history}) {
+//     console.log("omg")
+//
+//     this.props.history.push("login")
+//
+// }
 
+function Logout({History}){
 
+    axios.post('/logout')
+        .then((response) =>{
+            console.log(response)
 
+            History.push("/login")
+        })
+        .catch((error) =>{
+
+        })
+
+}
 
 function LogoutButtonBase({history}){
-    return <Button variant="raised" color="secondary"  onClick={() => history.push("/login")}>Logout</Button>
+    return <Button variant="raised" color="secondary"  onClick={() => Logout({History: history})}>Logout</Button>
 }
 const LogoutButton = withRouter(LogoutButtonBase);
 
@@ -102,49 +118,49 @@ function OnButton({ AddButtonComponent}){
 
     )
 }
-
-
-
+//
+// function ggg() {
+//     console.log("-----")
+//     return (<Redirect to='/login'/>)
+// }
 class Schedule extends Component{
     constructor(props){
        super(props)
 
-
     }
-
 
     state = {
         value:0,
-        name: "",
+        // name: "",
         openS: false,
         vertical: null,
         horizontal: null,
-        open: false
+        open: false,
+        redirect: false
 
 
     };
 
-    componentDidMount(){
-        axios.get('/user/whoami')
-            .then((response) => {
 
-                this.setState({name: response.data.user.substring(0,1).toUpperCase()})
-            })
+
+    componentDidMount(){
+
+        axios.get("/user/whoami")
+            .then((response) =>{
+
+                this.props.isAuthen(response.data.user.substring(0,1).toUpperCase())
+
+            }).catch((error) => {
+
+                this.setState({ redirect: true })
+        })
+
     }
 
     handleIndex = (event, value) => {
         this.setState({ value:value });
+        this.props.onSetPlan(value)
     };
-
-
-    getPlan(){
-
-        axios.get("/user/getplan")
-            .then((response) => {
-                console.log(response.data)
-                }
-            )
-    }
 
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -155,25 +171,20 @@ class Schedule extends Component{
     };
 
     handleClickS = state => () => {
-        // console.log("D")
         this.setState({ openS: true, ...state });
         this.saveCourse()
     };
 
     handleCloseS = () => {
-        // this.saveCourse()
         this.setState({ openS: false });
     };
 
-
     saveCourse(){
-
-        // e.preventDefault();
         const data = this.props.coursesA
         axios.post(`/user/saveCoursesToPlan?planname=${this.state.value+1}`, data)
             .then((response) =>{
                 // this.handleClickS({ vertical: 'top', horizontal: 'center' })
-                console.log(response)
+                // console.log(response)
 
             })
             .catch((error) =>{
@@ -183,16 +194,11 @@ class Schedule extends Component{
 
     deleteCourse(e){
 
-
         e.preventDefault();
-
-
         axios.post(`/user/removeAllCoursesFromPlan?planname=${this.state.value+1}`)
             .then((response) =>{
-                // console.log(response)
                 window.location.reload();
-
-
+                // this.forceUpdate()
             })
             .catch((error) =>{
                 // console.log(error);
@@ -200,142 +206,142 @@ class Schedule extends Component{
 
     }
 
-    logout(e){
-        axios.post('/logout')
-            .then((response) =>{
-                console.log(response)
-                console.log("D")
-                this.props.history.push("/login")
-            })
-            .catch((error) =>{
-
-            })
-    }
 
 
+    render() {
 
-    render(){
-        const { classes } = this.props;
-        const { value,vertical, horizontal, openS, open } = this.state;
+        const {classes} = this.props;
+        const {value, vertical, horizontal, openS, redirect} = this.state;
 
-        return (<div className={"Main"}>
+        // this.handleSubmit()
+        // console.log(this.state.redirect)
 
-                {/*<Button onClick={this.handleClickS({ vertical: 'top', horizontal: 'center' })}>*/}
+        if (redirect) {
+            // console.log("Pls redirect")
+            return <Redirect to='/login'/>;
+        } else {
+
+
+            return (<div className={"Main"}>
+
+                    {/*<Button onClick={this.handleClickS({ vertical: 'top', horizontal: 'center' })}>*/}
                     {/*Top-Center*/}
-                {/*</Button>*/}
+                    {/*</Button>*/}
 
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton className={classes.menuButton} color="default" aria-label="Menu">
-                            <MenuIcon  className={classes.icon} />
-                        </IconButton>
-                        <Typography variant="title" color="inherit" className={classes.flex}>
-                            Schedule
-                        </Typography>
-                        <Avatar className={classes.avatar} >{this.state.name}</Avatar>
-                        <LogoutButton />
-                    </Toolbar>
-                </AppBar>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <IconButton className={classes.menuButton} color="default" aria-label="Menu">
+                                <MenuIcon className={classes.icon}/>
+                            </IconButton>
+                            <Typography variant="title" color="inherit" className={classes.flex}>
+                                Schedule
+                            </Typography>
+                            <Avatar className={classes.avatar}>{this.props.whoAmI}</Avatar>
+                            <LogoutButton/>
+                        </Toolbar>
+                    </AppBar>
 
-                <div className={"Left-panel"}>
+                    <div className={"Left-panel"}>
 
-                    <OnButton AddButtonComponent={AddButton}/>
+                        <OnButton AddButtonComponent={AddButton}/>
 
 
+                        <div className={"Delete-course"}>
+                            <button><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
+                        </div>
 
-                    <div className={"Delete-course"}>
-                        <button><Icon  name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
+
+                        <div className={"Save-schedule"}>
+                            <button onClick={this.handleClickS({vertical: 'top', horizontal: 'center'})}><Icon
+                                name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
+
+                        </div>
+
+
+                        <div className={"Delete-Schedule"}>
+                            {/*<button onClick ={(e) => this.deleteCourse(e)}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>*/}
+                            <button onClick={this.handleClickOpen}><Icon name=" fa-calendar-minus-o"
+                                                                         style={Isize}/><br/>Delete Schedule<br/>
+                            </button>
+                            <Dialog
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle
+                                    id="alert-dialog-title">{"Do you want to DELETE the schedule ? "}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        This action cannot be undo
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={this.handleClose} color="primary">
+                                        Dismiss
+                                    </Button>
+                                    <Button onClick={(e) => this.deleteCourse(e)} color="secondary" autoFocus>
+                                        DELETE
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </div>
+
                     </div>
 
 
-                    <div className={"Save-schedule"}>
-                        <button onClick={this.handleClickS({ vertical: 'top', horizontal: 'center' })}><Icon name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
+                    <div className={"Mid-panel"}>
+                        <div className={classes.root}>
+                            <AppBar position="static">
+                                <Tabs value={value} onChange={this.handleIndex} centered>
+                                    <Tab label="Plan A"/>
+                                    <Tab label="Plan B"/>
+                                    <Tab label="Plan C" href="#basic-tabs"/>
+                                </Tabs>
+                            </AppBar>
 
+                            {value === 0 &&
+                            <TabContainer>
+                                <div className={"Table"}>
+
+                                    <DayTimeTable DataComponent={this.props.coursesA}/>
+                                </div>
+                            </TabContainer>}
+                            {value === 1 &&
+                            <TabContainer>
+
+                                <div className={"Table"}>
+                                    <DayTimeTable DataComponent={this.props.coursesB}/>
+                                </div>
+
+                            </TabContainer>}
+                            {value === 2 &&
+                            <TabContainer>
+
+                                <div className={"Table"}>
+                                    <DayTimeTable DataComponent={this.props.coursesC}/>
+                                    {/*<GetPlan Value={this.state.value} Pro={this.props.coursesA}/>*/}
+                                </div>
+
+                            </TabContainer>}
+                        </div>
                     </div>
-
-
-
-
-
-                    <div className={"Delete-Schedule"}>
-                        {/*<button onClick ={(e) => this.deleteCourse(e)}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>*/}
-                        <button onClick={this.handleClickOpen}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>
-                        <Dialog
-                            open={this.state.open}
-                            onClose={this.handleClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                        >
-                            <DialogTitle id="alert-dialog-title">{"Do you want to DELETE the schedule ? "}</DialogTitle>
-                            <DialogContent>
-                                <DialogContentText id="alert-dialog-description">
-                                    This action cannot be undo
-                                </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={this.handleClose} color="primary">
-                                    Dismiss
-                                </Button>
-                                <Button onClick={(e) => this.deleteCourse(e)} color="secondary" autoFocus>
-                                    DELETE
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                    </div>
+                    <Snackbar
+                        anchorOrigin={{vertical, horizontal}}
+                        open={openS}
+                        onClose={this.handleCloseS}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">Saved</span>}
+                    />
 
                 </div>
 
 
-                <div className={"Mid-panel"}>
-                    <div className={classes.root}>
-                        <AppBar position="static">
-                            <Tabs value={value} onChange={this.handleIndex} centered>
-                                <Tab label="Plan A" />
-                                <Tab label="Plan B" />
-                                <Tab label="Plan C" href="#basic-tabs" />
-                            </Tabs>
-                        </AppBar>
-
-                    {value === 0 &&
-                        <TabContainer>
-                            <div className={"Table"}>
-                                <DayTimeTable DataComponent={ this.props.coursesA}/>
-                            </div>
-                        </TabContainer>}
-                    {value === 1 &&
-                        <TabContainer>
-
-                            <div className={"Table"}>
-                                <DayTimeTable DataComponent={ this.getPlan()}/>
-                            </div>
-
-                        </TabContainer>}
-                    {value === 2 &&
-                        <TabContainer>
-
-                            <div className={"Table"}>
-                                <DayTimeTable DataComponent={ this.props.coursesA}/>
-                            </div>
-
-                        </TabContainer>}
-                    </div>
-                </div>
-                <Snackbar
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={openS}
-                    onClose={this.handleCloseS}
-                    SnackbarContentProps={{
-                        'aria-describedby': 'message-id',
-                    }}
-                    message={<span id="message-id">Saved</span>}
-                />
-
-            </div>
-
-
-
-
-        )}
+            )
+        }
+    }
 }
 Schedule.propTypes = {
     classes: PropTypes.object.isRequired,

@@ -2,12 +2,41 @@ import React, { Component } from 'react';
 import './App.css'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import urlencode from "form-urlencoded";
 import axios from "./AxiosConfig";
+import {withRouter} from "react-router-dom";
 
+//
+//
+// function LoginButtonBase({history, Username, Password}){
+//     return (<Button onClick ={() => HandleLogin({History: history, Username: Username, Password:Password})} variant="raised" color="secondary" size={"large"} >
+//         Login
+//         </Button>)
+//
+// }
+// const LoginButton = withRouter(LoginButtonBase);
 
+// function HandleLogin({History, Username, Password}){
+//     const loginParams = {
+//         username: Username,
+//         password: Password
+//     };
+//
+//     axios.post("/login", urlencode(loginParams))
+//         .then((response) => {
+//
+//             console.log(response.data.login);
+//
+//             history.push("/schedule")
+//             // }
+//         })
+//         .catch((error) => {
+//             alert("Username or Password are incorrect, Please try again.");
+//             console.log(error.response.data);
+//         })
+//
+//
+// }
 
 class Login extends Component{
 
@@ -34,6 +63,10 @@ class Login extends Component{
     //     this.setState({ccPassword: evt.target.value});
     // }
 
+    // componentDidMount(){
+    //
+    //     this.props.initialTime()
+    // }
 
     login(e){
         e.preventDefault();
@@ -45,9 +78,10 @@ class Login extends Component{
 
         axios.post("/login", urlencode(loginParams))
             .then((response) => {
+                console.log("THIS IS LOGIN")
 
                 console.log(response.data.login);
-                // if (response.data.login === true){
+
 
                 this.props.history.push('/Schedule');
                 // }
@@ -86,6 +120,7 @@ class Login extends Component{
                     <Button onClick={(e) => this.login(e) } variant="raised" color="secondary" size={"large"} >
                         Login
                     </Button>
+
                     </div>
 
                 </div>
