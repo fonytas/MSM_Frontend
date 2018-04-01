@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Schedule from './Schedule';
 import OpenSection from './OpenSection'
+import Login from './Login'
 import registerServiceWorker from './registerServiceWorker';
 
 // import basic from './basic';
@@ -31,10 +32,16 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             light: '#f05545',
-            main: '#b71c1c',
-            dark: '#7f0000',
-            contrastText: '#ffffff',
-        }
+            main: '#2f4f4f',
+            dark: '#000',
+            contrastText: '#f7f3ed',
+        },
+        secondary: {
+            light: '#000',
+            main:'#7f0000',
+            dark: '#5f0000',
+            contrastText: '#f7f3ed'
+        },
     }
 })
 
@@ -44,37 +51,33 @@ class Mother extends Component{
     constructor(props){
         super(props)
         this.state = {
-            courses: {}
+            coursesA: [],
+            coursesB: [],
+            coursesC: []
         }
 
 
-    }
-
-
-
-    onGetCourse (){
-        // console.log("HELLO")
-        console.log(this.state.courses)
 
     }
+
+
+    //
+    // onGetCourse (){
+    //     // console.log("HELLO")
+    //     console.log(this.state.coursesA)
+    //
+    // }
 
     onAddCourse = (course) => {
         console.log("call on add course")
-        let newState = this.state.courses
-        newState[course.id] = course
-        this.setState({courses: newState})
-
-        // console.log(this.state.courses)
-        // console.log(course)
-        // this.setState({courses: course})
-        // console.log(this.state)
 
 
+        this.state.coursesA.push(course)
     }
 
     onRemoveCourse = (course) => {
         const removeCourse = (st) => {
-            const {[course.id]: omit, ...res} = st.courses
+            const {[course.id]: omit, ...res} = st.coursesA
             return res
         }
         this.setState(removeCourse)
@@ -87,18 +90,19 @@ class Mother extends Component{
             <div>
                 <Route exact path = "/opensection" render={(props) => {
                     return (<OpenSection
-                        courses={this.state.courses}
+                        coursesA={this.state.coursesA}
+
                         onAddCourse={this.onAddCourse}
                         onRemoveCourse={this.onRemoveCourse}
-                        onGetCourse = {this.onGetCourse}
+                        // onGetCourse = {this.onGetCourse}
                     />)
                 }}/>
                 <Route exact path = "/Schedule" render={(props) => {
                     return (<Schedule
-                        courses={this.state.courses}
+                        coursesA={this.state.coursesA}
                         onAddCourse={this.onAddCourse}
                         onRemoveCourse={this.onRemoveCourse}
-                        onGetCourse = {this.onGetCourse}
+                        // onGetCourse = {this.onGetCourse}
                     />)
                 }}/>
 
@@ -114,7 +118,8 @@ function MainApp(){
         <MuiThemeProvider theme={theme}>
         <Router>
             <div>
-                <Route exact path="/login" component={App} />
+                <Route exact path="/register" component={App} />
+                <Route exact path="/login" component={Login} />
 
                 <Mother/>
                 {/*<Route exact path = "/schedule" component = {Schedule}/>*/}

@@ -1,46 +1,16 @@
 import React, { Component } from 'react';
 import axios from "./AxiosConfig";
 import urlencode from 'form-urlencoded';
-
-
 import './App.css';
-import Page from "./Page";
-import {AppBar, Avatar, IconButton, Toolbar, Typography} from "material-ui/index";
-import {deepOrange, withStyles} from "material-ui";
-import store from "./StoreInput";
-
-
-
-function HeaderText(){
-    return <h1 className={"App-title2"}>MUIC Schedule Maker</h1>
-}
-
-
-function TopBar(props){
-    const { classes } = props;
-
-    return  (
-        <AppBar position="static"  >
-            <Toolbar >
-                <Typography variant="title" color="inherit">
-                    MUIC Schedule Maker
-                </Typography>
-
-            </Toolbar>
-        </AppBar>
-    )
-}
-
-
-
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 
 
 class App extends Component {
     constructor(props){
         super(props);
         this.state = {userName:"", email:"",password: "",
-                    ccPassword: "",logClass: "login-form", regClass: "login-form",regform: false, logform: true,active: 0,
-                    error: false};
+                    ccPassword: ""}
         this.updateInputValue = this.updateInputValue.bind(this);
         this.updatePasswordValue = this.updatePasswordValue.bind(this);
         this.updateccPasswordValue = this.updateccPasswordValue.bind(this);
@@ -63,7 +33,6 @@ class App extends Component {
     }
 
     registerInfo(e){
-        console.log("hello")
 
         e.preventDefault();
 
@@ -82,141 +51,67 @@ class App extends Component {
                 email: this.state.email
             };
 
-            // console.log(this.state.userName)
-            // console.log(this.state.password)
-            // console.log(this.state.email)
 
             axios.post("/user/register",urlencode(regisParams))
                 .then((response) =>{
-                    console.log(response);
-
-                    // this.props.history.push({
-                    //     pahtname: "/login",
-                    //     search: "#login-form"
-                    // });
-
-                    this.props.history.push('/login#login-form')
-
-
+                    this.props.history.push('/login')
 
                 })
                 .catch((error) =>{
                     console.log(error.message);
 
-
-
                 });
 
-            // this.props.history.push('/login#login-form');
-
-
-            // console.log(">> username : " + this.state.userName);
-            //
-            // var js = axios.post("/user/register/" + this.state.userName + "/" +this.state.email+"/" +this.state.password);
-            // js.then((response)=>{
-            //     if(response.data.nameStatus === "valid"){
-            //         this.props.history.push("/Schedule/"+this.state.userName);
-            //     }
-            //     else{
-            //         alert("Username already exists")
-            //     }
-            //
-            // }).catch(function (error){
-            //     console.log(error);
-            // });
-            // this.props.history.push('/login');
         }
     }
-
-
-    login(e){
-        e.preventDefault();
-
-        const loginParams = {
-            username: this.state.userName,
-            password: this.state.password
-        };
-
-        axios.post("/login", urlencode(loginParams))
-            .then((response) => {
-
-                console.log(response.data.login);
-                // if (response.data.login === true){
-
-                this.props.history.push('/Schedule');
-                // }
-            })
-            .catch((error) => {
-                alert("Username or Password are incorrect, Please try again.");
-                console.log(error.response.data);
-            })
-    }
-
-
-    componentDidUpdate(){
-        // console.log(this.state);
-
-        if(this.state.logform && window.location.href.indexOf("#register-form") !== -1  ){
-            this.setState({regClass: "register-form show", logform: false, regform: true, active: this.state.active+1})
-        }
-        else if (this.state.regform && window.location.href.indexOf("#login-form") !== -1 ){
-            this.setState({regClass: "register-form", logform: true, regform: false,active: this.state.active+1})
-        }
-
-    }
-
-
-    componentDidMount(){
-        document.body.style.overflow = "hidden"
-    }
-
 
 
 
     render() {
 
-        // console.log(this.props.location)
 
         return (
-            <div className="App">
+            <div className={"parentDiv"}>
+                <div className="leftBox">
+                    <img className="logo" src="https://image.flaticon.com/icons/svg/295/295128.svg" />
 
-                <Page TextComponent={HeaderText}>
+                    <div className={"option"}><Button size='large'onClick={ () => this.props.history.push('/login')}>Login</Button><Button size='large'color={"secondary"}>Register</Button></div>
 
-                    <div className ="App-body">
+                    <div className={"informationBox2"}>
 
-                        <div className="form">
-
-
-                            <form id="login-form" className={this.state.regClass}>
-
-                                <div className="Signin">Register</div>
-
-                                <input  type="text" placeholder="Username" required  onChange={this.updateInputValue} />
-
-                                <input type="email" placeholder="Email" required  onChange={this.updateEmailValue} />
-                                <input type="password" placeholder="Password" required onChange={this.updatePasswordValue}/>
-                                <input type="password" placeholder="Confirm password" required onChange={this.updateccPasswordValue}/>
-                                <button onClick ={ (e) => this.registerInfo(e)}>create</button>
-                                <p className="message">Already registered? <a href={"#login-form"}>Sign In</a></p>
-                            </form>
+                    <div className={"TextBox"}>
+                        <TextField  label={"Username"} className={"textAboveBox"} required  onChange={this.updateInputValue} />
 
 
-                            <form id="register-form" className={this.state.logClass}>
-
-                                <div className="Signin">Sign In</div>
-                                <input type="text" placeholder="Username" required onChange={this.updateInputValue}/>
-                                <input type="password" placeholder="Password" required onChange={this.updatePasswordValue} />
-                                <button onClick={(e) => this.login(e) }>login</button>
-
-                                <p className="message">Not registered? <a href={"#register-form"}>Create an account</a></p>
-
-                            </form>
-
-                        </div>
                     </div>
-                </Page>
+                    <div className="TextBox">
+                        <TextField label={"Email"} className={"textAboveBox"} required  onChange={this.updateEmailValue} />
+                    </div>
 
-            </div>);
+                    <div className={"TextBox"}>
+                        <TextField  label="Password" type="password" required onChange={this.updatePasswordValue}/>
+                    </div>
+
+                    <div className={"TextBox"}>
+                        <TextField  label="Confirm Password" type="password" required onChange={this.updateccPasswordValue}/>
+                    </div>
+                    <Button variant="raised" color="secondary" size={"large"} onClick ={ (e) => this.registerInfo(e)}>
+                        Create
+                    </Button>
+                    </div>
+
+                </div>
+
+
+                <div className="rightBox">
+
+                    MUIC
+                    SCHEDULE
+                    MAKER
+                </div>
+
+            </div>)
+
     }
 }
 

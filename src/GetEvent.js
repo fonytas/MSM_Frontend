@@ -24,8 +24,7 @@ export default function GetEvent(DataComponent) {
                     let hourEnd = Number(time[i+3].split(":")[0])
                     let minuteEnd = Number(time[i+3].split(":")[1])
 
-
-                    event["title"] = eachData[key].subject
+                    event["title"] = eachData[key].name
                     event["startDate"] = new Date(2018,2,dayMap[time[i]],hourStart,minuteStart,0,0)
                     event["endDate"] = new Date(2018,2,dayMap[time[i]],hourEnd,minuteEnd,0,0)
                     eventList.push(event)

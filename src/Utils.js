@@ -16,8 +16,8 @@ var mapData = {};
 const newSubject = (data) => {
     return {
 
-        id: data.skyid,
-        subject: data.name,
+        skyid: data.skyid,
+        name: data.name,
         type: data.type,
         section: data.section,
         capacity: data.capacity,
@@ -25,7 +25,8 @@ const newSubject = (data) => {
         room: data.room,
         instructor: data.instructor,
         final: data.finaltime,
-        remark: data.remark
+        remark: data.remark,
+        courseid: data.courseid
     };
 };
 
@@ -39,7 +40,7 @@ export function makeData(allData) {
 
         return {
             ...newSubject(mapData[key]),
-            children: range(10).map(newSubject)
+            // children: range(10).map(newSubject)
         };
     });
 }

@@ -9,16 +9,19 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 
 
-export default function DayTimeTable({children, DataComponent}) {
+export default function DayTimeTable({DataComponent}) {
 
     let format = {
         dayFormat: (date, culture, localizer) =>
             localizer.format(date, 'ddd', culture),
     }
+    let color;
 
     function eventStyle() {
+
         var randomColor = require('randomcolor');
-        var color = randomColor();
+
+        color = randomColor();
 
         var style = {
             backgroundColor: color,
@@ -35,10 +38,10 @@ export default function DayTimeTable({children, DataComponent}) {
 
     return (
 
+
         <BigCalendar
 
             events={GetEvent(DataComponent) }
-            // views={allViews}
             views={['week','agenda']}
             step={30}
             showMultiDayTimes
@@ -46,7 +49,7 @@ export default function DayTimeTable({children, DataComponent}) {
 
             defaultDate={new Date("2018-03-25")}
 
-            min={ new Date(new Date().setHours(8,0,0))}
+            min={ new Date(new Date().setHours(7,0,0))}
             max={ new Date(new Date().setHours(21,0,0))}
 
             scrollToTime={new Date()}

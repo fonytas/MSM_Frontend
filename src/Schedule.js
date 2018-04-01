@@ -11,21 +11,31 @@ import axios from "./AxiosConfig";
 import urlencode from "form-urlencoded";
 import DayTimeTable from "./DayTimeTable";
 
-
+import Snackbar from 'material-ui/Snackbar';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Switch from 'material-ui/Switch';
-import Fade from 'material-ui/transitions/Fade';
+
 
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
+import Button from 'material-ui/Button';
 
+import IconButton from 'material-ui/IconButton';
+// import MenuIcon from 'material-ui-icons/Menu';
+import MenuIcon from 'material-ui-icons/Event';
+import Toolbar from 'material-ui/Toolbar';
 
-// import { storiesOf } from "@storybook/react";
-// import DayTimeTable from "../src/DayTimeTable";
+import Avatar from 'material-ui/Avatar';
 
 import Typography from 'material-ui/Typography';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from 'material-ui/Dialog';
+
 
 function TabContainer(props) {
     return (
@@ -41,7 +51,27 @@ TabContainer.propTypes = {
 
 
 
-
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+    flex: {
+        flex: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
+    avatar: {
+        margin: 10,
+        color: '#f7f3ed',
+        backgroundColor: '#477575'
+    },
+    icon:{
+        fontSize:45,
+        marginLeft:12
+    }
+};
 
 const Isize = {
     fontSize: '2.1rem'
@@ -50,14 +80,10 @@ const Isize = {
 
 
 
-function HeaderText(){
-    return <h1 className={"App-title2"}>My Schedule</h1>
-}
+
 
 function LogoutButtonBase({history}){
-    return <button className="logout" onClick={() => history.push("/login#login-form")} >
-        Logout
-    </button>
+    return <Button variant="raised" color="secondary"  onClick={() => history.push("/login")}>Logout</Button>
 }
 const LogoutButton = withRouter(LogoutButtonBase);
 
@@ -72,188 +98,238 @@ function OnButton({ AddButtonComponent}){
     return (
         <div className={"Add-course"}>
             {AddButtonComponent && <AddButtonComponent/>}
-            {/*<AddButtonBase/>*/}
         </div>
 
     )
 }
 
-function HandleName({StateComponent}){
-
-    if (StateComponent === false){
-        return <div>Plan A</div>
-    }
-    return <div>Plan B</div>
-
-
-}
-
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        marginTop: theme.spacing.unit * 3,
-        backgroundColor: theme.palette.background.paper,
-    },
-});
-
-
 
 
 class Schedule extends Component{
+    constructor(props){
+       super(props)
+
+
+    }
+
 
     state = {
-        checked: false,
-        value:0
+        value:0,
+        name: "",
+        openS: false,
+        vertical: null,
+        horizontal: null,
+        open: false
+
+
     };
 
-    handleChange = () => {
-        this.setState({ checked: !this.state.checked });
-    };
+    componentDidMount(){
+        axios.get('/user/whoami')
+            .then((response) => {
+
+                this.setState({name: response.data.user.substring(0,1).toUpperCase()})
+            })
+    }
 
     handleIndex = (event, value) => {
         this.setState({ value:value });
     };
 
 
-    selectData(){
+    getPlan(){
 
-        axios.get("user/getplan")
-            .then((response) =>{
-                // console.log(response)
-                // console.log(response.data.length == 0)
-                console.log(this.props.courses)
-                if (response.data.length == 0){
-                    return this.props.courses
+        axios.get("/user/getplan")
+            .then((response) => {
+                console.log(response.data)
                 }
-                else {
-                    return response.data
-
-                }
-
-
-            })
-
+            )
     }
 
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleClickS = state => () => {
+        // console.log("D")
+        this.setState({ openS: true, ...state });
+        this.saveCourse()
+    };
+
+    handleCloseS = () => {
+        // this.saveCourse()
+        this.setState({ openS: false });
+    };
 
 
-    saveCourse(e, planNumber){
-        if (planNumber === false){
-            planNumber = 1
-        }
-        else{
-            planNumber = 2
-        }
+    saveCourse(){
 
-        console.log(planNumber)
-
-        e.preventDefault();
-        const dataParams ={
-            // courseskyid: this.props.courses,
-            planname: planNumber
-        };
-        // axios.post(`/order_to_kitchen?tablenum=${localStorage.getItem("tableID")}`, cart)
-        // axios.post("/user/addCoursesToPlan"+urlencode(dataParams))
-        axios.post("/user/addCoursesToPlan"+urlencode(dataParams), this.props.courses)
+        // e.preventDefault();
+        const data = this.props.coursesA
+        axios.post(`/user/saveCoursesToPlan?planname=${this.state.value+1}`, data)
             .then((response) =>{
+                // this.handleClickS({ vertical: 'top', horizontal: 'center' })
                 console.log(response)
-                // return "success"
 
             })
             .catch((error) =>{
-
-                console.log(error);
-                // return "error"
         })
+
+    }
+
+    deleteCourse(e){
+
+
+        e.preventDefault();
+
+
+        axios.post(`/user/removeAllCoursesFromPlan?planname=${this.state.value+1}`)
+            .then((response) =>{
+                // console.log(response)
+                window.location.reload();
+
+
+            })
+            .catch((error) =>{
+                // console.log(error);
+            })
+
+    }
+
+    logout(e){
+        axios.post('/logout')
+            .then((response) =>{
+                console.log(response)
+                console.log("D")
+                this.props.history.push("/login")
+            })
+            .catch((error) =>{
+
+            })
     }
 
 
+
     render(){
-        // const { classes } = this.props;
         const { classes } = this.props;
-        const { checked, value } = this.state;
-        // const { value } = this.state;
+        const { value,vertical, horizontal, openS, open } = this.state;
 
         return (<div className={"Main"}>
 
-            <Page ButtonComponent={LogoutButton} TextComponent={HeaderText}>
+                {/*<Button onClick={this.handleClickS({ vertical: 'top', horizontal: 'center' })}>*/}
+                    {/*Top-Center*/}
+                {/*</Button>*/}
 
-            {/*<div className="Body-S">*/}
-                {/*<div className={"S-body"}>*/}
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton className={classes.menuButton} color="default" aria-label="Menu">
+                            <MenuIcon  className={classes.icon} />
+                        </IconButton>
+                        <Typography variant="title" color="inherit" className={classes.flex}>
+                            Schedule
+                        </Typography>
+                        <Avatar className={classes.avatar} >{this.state.name}</Avatar>
+                        <LogoutButton />
+                    </Toolbar>
+                </AppBar>
 
-                    {/*<div className={classes.root}>*/}
-                    {/*<AppBar position="static">*/}
-                        {/*<Tabs value={value} onChange={this.handleIndex}>*/}
-                            {/*<Tab label="Item One" />*/}
-                            {/*<Tab label="Item Two" />*/}
-                            {/*<Tab label="Item Three" href="#basic-tabs" />*/}
-                        {/*</Tabs>*/}
-                    {/*</AppBar>*/}
-                    {/*{value === 0 && <TabContainer>Item One</TabContainer>}*/}
-                    {/*{value === 1 && <TabContainer>Item Two</TabContainer>}*/}
-                    {/*{value === 2 && <TabContainer>Item Three</TabContainer>}*/}
-                    {/*</div>*/}
+                <div className={"Left-panel"}>
 
-                {/*</div>*/}
-            {/*</div>*/}
-
-
-
-
-                <div className={"S-body"}>
-
-                    <div className={"Left-panel"}>
-
-                        <div className={"switch"}>
-
-                            <Switch checked={checked} onChange={this.handleChange} aria-label="collapse" />
-                            <HandleName StateComponent={this.state.checked}/>
-
-
-                        </div>
-
-                        <OnButton AddButtonComponent={AddButton}/>
-
-
-                        <div className={"Delete-course"}>
-                            <button><Icon  name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
-                        </div>
-
-
-                        <div className={"Save-schedule"}>
-                            <button onClick={(e) => this.saveCourse(e, this.state.checked)}><Icon name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
-                        </div>
+                    <OnButton AddButtonComponent={AddButton}/>
 
 
 
-                        <div className={"Delete-Schedule"}>
-                            <button onClick ={() => console.log(store.course)}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>
-                        </div>
+                    <div className={"Delete-course"}>
+                        <button><Icon  name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
+                    </div>
+
+
+                    <div className={"Save-schedule"}>
+                        <button onClick={this.handleClickS({ vertical: 'top', horizontal: 'center' })}><Icon name=" fa-floppy-o" style={Isize}/><br/>Save Schedule<br/></button>
 
                     </div>
 
 
 
 
-                    <Fade in={checked}>
-                    <div className={"Mid-panel"}>
 
-
-
-                        <div className={"Table"}>
-                            <DayTimeTable DataComponent={ this.props.courses}/>
-                        </div>
+                    <div className={"Delete-Schedule"}>
+                        {/*<button onClick ={(e) => this.deleteCourse(e)}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>*/}
+                        <button onClick={this.handleClickOpen}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>
+                        <Dialog
+                            open={this.state.open}
+                            onClose={this.handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">{"Do you want to DELETE the schedule ? "}</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    This action cannot be undo
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={this.handleClose} color="primary">
+                                    Dismiss
+                                </Button>
+                                <Button onClick={(e) => this.deleteCourse(e)} color="secondary" autoFocus>
+                                    DELETE
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </div>
-                    </Fade>
-
-                    {/*<Fade in={!checked}>*/}
-                        {/*<div className={"Table"}>*/}
-                            {/*<DayTimeTable DataComponent={ this.props.courses}/>*/}
-                        {/*</div>*/}
-                    {/*</Fade>*/}
 
                 </div>
-            </Page>
+
+
+                <div className={"Mid-panel"}>
+                    <div className={classes.root}>
+                        <AppBar position="static">
+                            <Tabs value={value} onChange={this.handleIndex} centered>
+                                <Tab label="Plan A" />
+                                <Tab label="Plan B" />
+                                <Tab label="Plan C" href="#basic-tabs" />
+                            </Tabs>
+                        </AppBar>
+
+                    {value === 0 &&
+                        <TabContainer>
+                            <div className={"Table"}>
+                                <DayTimeTable DataComponent={ this.props.coursesA}/>
+                            </div>
+                        </TabContainer>}
+                    {value === 1 &&
+                        <TabContainer>
+
+                            <div className={"Table"}>
+                                <DayTimeTable DataComponent={ this.getPlan()}/>
+                            </div>
+
+                        </TabContainer>}
+                    {value === 2 &&
+                        <TabContainer>
+
+                            <div className={"Table"}>
+                                <DayTimeTable DataComponent={ this.props.coursesA}/>
+                            </div>
+
+                        </TabContainer>}
+                    </div>
+                </div>
+                <Snackbar
+                    anchorOrigin={{ vertical, horizontal }}
+                    open={openS}
+                    onClose={this.handleCloseS}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">Saved</span>}
+                />
+
             </div>
 
 
@@ -264,4 +340,5 @@ class Schedule extends Component{
 Schedule.propTypes = {
     classes: PropTypes.object.isRequired,
 };
+
 export default  withStyles(styles)(Schedule);

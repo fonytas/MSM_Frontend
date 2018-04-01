@@ -37,12 +37,9 @@ const requestData = (pageSize, page, sorted, filtered) => {
 
     return new Promise((resolve, reject) => {
 
-        // You can retrieve your data however you want, in this case, we will just use some local data.
-
         fetchLocals().payload
             .then(data => {
 
-                // console.log(data);
 
                 let filteredData = makeData(data);
                 if (filtered.length) {
@@ -91,14 +88,14 @@ function MyTable({onRowClick, ...props}){
         columns={ [
             {
                 Header: "ID",
-                accessor: "id",
+                accessor: "skyid",
                 maxWidth: 100,
                 style:{ "whiteSpace": "normal"}
 
             },
             {
                 Header: "Subject",
-                accessor: "subject",
+                accessor: "name",
                 maxWidth: 400,
 
                 style:{ "whiteSpace": "normal"}
@@ -158,13 +155,6 @@ function MyTable({onRowClick, ...props}){
                 maxWidth:50,
 
 
-                // accessor: "id",
-                // show: false,
-            // e.stopPropagation()
-
-                // Cell: <Button onClick={console.log("HELLO")} variant={"fab"}  mini color="secondary" aria-label="add">
-                //     <AddIcon /></Button>,
-
             }
         ]}
         manual // Forces table not to paginate or sort automatically, so we can handle it server-side
@@ -172,7 +162,6 @@ function MyTable({onRowClick, ...props}){
         defaultPageSize={10}
         className="-striped -highlight"
         getTrProps={(st, rowInfo) => ({
-
             onClick:  onRowClick(rowInfo)
         })
 
@@ -209,27 +198,17 @@ class OpenSection extends React.Component {
             status: false,
         };
         this.fetchData = this.fetchData.bind(this);
-        // this.onButtonClick = this.onButtonClick.bind(this)
-        // this.onRowClick = this.onRowClick.bind(this)
     }
 
 
     fetchData(state, instance) {
-        // Whenever the table mod
-        // el changes, or the user sorts or changes pages, this method gets called and passed the current table model.
-        // You can set the `loading` prop of the table to true to use the built-in one or show you're own loading bar if you want.
         this.setState({ loading: true });
-        // Request the data however you want.  Here, we'll use our mocked service we created earlier
-
         requestData(
-
             state.pageSize,
             state.page,
             state.sorted,
             state.filtered
-
         ).then(res => {
-            // Now just get the rows of data to your React Table (and update anything else like total pages or loading)
             this.setState({
                 data: res.rows,
                 pages: res.pages,
@@ -238,45 +217,21 @@ class OpenSection extends React.Component {
         });
     }
 
-
-    // onButtonClick=()=>{
-    //     console.log("1")
-    //
-    //
-    //     this.setState({status: true})
-    //     console.log(this.state.status)
-    //
-    //
-    //
-    //
-    // }
-
-
     onRowClick = (rowInfo) => (e) => {
-        this.props.onAddCourse(rowInfo.original)
-        // console.log("2")
-        // // e.stopPropagation()
-        // // console.log(this.state.status)
-        //
-        // // if (this.state.gg === true){
-        // //     this.props.onAddCourse(rowInfo.original)
-        // //     this.setState({gg: false})
-        // //
-        // // }
-        //
-        // if (this.state.status === true){
-        //     console.log("3")
-        //     this.props.onAddCourse(rowInfo.original)
-        //     this.setState({status: false})
-        //
-        // }
-        // else {
-        //     this.setState({status: false})
-        // }
 
+        let count =0;
 
+        this.props.coursesA.forEach(function (element) {
+            if (rowInfo.original.skyid === element.skyid) {
+                count = 1;
+            }
+        })
+        if (count !== 1){
+            this.props.onAddCourse(rowInfo.original)
+
+        }
+        // console.log(this.props.courses)
     }
-
 
 
 
