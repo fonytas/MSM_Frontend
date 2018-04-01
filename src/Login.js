@@ -4,69 +4,28 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import urlencode from "form-urlencoded";
 import axios from "./AxiosConfig";
-import {withRouter} from "react-router-dom";
+import { Redirect} from "react-router-dom";
 
-//
-//
-// function LoginButtonBase({history, Username, Password}){
-//     return (<Button onClick ={() => HandleLogin({History: history, Username: Username, Password:Password})} variant="raised" color="secondary" size={"large"} >
-//         Login
-//         </Button>)
-//
-// }
-// const LoginButton = withRouter(LoginButtonBase);
 
-// function HandleLogin({History, Username, Password}){
-//     const loginParams = {
-//         username: Username,
-//         password: Password
-//     };
-//
-//     axios.post("/login", urlencode(loginParams))
-//         .then((response) => {
-//
-//             console.log(response.data.login);
-//
-//             history.push("/schedule")
-//             // }
-//         })
-//         .catch((error) => {
-//             alert("Username or Password are incorrect, Please try again.");
-//             console.log(error.response.data);
-//         })
-//
-//
-// }
 
 class Login extends Component{
 
     constructor(props){
         super(props);
         this.state = {userName:"", email:"",password: "",
-            ccPassword: ""}
+            ccPassword: "", redirect: false}
         this.updateInputValue = this.updateInputValue.bind(this);
         this.updatePasswordValue = this.updatePasswordValue.bind(this);
-        // this.updateccPasswordValue = this.updateccPasswordValue.bind(this);
-        // this.updateEmailValue = this.updateEmailValue.bind(this);
+
 
     }
     updateInputValue(evt){
         this.setState({userName: evt.target.value});
     }
-    // updateEmailValue(evt){
-    //     this.setState({email: evt.target.value});
-    // }
     updatePasswordValue(evt){
         this.setState({password: evt.target.value});
     }
-    // updateccPasswordValue(evt){
-    //     this.setState({ccPassword: evt.target.value});
-    // }
 
-    // componentDidMount(){
-    //
-    //     this.props.initialTime()
-    // }
 
     login(e){
         e.preventDefault();
@@ -84,57 +43,63 @@ class Login extends Component{
 
 
                 this.props.history.push('/Schedule');
-                // }
             })
             .catch((error) => {
                 alert("Username or Password are incorrect, Please try again.");
                 console.log(error.response.data);
+                this.setState({ redirect: true })
             })
     }
 
 
-
-
     render() {
         const {classes} = this.props
+        const {redirect} = this.state
 
-        return(
+        if (redirect) {
+            console.log("Pls redirect")
+            return <Redirect to='/login'/>;
+        } else {
 
-            <div className={"parentDiv"}>
-                <div className="leftBox">
-                    <img className="logo" src="https://image.flaticon.com/icons/svg/295/295128.svg" />
+            return (
 
-                    <div className={"option"}><Button size='large'color={'secondary'} > Login </Button> <Button size='large' onClick={ () => this.props.history.push('/register')}>Register</Button></div>
+                <div className={"parentDiv"}>
+                    <div className="leftBox">
+                        <img className="logo" src="https://image.flaticon.com/icons/svg/295/295128.svg"/>
 
-                    <div className={"informationBox"}>
+                        <div className={"option"}><Button size='large' color={'secondary'}> Login </Button> <Button
+                            size='large' onClick={() => this.props.history.push('/register')}>Register</Button></div>
+
+                        <div className={"informationBox"}>
 
 
-                    <div className={"TextBox"} type="username">
-                        <TextField  label={"Username"} className={"textAboveBox"} required onChange={this.updateInputValue}/>
+                            <div className={"TextBox"} type="username">
+                                <TextField label={"Username"} className={"textAboveBox"} required
+                                           onChange={this.updateInputValue}/>
+                            </div>
+
+                            <div className={"TextBox"}>
+                                <TextField label="Password" type="password" required
+                                           onChange={this.updatePasswordValue}/>
+                            </div>
+
+                            <Button onClick={(e) => this.login(e)} variant="raised" color="secondary" size={"large"}>
+                                Login
+                            </Button>
+
+                        </div>
                     </div>
 
-                    <div className={"TextBox"}>
-                        <TextField  label="Password" type="password" required onChange={this.updatePasswordValue}/>
-                    </div>
-
-                    <Button onClick={(e) => this.login(e) } variant="raised" color="secondary" size={"large"} >
-                        Login
-                    </Button>
-
+                    <div className="rightBox">
+                        MUIC
+                        SCHEDULE
+                        MAKER
                     </div>
 
                 </div>
 
-                <div className="rightBox">
-                    MUIC
-                    SCHEDULE
-                    MAKER
-                </div>
-
-            </div>
-
-
-        )
+            )
+        }
     }
 }
 

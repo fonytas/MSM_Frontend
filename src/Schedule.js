@@ -3,27 +3,16 @@ import {withRouter, Redirect} from "react-router-dom";
 
 import {Icon} from 'react-fa';  // http://astronautweb.co/snippet/font-awesome/
 import './Schedule.css';
-import Page from './Page.js'
-// import { Redirect } from 'react-router'
-
-import store from './StoreInput';
-
 import axios from "./AxiosConfig";
-import urlencode from "form-urlencoded";
 import DayTimeTable from "./DayTimeTable";
 
 import Snackbar from 'material-ui/Snackbar';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-
-
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-
 import Button from 'material-ui/Button';
-
 import IconButton from 'material-ui/IconButton';
-// import MenuIcon from 'material-ui-icons/Menu';
 import MenuIcon from 'material-ui-icons/Event';
 import Toolbar from 'material-ui/Toolbar';
 import Avatar from 'material-ui/Avatar';
@@ -88,7 +77,6 @@ function Logout({History}){
 
     axios.post('/logout')
         .then((response) =>{
-            console.log(response)
 
             History.push("/login")
         })
@@ -213,8 +201,9 @@ class Schedule extends Component{
         const {classes} = this.props;
         const {value, vertical, horizontal, openS, redirect} = this.state;
 
-        // this.handleSubmit()
-        // console.log(this.state.redirect)
+
+
+        // if acccess login and already authen --> go to home
 
         if (redirect) {
             // console.log("Pls redirect")

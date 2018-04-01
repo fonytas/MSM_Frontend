@@ -62,6 +62,7 @@ export function fetchLocals() {
             return response.data;
         })
         .catch(function (error) {
+            this.setState({ redirect: true })
             return Promise.reject(error);
         });
 
@@ -202,17 +203,6 @@ function MyTable({onRowClick, ...props}){
     />)
 }
 
-function BackButtonBase({history}){
-    return <button className="back" onClick={() => history.push("/schedule")} >
-        Back
-    </button>
-}
-// const BackButton = withRouter(BackButtonBase);
-//
-// function HeaderText(){
-//     return <h1 className={"App-title2"}>MUIC Open Section</h1>
-// }
-
 
 
 class OpenSection extends React.Component {
@@ -225,11 +215,10 @@ class OpenSection extends React.Component {
             pages: null,
             loading: true,
             status: false,
-            redirect2: false
+            redirect: false
         };
         this.fetchData = this.fetchData.bind(this);
     }
-
 
     componentDidMount() {
 
@@ -240,7 +229,7 @@ class OpenSection extends React.Component {
 
             }).catch((error) => {
 
-            this.setState({redirect2: true})
+                this.setState({redirect: true})
         })
 
     }
@@ -278,9 +267,9 @@ class OpenSection extends React.Component {
 
     render() {
         const {classes} = this.props;
-        const {data, pages, loading, redirect2} = this.state;
+        const {data, pages, loading, redirect} = this.state;
 
-        if (redirect2) {
+        if (redirect) {
             return <Redirect to='/login'/>;
         }
         else{
