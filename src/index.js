@@ -57,14 +57,13 @@ class Mother extends Component{
             plan: 0,
             whoAmI: "",
             // isLogin: false
-            redirectIndex: false
+            redirect: false
         }
     }
 
 
-    isAuthen = (name) =>{
-        // console.log("HI")
 
+    isAuthen = (name) =>{
         this.setState({whoAmI: name})
         axios.get("/user/getplan")
             .then((response) =>{
@@ -80,15 +79,18 @@ class Mother extends Component{
 
     }
 
+
     onSetPlan = (plan) => {
 
         this.setState({plan: plan})
     }
     onAddCourse = (course, val) => {
+
         console.log("call on add course")
+        // console.log(this.state.coursesA.length)
+
         if (val === 0){
             this.state.coursesA.push(course)
-
         }
         else if (val ===1){
             this.state.coursesB.push(course)
@@ -97,6 +99,9 @@ class Mother extends Component{
         else if (val ===2){
             this.state.coursesC.push(course)
         }
+
+        // console.log(this.state.coursesA)
+
 
     }
 

@@ -66,24 +66,14 @@ const Isize = {
 
 };
 
-// function GG({history}) {
-//     console.log("omg")
-//
-//     this.props.history.push("login")
-//
-// }
 
 function Logout({History}){
-
     axios.post('/logout')
         .then((response) =>{
-
             History.push("/login")
         })
         .catch((error) =>{
-
         })
-
 }
 
 function LogoutButtonBase({history}){
@@ -102,15 +92,9 @@ function OnButton({ AddButtonComponent}){
     return (
         <div className={"Add-course"}>
             {AddButtonComponent && <AddButtonComponent/>}
-        </div>
-
-    )
+        </div>)
 }
-//
-// function ggg() {
-//     console.log("-----")
-//     return (<Redirect to='/login'/>)
-// }
+
 class Schedule extends Component{
     constructor(props){
        super(props)
@@ -125,10 +109,7 @@ class Schedule extends Component{
         horizontal: null,
         open: false,
         redirect: false
-
-
     };
-
 
 
     componentDidMount(){
@@ -137,12 +118,9 @@ class Schedule extends Component{
             .then((response) =>{
 
                 this.props.isAuthen(response.data.user.substring(0,1).toUpperCase())
-
             }).catch((error) => {
-
                 this.setState({ redirect: true })
         })
-
     }
 
     handleIndex = (event, value) => {
@@ -171,9 +149,6 @@ class Schedule extends Component{
         const data = this.props.coursesA
         axios.post(`/user/saveCoursesToPlan?planname=${this.state.value+1}`, data)
             .then((response) =>{
-                // this.handleClickS({ vertical: 'top', horizontal: 'center' })
-                // console.log(response)
-
             })
             .catch((error) =>{
         })
@@ -186,12 +161,9 @@ class Schedule extends Component{
         axios.post(`/user/removeAllCoursesFromPlan?planname=${this.state.value+1}`)
             .then((response) =>{
                 window.location.reload();
-                // this.forceUpdate()
             })
             .catch((error) =>{
-                // console.log(error);
             })
-
     }
 
 
@@ -201,14 +173,13 @@ class Schedule extends Component{
         const {classes} = this.props;
         const {value, vertical, horizontal, openS, redirect} = this.state;
 
-
-
         // if acccess login and already authen --> go to home
 
         if (redirect) {
-            // console.log("Pls redirect")
+            console.log("redirect")
             return <Redirect to='/login'/>;
         } else {
+            console.log(this.props.coursesA)
 
 
             return (<div className={"Main"}>
@@ -236,7 +207,7 @@ class Schedule extends Component{
 
 
                         <div className={"Delete-course"}>
-                            <button><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
+                            <button ><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
                         </div>
 
 

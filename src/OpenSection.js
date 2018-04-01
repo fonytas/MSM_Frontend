@@ -48,7 +48,6 @@ const styles = {
     }
 };
 
-
 function ScheduleButtonBase({history}){
     return <Button variant="raised" color="secondary"  onClick={() => history.push("/schedule")}> Back</Button>
 }
@@ -67,7 +66,6 @@ export function fetchLocals() {
         });
 
     return {
-        // type: GET_LOCATIONS,
         payload: request
     };
 }
@@ -76,10 +74,8 @@ export function fetchLocals() {
 const requestData = (pageSize, page, sorted, filtered) => {
 
     return new Promise((resolve, reject) => {
-
         fetchLocals().payload
             .then(data => {
-
 
                 let filteredData = makeData(data);
                 if (filtered.length) {
@@ -121,7 +117,7 @@ const requestData = (pageSize, page, sorted, filtered) => {
 
 function MyTable({onRowClick, ...props}){
 
-    return  (<ReactTable  //striped
+    return  (<ReactTable
 
         columns={ [
             {
@@ -130,56 +126,47 @@ function MyTable({onRowClick, ...props}){
                 maxWidth: 100,
                 style:{ "whiteSpace": "normal"}
 
-            },
-            {
+            }, {
                 Header: "Subject",
                 accessor: "name",
                 maxWidth: 400,
 
                 style:{ "whiteSpace": "normal"}
-            },
-            {
+            }, {
                 Header: "Type",
                 accessor: "type",
                 maxWidth:75
-            },
-            {
+            }, {
                 Header: "Section",
                 accessor: "section",
                 maxWidth:50
-            },
-            {
+            }, {
                 Header: "Time",
                 accessor: "time",
                 maxWidth: 126.5,
                 style:{ "whiteSpace": "normal"}
-            },
-            {
+            }, {
                 Header: "Room",
                 accessor: "room",
                 maxWidth:60,
                 style:{ "whiteSpace": "normal"}
-            },
-            {
+            }, {
                 Header: "Instructor",
                 accessor: "instructor",
                 maxWidth: 140,
                 style:{ "whiteSpace": "normal"}
-            },
-            {
+            }, {
                 Header: "Final",
                 accessor: "final",
                 style:{ "whiteSpace": "normal"},
                 maxWidth: 200,
-            },
-            {
+            }, {
                 Header: "Remark",
                 accessor: "remark",
                 style:{ "whiteSpace": "normal"},
                 maxWidth: 140,
 
-            },
-            {
+            }, {
                 filterable:false,
                 style: {"margin": "5px 0px 0px 10px"},
 
@@ -198,12 +185,9 @@ function MyTable({onRowClick, ...props}){
         })
 
         }
-
         {...props}
     />)
 }
-
-
 
 class OpenSection extends React.Component {
 
@@ -259,7 +243,8 @@ class OpenSection extends React.Component {
                 count = 1;
             }
         })
-        if (count !== 1) {
+        if (count !== 1 ) {
+
             this.props.onAddCourse(rowInfo.original, this.props.plan)
         }
     }
@@ -300,7 +285,6 @@ class OpenSection extends React.Component {
                                      loading={loading} // Display the loading overlay when we need it
                                      onFetchData={this.fetchData} // Request new data when things change
                                      onRowClick={this.onRowClick}
-
                             />
                         </div>
                     </Paper>
