@@ -45,6 +45,20 @@ const theme = createMuiTheme({
     }
 })
 
+function checkExistence(todo, ele){
+
+
+    for (let i=0; i < todo.length; i++){
+
+        if (todo[i].value === ele){
+            return true
+        }else{
+            return false
+        }
+    }
+
+}
+
 
 class Mother extends Component{
 
@@ -56,8 +70,16 @@ class Mother extends Component{
             coursesC: [],
             plan: 0,
             whoAmI: "",
-            // isLogin: false
-            redirect: false
+            redirect: false,
+            temporaryCourseA: [],
+            temporaryCourseB: [],
+            temporaryCourseC: [],
+            todo:[],
+            isRemove:false,
+            isColor: ""
+
+
+
         }
     }
 
@@ -80,6 +102,28 @@ class Mother extends Component{
     }
 
 
+    saveCourse = (value) => {
+        console.log("Saved !")
+        let data ;
+
+        if (value === 0){
+            data = this.state.coursesA.concat(this.state.temporaryCourseA)
+        }
+        else if (value === 1) {
+            data = this.state.coursesB.concat(this.state.temporaryCourseB)
+        }
+        else if (value === 2){
+            data = this.state.coursesC.concat(this.state.temporaryCourseC)
+        }
+
+        axios.post(`/user/saveCoursesToPlan?planname=${value+1}`, data)
+            .then((response) =>{
+            })
+            .catch((error) =>{
+            })
+    }
+
+
     onSetPlan = (plan) => {
 
         this.setState({plan: plan})
@@ -90,28 +134,138 @@ class Mother extends Component{
         // console.log(this.state.coursesA.length)
 
         if (val === 0){
-            this.state.coursesA.push(course)
+            this.state.temporaryCourseA.push(course)
+            // this.state.coursesA.push(course)
+            // this.state.todoA.push(course)
         }
         else if (val ===1){
-            this.state.coursesB.push(course)
+            this.state.temporaryCourseB.push(course)
+            // this.state.coursesB.push(course)
+            // this.state.todoB.push(course)
         }
 
         else if (val ===2){
-            this.state.coursesC.push(course)
+
+            this.state.temporaryCourseC.push(course)
+            // this.state.coursesC.push(course)
+            // this.state.todoA.push(course)
         }
 
         // console.log(this.state.coursesA)
 
 
     }
+    setTodo= (todo,val) =>{
 
-    onRemoveCourse = (course) => {
-        const removeCourse = (st) => {
-            const {[course.id]: omit, ...res} = st.coursesA
-            return res
-        }
-        this.setState(removeCourse)
+        this.setState({todo: todo})
+
     }
+
+    changeColor = () =>{
+        var randomColor = require('randomcolor');
+        // let color = randomColor();
+
+        this.setState({isColor: randomColor()})
+    }
+    
+    onSetRemove = () => {
+        this.setState({isRemove:true})
+    }
+    onDeleteCourse = (val) => {
+
+        // console.log(val)
+        console.log(this.state.todo)
+
+        if (this.state.todo.length !== 0){
+            // console.log("1")
+            if (val === 0){
+                // console.log("2")
+                this.setState({coursesA: []})
+                this.setState({temporaryCourseA: this.state.todo})
+
+            }
+            else if (val === 1){
+                this.setState({coursesB: []})
+                this.setState({temporaryCourseB: this.state.todo})
+            }
+            else if (val === 2){
+                this.setState({coursesC: []})
+                this.setState({temporaryCourseC: this.state.todo})
+            }
+
+        }
+        else if (this.state.isRemove){
+
+            if (val === 0){
+                // console.log("2")
+                this.setState({coursesA: []})
+                this.setState({temporaryCourseA: []})
+
+            }
+            else if (val === 1){
+                this.setState({coursesB: []})
+                this.setState({temporaryCourseB: []})
+            }
+            else if (val === 2){
+                this.setState({coursesC: []})
+                this.setState({temporaryCourseC:[]})
+            }
+
+        }
+
+        // else{
+        //
+        //     if (val === 0){
+        //         // console.log("2")
+        //         this.setState({coursesA: []})
+        //         this.setState({temporaryCourseA: this.state.todo})
+        //
+        //     }
+        //     else if (val === 1){
+        //         this.setState({coursesB: []})
+        //         this.setState({temporaryCourseB: this.state.todo})
+        //     }
+        //     else if (val === 2){
+        //         this.setState({coursesC: []})
+        //         this.setState({temporaryCourseC: this.state.todo})
+        //
+        //
+        // }
+
+        // else {
+            // if (val === 0){
+            //     // console.log("2")
+            //     this.setState({coursesA: []})
+            //     this.setState({temporaryCourseA: this.state.todo})
+            //
+            // }
+            // else if (val === 1){
+            //     this.setState({coursesB: []})
+            //     this.setState({temporaryCourseB: this.state.todo})
+            // }
+            // else if (val === 2){
+            //     this.setState({coursesC: []})
+            //     this.setState({temporaryCourseC: this.state.todo})
+            // }
+
+        // }
+
+
+
+
+        // if (this.state.todo.length !== 0){
+
+
+        // }
+        // this.setState({coursesA: []})
+        // this.setState({temporaryCourseA: this.state.todo})
+
+        // this.saveCourse()
+        // window.location.reload();
+
+
+    }
+
 
     render() {
 
@@ -130,12 +284,20 @@ class Mother extends Component{
                             coursesC={this.state.coursesC}
                             plan={this.state.plan}
                             whoAmI={this.state.whoAmI}
+                            temporaryCourseA={this.state.temporaryCourseA}
+                            temporaryCourseB={this.state.temporaryCourseB}
+                            temporaryCourseC={this.state.temporaryCourseC}
 
                             onAddCourse={this.onAddCourse}
                             onRemoveCourse={this.onRemoveCourse}
                             onSetPlan={this.onSetPlan}
+                            saveCourse = {this.saveCourse}
+
+                            createItem={this.createItem}
 
                             isAuthen={this.isAuthen}
+                            isColor={this.state.isColor}
+                            changeColor={this.changeColor}
                         />)
                     }}/>
                     <Route exact path="/Schedule" render={(props) => {
@@ -145,13 +307,27 @@ class Mother extends Component{
                             coursesC={this.state.coursesC}
                             plan={this.state.plan}
                             whoAmI={this.state.whoAmI}
+                            temporaryCourseA={this.state.temporaryCourseA}
+                            temporaryCourseB={this.state.temporaryCourseB}
+                            temporaryCourseC={this.state.temporaryCourseC}
+                            setTodo={this.setTodo}
 
+                            onDeleteCourse={this.onDeleteCourse}
+
+                            todo={this.state.todo}
+                            isRemove={this.state.remove}
+                            onSetRemove={this.onSetRemove}
+
+                            setZero={this.setZero}
+                            createItem={this.createItem}
 
                             onAddCourse={this.onAddCourse}
                             onRemoveCourse={this.onRemoveCourse}
                             onSetPlan={this.onSetPlan}
+                            saveCourse = {this.saveCourse}
 
                             isAuthen={this.isAuthen}
+                            isColor={this.state.isColor}
 
                         />)
                     }}/>

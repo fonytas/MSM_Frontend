@@ -39,15 +39,15 @@ class Login extends Component{
             .then((response) => {
                 console.log("THIS IS LOGIN")
 
-                console.log(response.data.login);
-
+                // console.log(response.data.login);
 
                 this.props.history.push('/Schedule');
             })
             .catch((error) => {
                 alert("Username or Password are incorrect, Please try again.");
                 console.log(error.response.data);
-                this.setState({ redirect: true })
+                // this.setState({ redirect: true })
+                window.location.reload();
             })
     }
 

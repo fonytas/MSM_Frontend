@@ -9,22 +9,22 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 
 
-export default function DayTimeTable({DataComponent}) {
+export default function DayTimeTable({DataComponent, Color}) {
 
     let format = {
         dayFormat: (date, culture, localizer) =>
             localizer.format(date, 'ddd', culture),
     }
-    let color;
+    // let color;
 
     function eventStyle() {
 
-        var randomColor = require('randomcolor');
-
-        color = randomColor();
+        // var randomColor = require('randomcolor');
+        //
+        // color = randomColor();
 
         var style = {
-            backgroundColor: color,
+            backgroundColor: Color,
             border: '0.05rem solid #000' ,
             opacity: 0.8,
             color: 'black',

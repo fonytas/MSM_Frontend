@@ -238,15 +238,43 @@ class OpenSection extends React.Component {
 
         let count = 0;
 
-        this.props.coursesA.forEach(function (element) {
-            if (rowInfo.original.skyid === element.skyid) {
-                count = 1;
-            }
-        })
+        if (this.props.plan === 0 ){
+            this.props.coursesA.forEach(function (element) {
+                if (rowInfo.original.skyid === element.skyid) {
+                    count = 1;
+                }
+            })
+
+        }
+        else if (this.props.plan === 1){
+            this.props.coursesB.forEach(function (element) {
+                if (rowInfo.original.skyid === element.skyid) {
+                    count = 1;
+                }
+            })
+
+        }
+        else if (this.props.plan === 1){
+            this.props.coursesC.forEach(function (element) {
+                if (rowInfo.original.skyid === element.skyid) {
+                    count = 1;
+                }
+            })
+
+        }
+
+
         if (count !== 1 ) {
 
             this.props.onAddCourse(rowInfo.original, this.props.plan)
         }
+
+        // var randomColor = require('randomcolor');
+        // let color = randomColor();
+        this.props.changeColor()
+
+
+
     }
 
 

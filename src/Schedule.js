@@ -24,6 +24,8 @@ import Dialog, {
     DialogTitle,
 } from 'material-ui/Dialog';
 
+import TodoList from './TodoList'
+
 
 function TabContainer(props) {
     return (
@@ -66,6 +68,13 @@ const Isize = {
 
 };
 
+var todoItems =[]
+
+var send = []
+// var sendA = []
+// var sendB = []
+// var sendC = []
+
 
 function Logout({History}){
     axios.post('/logout')
@@ -95,20 +104,23 @@ function OnButton({ AddButtonComponent}){
         </div>)
 }
 
+
 class Schedule extends Component{
     constructor(props){
-       super(props)
+       super(props);
+        this.removeItem = this.removeItem.bind(this);
+        // this.deleteCourse = this.deleteCourse.bind(this);
 
     }
 
     state = {
         value:0,
-        // name: "",
         openS: false,
         vertical: null,
         horizontal: null,
         open: false,
-        redirect: false
+        redirect: false,
+        open2: false,
     };
 
 
@@ -121,11 +133,47 @@ class Schedule extends Component{
             }).catch((error) => {
                 this.setState({ redirect: true })
         })
+
+
     }
 
+    removeItem (itemIndex) {
+
+        this.props.onSetRemove()
+
+        todoItems.splice(itemIndex, 1);
+        this.setState({todoItems: todoItems});
+
+        send.splice(itemIndex, 1);
+        console.log(send)
+        this.props.setTodo(send,this.state.value)
+
+
+
+    }
+
+
+
+
+    handleClickOpen2 = (val) => {
+        this.setState({ open2: true });
+        this.deleteCourse(val)
+        // this.props.createItem
+
+    };
+
+    handleClose2 = () => {
+        this.setState({ open2: false });
+    };
+
     handleIndex = (event, value) => {
+        console.log("Handle")
         this.setState({ value:value });
         this.props.onSetPlan(value)
+        todoItems = []
+        send = []
+        // this.props.setZero
+
     };
 
     handleClickOpen = () => {
@@ -138,55 +186,108 @@ class Schedule extends Component{
 
     handleClickS = state => () => {
         this.setState({ openS: true, ...state });
-        this.saveCourse()
+        this.props.saveCourse(this.state.value)
     };
 
     handleCloseS = () => {
         this.setState({ openS: false });
     };
 
-    saveCourse(){
-        const data = this.props.coursesA
-        axios.post(`/user/saveCoursesToPlan?planname=${this.state.value+1}`, data)
-            .then((response) =>{
-            })
-            .catch((error) =>{
+
+    deleteCourse(val) {
+
+        let data;
+
+        if (val === 0){
+            data = this.props.coursesA.concat(this.props.temporaryCourseA)
+        }
+        else if (val ===1){
+            data = this.props.coursesB.concat(this.props.temporaryCourseB)
+        }
+        else if (val === 2){
+            data = this.props.coursesC.concat(this.props.temporaryCourseC)
+
+        }
+
+        // console.log(data)
+        data.forEach(function (element) {
+
+            var dataSky = element.skyid
+
+            var count = 0;
+
+            if (todoItems.length ===0){
+                // console.log("HI")
+                todoItems.push({index: 1, value: dataSky, done: false})
+                send.push(element)
+            }
+            else{
+
+                todoItems.forEach(function (each) {
+                    if (each.value === dataSky){
+                        count=1;
+                    }
+
+                })
+
+                if (count!==1){
+                    todoItems.push({index: 1, value: dataSky, done: false})
+                    send.push(element)
+
+                }
+
+            }
+
         })
 
+        // console.log("GG")
+        // console.log(send)
+        // console.log(todoItems)
+        // this.setState({send: send, todoItems:todoItems})
+
+
     }
 
-    deleteCourse(e){
+    handleDelete(){
+        //
+        // console.log(send)
+        // console.log(todoItems)
 
-        e.preventDefault();
+        this.handleClose2()
+        this.props.onDeleteCourse(this.state.value)
+
+    }
+
+
+
+
+    deleteSchedule(){
+
+        // e.preventDefault();
         axios.post(`/user/removeAllCoursesFromPlan?planname=${this.state.value+1}`)
             .then((response) =>{
-                window.location.reload();
             })
             .catch((error) =>{
             })
     }
-
 
 
     render() {
 
         const {classes} = this.props;
         const {value, vertical, horizontal, openS, redirect} = this.state;
+        // console.log(this.props.coursesA)
 
-        // if acccess login and already authen --> go to home
 
         if (redirect) {
             console.log("redirect")
             return <Redirect to='/login'/>;
         } else {
-            console.log(this.props.coursesA)
+            // console.log(this.props.coursesA)
 
 
             return (<div className={"Main"}>
 
-                    {/*<Button onClick={this.handleClickS({ vertical: 'top', horizontal: 'center' })}>*/}
-                    {/*Top-Center*/}
-                    {/*</Button>*/}
 
                     <AppBar position="static">
                         <Toolbar>
@@ -201,13 +302,46 @@ class Schedule extends Component{
                         </Toolbar>
                     </AppBar>
 
+
+
+                    {/*<div>*/}
+
+
+
                     <div className={"Left-panel"}>
 
                         <OnButton AddButtonComponent={AddButton}/>
 
 
                         <div className={"Delete-course"}>
-                            <button ><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
+                            <button onClick={ () =>  this.handleClickOpen2(this.state.value) }><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
+
+                            <Dialog
+                                open={this.state.open2}
+                                onClose={this.handleClose2}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">{"What course do you want to Delete ?"}</DialogTitle>
+                                <DialogContent>
+
+
+                                    <div id="main">
+                                        <TodoList items={todoItems}
+                                                  removeItem={this.removeItem}
+                                        />
+                                    </div>
+
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={this.handleClose2} color="primary">
+                                        Dismiss
+                                    </Button>
+                                    <Button onClick={() => this.handleDelete()} color="primary" autoFocus>
+                                        Done
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
                         </div>
 
 
@@ -219,7 +353,6 @@ class Schedule extends Component{
 
 
                         <div className={"Delete-Schedule"}>
-                            {/*<button onClick ={(e) => this.deleteCourse(e)}><Icon name=" fa-calendar-minus-o" style={Isize}/><br/>Delete Schedule<br/></button>*/}
                             <button onClick={this.handleClickOpen}><Icon name=" fa-calendar-minus-o"
                                                                          style={Isize}/><br/>Delete Schedule<br/>
                             </button>
@@ -240,15 +373,13 @@ class Schedule extends Component{
                                     <Button onClick={this.handleClose} color="primary">
                                         Dismiss
                                     </Button>
-                                    <Button onClick={(e) => this.deleteCourse(e)} color="secondary" autoFocus>
+                                    <Button onClick={() => this.deleteSchedule()} color="secondary" autoFocus>
                                         DELETE
                                     </Button>
                                 </DialogActions>
                             </Dialog>
                         </div>
-
                     </div>
-
 
                     <div className={"Mid-panel"}>
                         <div className={classes.root}>
@@ -263,15 +394,20 @@ class Schedule extends Component{
                             {value === 0 &&
                             <TabContainer>
                                 <div className={"Table"}>
-
-                                    <DayTimeTable DataComponent={this.props.coursesA}/>
+                                    <DayTimeTable DataComponent={this.props.coursesA.concat(this.props.temporaryCourseA)} Color={this.props.isColor}/>
                                 </div>
                             </TabContainer>}
                             {value === 1 &&
                             <TabContainer>
 
+                                {/*<div id="main">*/}
+                                    {/*<TodoList items={todoItems}*/}
+                                              {/*removeItem={this.removeItem}*/}
+                                    {/*/>*/}
+                                {/*</div>*/}
+
                                 <div className={"Table"}>
-                                    <DayTimeTable DataComponent={this.props.coursesB}/>
+                                    <DayTimeTable DataComponent={this.props.coursesB.concat(this.props.temporaryCourseB)} Color={this.props.isColor}/>
                                 </div>
 
                             </TabContainer>}
@@ -279,7 +415,7 @@ class Schedule extends Component{
                             <TabContainer>
 
                                 <div className={"Table"}>
-                                    <DayTimeTable DataComponent={this.props.coursesC}/>
+                                    <DayTimeTable DataComponent={this.props.coursesC.concat(this.props.temporaryCourseC)} Color={this.props.isColor} />
                                     {/*<GetPlan Value={this.state.value} Pro={this.props.coursesA}/>*/}
                                 </div>
 
