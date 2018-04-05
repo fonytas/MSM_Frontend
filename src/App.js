@@ -35,7 +35,7 @@ class App extends Component {
 
         e.preventDefault();
 
-        if (this.state.userName.length < 4 && this.state.userName.length > 10){
+        if (this.state.userName.length < 4 || this.state.userName.length > 10){
             alert("Username must be between 4 to 6 letters");
 
         }
