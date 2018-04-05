@@ -28,10 +28,12 @@ class Login extends Component{
     login(e){
         e.preventDefault();
 
+
         const loginParams = {
             username: this.state.userName,
             password: this.state.password
         };
+
 
         axios.post("/login", urlencode(loginParams))
             .then((response) => {

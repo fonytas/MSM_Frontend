@@ -31,7 +31,14 @@ class App extends Component {
     }
 
     registerInfo(e){
+
+
         e.preventDefault();
+
+        if (this.state.userName.length < 4 && this.state.userName.length > 10){
+            alert("Username must be between 4 to 6 letters");
+
+        }
         if(this.state.password.length < 6){
             alert("Password must be more than 6 letters");
         }
