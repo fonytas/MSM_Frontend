@@ -25,7 +25,6 @@ const styles = {
 function Logout({History}){
     axios.post('/logout')
         .then((response) =>{
-            console.log(response)
             History.push("/")
         })
         .catch((error) =>{

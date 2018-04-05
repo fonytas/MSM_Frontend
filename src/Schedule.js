@@ -76,8 +76,9 @@ var send = []
 function Logout({History}){
     axios.post('/logout')
         .then((response) =>{
-            console.log(response)
+            window.location.reload();
             History.push("/")
+
         })
         .catch((error) =>{
         })
@@ -122,6 +123,7 @@ class Schedule extends Component{
 
 
     componentDidMount(){
+
         axios.get("/user/whoami")
             .then((response) =>{
 

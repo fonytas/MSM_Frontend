@@ -319,7 +319,7 @@ class OpenSection extends React.Component {
                         <div className={"Table-body-2"}>
                             <MyTable data={data}
                                      pages={pages} //Display the total number of pages
-                                     loading={loading} // Display the loading overlay when we need it
+                                     // loading={loading} // Display the loading overlay when we need it
                                      onFetchData={this.fetchData} // Request new data when things change
                                      onRowClick={this.onRowClick}
                             />

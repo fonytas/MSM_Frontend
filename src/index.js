@@ -7,11 +7,7 @@ import OpenSection from './OpenSection'
 import Login from './Login'
 import registerServiceWorker from './registerServiceWorker';
 import {Redirect} from "react-router-dom";
-
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
 import {
     BrowserRouter as Router,
     Route,
@@ -187,12 +183,8 @@ class Mother extends Component{
                             temporaryCourseA={this.state.temporaryCourseA}
                             temporaryCourseB={this.state.temporaryCourseB}
                             temporaryCourseC={this.state.temporaryCourseC}
-
                             onAddCourse={this.onAddCourse}
                             onSetPlan={this.onSetPlan}
-                            // saveCourse = {this.saveCourse}
-
-
                             isAuthen={this.isAuthen}
                             isColor={this.state.isColor}
                             changeColor={this.changeColor}
@@ -217,24 +209,16 @@ class Mother extends Component{
                             todo={this.state.todo}
                             isRemove={this.state.remove}
                             onSetRemove={this.onSetRemove}
-
-
                             onAddCourse={this.onAddCourse}
                             onSetPlan={this.onSetPlan}
                             saveCourse = {this.saveCourse}
-
                             isAuthen={this.isAuthen}
                             isColor={this.state.isColor}
 
                         />)
                     }}/>
-
-
                 </div>
-            )
-        }
-    }
-
+            )}}
 }
 
 function MainApp(){
@@ -248,9 +232,7 @@ function MainApp(){
                 <Route exact path="/" component={Login} />
                 <Route exact path ="/DayTimeTable" component={DayTimeTable}/>
                 <Route exact path="/admin" component={Admin} />
-
             </div>
-
         </Router>
         </MuiThemeProvider>
         </div>

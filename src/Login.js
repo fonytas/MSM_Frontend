@@ -17,7 +17,6 @@ class Login extends Component{
         this.updateInputValue = this.updateInputValue.bind(this);
         this.updatePasswordValue = this.updatePasswordValue.bind(this);
 
-
     }
     updateInputValue(evt){
         this.setState({userName: evt.target.value});
@@ -54,11 +53,9 @@ class Login extends Component{
         const {redirect, isAdmin} = this.state
 
         if (redirect) {
-            console.log("Pls redirect")
             return <Redirect to='/'/>;
         }
         if (isAdmin){
-            console.log("this is admin")
             return <Redirect to='/admin'/>;
 
         }
