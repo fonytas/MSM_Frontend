@@ -64,6 +64,8 @@ class Login extends Component{
             return (
 
                 <div className={"parentDiv"}>
+
+                    {/*<button onClick={() => this.props.history.push('/admin')}>GG</button>*/}
                     <div className="leftBox">
                         <img className="logo" src="https://image.flaticon.com/icons/svg/295/295128.svg"/>
 

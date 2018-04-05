@@ -19,9 +19,7 @@ export default function DayTimeTable({DataComponent, Color}) {
 
     function eventStyle() {
 
-        // var randomColor = require('randomcolor');
-        //
-        // color = randomColor();
+
 
         var style = {
             backgroundColor: Color,

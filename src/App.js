@@ -4,7 +4,7 @@ import urlencode from 'form-urlencoded';
 import './App.css';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-
+import isEmail from 'validator/lib/isEmail';
 
 class App extends Component {
     constructor(props){
@@ -43,6 +43,11 @@ class App extends Component {
 
             alert("Password mismatch");
         }
+
+        if (!isEmail(this.state.email)){
+            alert("Please put the valid Email");
+        }
+
         else{
 
             const regisParams ={

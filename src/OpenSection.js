@@ -56,6 +56,8 @@ const ScheduleButton = withRouter(ScheduleButtonBase);
 
 export function fetchLocals() {
 
+
+
     const request = axios.post('course/findall')
         .then(function(response) {
             return response.data;
@@ -81,7 +83,8 @@ const requestData = (pageSize, page, sorted, filtered) => {
                 if (filtered.length) {
                     filteredData = filtered.reduce((filteredSoFar, nextFilter) => {
                         return filteredSoFar.filter(row => {
-                            return (row[nextFilter.id] + "").includes(nextFilter.value);
+                            // console.log(row[nextFilter.id])
+                            return (row[nextFilter.id].toLowerCase() + "").includes(nextFilter.value.toLowerCase());
                         });
                     }, filteredData);
                 }

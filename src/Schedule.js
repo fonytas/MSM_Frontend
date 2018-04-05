@@ -79,6 +79,7 @@ var send = []
 function Logout({History}){
     axios.post('/logout')
         .then((response) =>{
+            console.log(response)
             History.push("/login")
         })
         .catch((error) =>{
@@ -125,6 +126,8 @@ class Schedule extends Component{
 
 
     componentDidMount(){
+
+        console.log("Com Did mount")
 
         axios.get("/user/whoami")
             .then((response) =>{
@@ -240,10 +243,7 @@ class Schedule extends Component{
 
         })
 
-        // console.log("GG")
-        // console.log(send)
-        // console.log(todoItems)
-        // this.setState({send: send, todoItems:todoItems})
+
 
 
     }
@@ -269,6 +269,8 @@ class Schedule extends Component{
             })
             .catch((error) =>{
             })
+
+        window.location.reload();
     }
 
 
@@ -303,8 +305,7 @@ class Schedule extends Component{
                     </AppBar>
 
 
-
-                    {/*<div>*/}
+                    {/*<button onClick={() => this.props.history.push('/ad')}>GGGG</button>*/}
 
 
 
@@ -400,11 +401,8 @@ class Schedule extends Component{
                             {value === 1 &&
                             <TabContainer>
 
-                                {/*<div id="main">*/}
-                                    {/*<TodoList items={todoItems}*/}
-                                              {/*removeItem={this.removeItem}*/}
-                                    {/*/>*/}
-                                {/*</div>*/}
+
+
 
                                 <div className={"Table"}>
                                     <DayTimeTable DataComponent={this.props.coursesB.concat(this.props.temporaryCourseB)} Color={this.props.isColor}/>
@@ -443,4 +441,5 @@ Schedule.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default  withStyles(styles)(Schedule);
+export default  withStyles(styles)(Schedule, LogoutButton);
+// export default LogoutButton
