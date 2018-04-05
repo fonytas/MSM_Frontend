@@ -19,6 +19,9 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
+import Click from 'material-ui-icons/TouchApp';
+import Snackbar from 'material-ui/Snackbar';
+
 
 
 const styles = {
@@ -45,7 +48,14 @@ const styles = {
         paddingTop: 16,
         paddingBottom: 16,
         backgroundColor: '#f7f3ed'
-    }
+    },
+    text:{
+        paddingLeft: 40
+    },
+    icon2:{
+        fontSize:35,
+        marginLeft:12
+    },
 };
 
 function ScheduleButtonBase({history}){
@@ -169,15 +179,16 @@ function MyTable({onRowClick, ...props}){
                 style:{ "whiteSpace": "normal"},
                 maxWidth: 140,
 
-            }, {
-                filterable:false,
-                style: {"margin": "5px 0px 0px 10px"},
-
-                Cell: <Button onClick={(e) =>{ }} variant={"fab"}  mini color="secondary" aria-label="add" >
-                    <AddIcon /></Button>,
-
-                maxWidth:50,
-            }
+            },
+            // {
+            //     filterable:false,
+            //     style: {"margin": "5px 0px 0px 10px"},
+            //
+            //     Cell: <Button onClick={(e) =>{ }} variant={"fab"}  mini color="secondary" aria-label="add" >
+            //         <AddIcon /></Button>,
+            //
+            //     maxWidth:50,
+            // }
         ]}
         manual // Forces table not to paginate or sort automatically, so we can handle it server-side
         filterable
@@ -202,10 +213,29 @@ class OpenSection extends React.Component {
             pages: null,
             loading: true,
             status: false,
-            redirect: false
+            redirect: false,
+            open: false,
+            vertical: null,
+            horizontal: null,
         };
         this.fetchData = this.fetchData.bind(this);
     }
+
+    // state = {
+    //     open: false,
+    //     vertical: null,
+    //     horizontal: null,
+    // };
+
+    handleClick =  () => {
+        // console.log("HI")
+        this.setState({ open: true,  vertical: 'top', horizontal: 'center' });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
 
     componentDidMount() {
 
@@ -238,6 +268,9 @@ class OpenSection extends React.Component {
     }
 
     onRowClick = (rowInfo) => (e) => {
+
+        this.handleClick()
+
 
         let count = 0;
 
@@ -283,7 +316,7 @@ class OpenSection extends React.Component {
 
     render() {
         const {classes} = this.props;
-        const {data, pages, loading, redirect} = this.state;
+        const {data, pages, loading, redirect, vertical, horizontal, open } = this.state;
 
         if (redirect) {
             return <Redirect to='/login'/>;
@@ -308,7 +341,16 @@ class OpenSection extends React.Component {
                     </AppBar>
 
 
+
+
+
                     <Paper className={classes.paper} elevation={4}>
+
+                        <Typography  color="inherit" className={classes.text}>
+                            <Click className={classes.icon2}/>
+                            Click on the course's row to add course
+                        </Typography>
+
 
                         <div className={"Table-body-2"}>
                             <MyTable data={data}
@@ -319,6 +361,16 @@ class OpenSection extends React.Component {
                             />
                         </div>
                     </Paper>
+                    <Snackbar
+                        anchorOrigin={{ vertical, horizontal }}
+                        autoHideDuration={1000}
+                        open={open}
+                        onClose={this.handleClose}
+                        SnackbarContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">ADDED</span>}
+                    />
 
                 </div>
             );}

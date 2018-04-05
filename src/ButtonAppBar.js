@@ -21,6 +21,7 @@ const styles = {
         marginLeft: -12,
         marginRight: 20,
     },
+
 };
 
 
@@ -28,7 +29,7 @@ function Logout({History}){
     axios.post('/logout')
         .then((response) =>{
             console.log(response)
-            History.push("/login")
+            History.push("/")
         })
         .catch((error) =>{
         })
@@ -53,6 +54,8 @@ function ButtonAppBar(props) {
                     <LogoutButton/>
                 </Toolbar>
             </AppBar>
+
+
         </div>
     );
 }

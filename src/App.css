@@ -113,3 +113,21 @@
     text-align: center;
     padding-top: 10px;
 }
+
+
+.BoxOfText{
+    position: relative;
+
+    background-color: #f7f3ed;
+    margin-top: 250px;
+    height: 80px;
+
+    /*width: 20px;*/
+    /*padding-left: 600px;*/
+    /*text-align: center;*/
+
+    margin-left: 340px;
+    margin-right: 320px;
+    border-radius: 15px;
+
+}

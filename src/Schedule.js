@@ -17,6 +17,7 @@ import MenuIcon from 'material-ui-icons/Event';
 import Toolbar from 'material-ui/Toolbar';
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
+
 import Dialog, {
     DialogActions,
     DialogContent,
@@ -80,7 +81,7 @@ function Logout({History}){
     axios.post('/logout')
         .then((response) =>{
             console.log(response)
-            History.push("/login")
+            History.push("/")
         })
         .catch((error) =>{
         })
@@ -127,7 +128,7 @@ class Schedule extends Component{
 
     componentDidMount(){
 
-        console.log("Com Did mount")
+        // console.log("Com Did mount")
 
         axios.get("/user/whoami")
             .then((response) =>{
@@ -283,7 +284,7 @@ class Schedule extends Component{
 
         if (redirect) {
             console.log("redirect")
-            return <Redirect to='/login'/>;
+            return <Redirect to='/'/>;
         } else {
             // console.log(this.props.coursesA)
 
@@ -423,6 +424,7 @@ class Schedule extends Component{
                     <Snackbar
                         anchorOrigin={{vertical, horizontal}}
                         open={openS}
+                        autoHideDuration={1000}
                         onClose={this.handleCloseS}
                         SnackbarContentProps={{
                             'aria-describedby': 'message-id',

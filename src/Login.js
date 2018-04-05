@@ -13,7 +13,7 @@ class Login extends Component{
     constructor(props){
         super(props);
         this.state = {userName:"", email:"",password: "",
-            ccPassword: "", redirect: false}
+            ccPassword: "", redirect: false, isAdmin: false}
         this.updateInputValue = this.updateInputValue.bind(this);
         this.updatePasswordValue = this.updatePasswordValue.bind(this);
 
@@ -37,11 +37,19 @@ class Login extends Component{
 
         axios.post("/login", urlencode(loginParams))
             .then((response) => {
-                console.log("THIS IS LOGIN")
+                console.log(response)
+                if (response.data.role === "admin"){
+                    // console.log("I am admin")
 
-                // console.log(response.data.login);
+                    this.setState({isAdmin: true})
+                }
 
-                this.props.history.push('/Schedule');
+                else{
+
+                    this.props.history.push('/Schedule');
+                }
+
+
             })
             .catch((error) => {
                 alert("Username or Password are incorrect, Please try again.");
@@ -54,12 +62,20 @@ class Login extends Component{
 
     render() {
         const {classes} = this.props
-        const {redirect} = this.state
+        const {redirect, isAdmin} = this.state
+
 
         if (redirect) {
             console.log("Pls redirect")
-            return <Redirect to='/login'/>;
-        } else {
+            return <Redirect to='/'/>;
+        }
+        if (isAdmin){
+            console.log("this is admin")
+            return <Redirect to='/admin'/>;
+
+        }
+
+        else {
 
             return (
 

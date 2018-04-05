@@ -59,7 +59,7 @@ class App extends Component {
 
             axios.post("/user/register",urlencode(regisParams))
                 .then((response) =>{
-                    this.props.history.push('/login')
+                    this.props.history.push('/')
 
                 })
                 .catch((error) =>{
@@ -80,7 +80,7 @@ class App extends Component {
                 <div className="leftBox">
                     <img className="logo" src="https://image.flaticon.com/icons/svg/295/295128.svg" />
 
-                    <div className={"option"}><Button size='large'onClick={ () => this.props.history.push('/login')}>Login</Button><Button size='large'color={"secondary"}>Register</Button></div>
+                    <div className={"option"}><Button size='large'onClick={ () => this.props.history.push('/')}>Login</Button><Button size='large'color={"secondary"}>Register</Button></div>
 
                     <div className={"informationBox2"}>
 

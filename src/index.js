@@ -79,7 +79,7 @@ class Mother extends Component{
                 this.setState({coursesA: response.data[0].courses})
                 this.setState({coursesB: response.data[1].courses})
                 this.setState({coursesC: response.data[2].courses})
-                console.log(response.data[0])
+                // console.log(response.data[0])
             })
             .catch((error) => {
                 this.setState({ redirect: true })
@@ -215,7 +215,7 @@ class Mother extends Component{
                             temporaryCourseB={this.state.temporaryCourseB}
                             temporaryCourseC={this.state.temporaryCourseC}
 
-                            // onAddCourse={this.onAddCourse}
+                            onAddCourse={this.onAddCourse}
                             onSetPlan={this.onSetPlan}
                             // saveCourse = {this.saveCourse}
 
@@ -276,7 +276,7 @@ function MainApp(){
             <div>
                 <Mother/>
                 <Route exact path="/register" component={App} />
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/" component={Login} />
 
                 <Route exact path ="/DayTimeTable" component={DayTimeTable}/>
                 <Route exact path="/admin" component={Admin} />
