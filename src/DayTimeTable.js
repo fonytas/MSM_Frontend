@@ -2,12 +2,9 @@ import React from 'react';
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import GetEvent from './GetEvent';
-
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
-
-
 
 export default function DayTimeTable({DataComponent, Color}) {
 
@@ -15,11 +12,7 @@ export default function DayTimeTable({DataComponent, Color}) {
         dayFormat: (date, culture, localizer) =>
             localizer.format(date, 'ddd', culture),
     }
-    // let color;
-
     function eventStyle() {
-
-
 
         var style = {
             backgroundColor: Color,

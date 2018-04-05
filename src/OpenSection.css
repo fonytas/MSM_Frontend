@@ -1,16 +1,4 @@
 
-/*.Table-body {*/
-    /*!*position: absolute;*!*/
-    /*!*overflow: auto;*!*/
-    /*margin: 10px 2rem 3rem 2rem;*/
-    /*width: 1360px;*/
-    /*height: 1769px;*/
-    /*!*z-index: -1;*!*/
-
-
-
-/*}*/
-
 .Table-body-2 {
     margin: 10px 2rem 3rem 2rem;
 
@@ -22,7 +10,7 @@
 
 .AddButton{
     position: relative;
-    font-family: "Geneva";
+    font-family: 'Roboto',sans-serif;
     left: 23%;
     background-color:#e23c52;
     color: white;

@@ -3,8 +3,6 @@ import ReactTable from "react-table";
 import {withRouter, Redirect} from "react-router-dom";
 import _ from "lodash";
 import axios from "./AxiosConfig";
-import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
 
 import './OpenSection.css';
 import "react-table/react-table.css";
@@ -21,6 +19,8 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Click from 'material-ui-icons/TouchApp';
 import Snackbar from 'material-ui/Snackbar';
+import Button from 'material-ui/Button';
+
 
 
 
@@ -63,10 +63,7 @@ function ScheduleButtonBase({history}){
 }
 const ScheduleButton = withRouter(ScheduleButtonBase);
 
-
 export function fetchLocals() {
-
-
 
     const request = axios.post('course/findall')
         .then(function(response) {
@@ -93,12 +90,10 @@ const requestData = (pageSize, page, sorted, filtered) => {
                 if (filtered.length) {
                     filteredData = filtered.reduce((filteredSoFar, nextFilter) => {
                         return filteredSoFar.filter(row => {
-                            // console.log(row[nextFilter.id])
                             return (row[nextFilter.id].toLowerCase() + "").includes(nextFilter.value.toLowerCase());
                         });
                     }, filteredData);
                 }
-                // You can also use the sorting in your request, but again, you are responsible for applying it.
                 const sortedData = _.orderBy(
                     filteredData,
                     sorted.map(sort => {
@@ -113,14 +108,10 @@ const requestData = (pageSize, page, sorted, filtered) => {
                     }),
                     sorted.map(d => (d.desc ? "desc" : "asc"))
                 );
-
-                // You must return an object containing the rows of the current page, and optionally the total pages number.
                 const res = {
                     rows: sortedData.slice(pageSize * page, pageSize * page + pageSize),
                     pages: Math.ceil(filteredData.length / pageSize)
                 };
-
-                // Here we'll simulate a server response with 500ms of delay.
                 setTimeout(() => resolve(res), 500);
 
 
@@ -180,17 +171,8 @@ function MyTable({onRowClick, ...props}){
                 maxWidth: 140,
 
             },
-            // {
-            //     filterable:false,
-            //     style: {"margin": "5px 0px 0px 10px"},
-            //
-            //     Cell: <Button onClick={(e) =>{ }} variant={"fab"}  mini color="secondary" aria-label="add" >
-            //         <AddIcon /></Button>,
-            //
-            //     maxWidth:50,
-            // }
         ]}
-        manual // Forces table not to paginate or sort automatically, so we can handle it server-side
+        manual
         filterable
         defaultPageSize={10}
         className="-striped -highlight"
@@ -221,14 +203,7 @@ class OpenSection extends React.Component {
         this.fetchData = this.fetchData.bind(this);
     }
 
-    // state = {
-    //     open: false,
-    //     vertical: null,
-    //     horizontal: null,
-    // };
-
     handleClick =  () => {
-        // console.log("HI")
         this.setState({ open: true,  vertical: 'top', horizontal: 'center' });
     };
 
@@ -238,7 +213,6 @@ class OpenSection extends React.Component {
 
 
     componentDidMount() {
-
         axios.get("/user/whoami")
             .then((response) => {
 
@@ -299,18 +273,12 @@ class OpenSection extends React.Component {
 
         }
 
-
         if (count !== 1 ) {
 
             this.props.onAddCourse(rowInfo.original, this.props.plan)
         }
 
-        // var randomColor = require('randomcolor');
-        // let color = randomColor();
         this.props.changeColor()
-
-
-
     }
 
 
@@ -341,16 +309,12 @@ class OpenSection extends React.Component {
                     </AppBar>
 
 
-
-
-
                     <Paper className={classes.paper} elevation={4}>
 
                         <Typography  color="inherit" className={classes.text}>
                             <Click className={classes.icon2}/>
                             Click on the course's row to add course
                         </Typography>
-
 
                         <div className={"Table-body-2"}>
                             <MyTable data={data}

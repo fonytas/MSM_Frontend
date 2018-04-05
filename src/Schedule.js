@@ -70,11 +70,7 @@ const Isize = {
 };
 
 var todoItems =[]
-
 var send = []
-// var sendA = []
-// var sendB = []
-// var sendC = []
 
 
 function Logout({History}){
@@ -111,7 +107,6 @@ class Schedule extends Component{
     constructor(props){
        super(props);
         this.removeItem = this.removeItem.bind(this);
-        // this.deleteCourse = this.deleteCourse.bind(this);
 
     }
 
@@ -127,9 +122,6 @@ class Schedule extends Component{
 
 
     componentDidMount(){
-
-        // console.log("Com Did mount")
-
         axios.get("/user/whoami")
             .then((response) =>{
 
@@ -144,26 +136,16 @@ class Schedule extends Component{
     removeItem (itemIndex) {
 
         this.props.onSetRemove()
-
         todoItems.splice(itemIndex, 1);
         this.setState({todoItems: todoItems});
-
         send.splice(itemIndex, 1);
-        console.log(send)
         this.props.setTodo(send,this.state.value)
-
-
-
     }
-
-
 
 
     handleClickOpen2 = (val) => {
         this.setState({ open2: true });
         this.deleteCourse(val)
-        // this.props.createItem
-
     };
 
     handleClose2 = () => {
@@ -171,13 +153,10 @@ class Schedule extends Component{
     };
 
     handleIndex = (event, value) => {
-        console.log("Handle")
         this.setState({ value:value });
         this.props.onSetPlan(value)
         todoItems = []
         send = []
-        // this.props.setZero
-
     };
 
     handleClickOpen = () => {
@@ -213,7 +192,6 @@ class Schedule extends Component{
 
         }
 
-        // console.log(data)
         data.forEach(function (element) {
 
             var dataSky = element.skyid
@@ -221,7 +199,6 @@ class Schedule extends Component{
             var count = 0;
 
             if (todoItems.length ===0){
-                // console.log("HI")
                 todoItems.push({index: 1, value: dataSky, done: false})
                 send.push(element)
             }
@@ -237,40 +214,23 @@ class Schedule extends Component{
                 if (count!==1){
                     todoItems.push({index: 1, value: dataSky, done: false})
                     send.push(element)
-
                 }
-
             }
-
         })
-
-
-
-
     }
 
     handleDelete(){
-        //
-        // console.log(send)
-        // console.log(todoItems)
-
         this.handleClose2()
         this.props.onDeleteCourse(this.state.value)
-
     }
 
 
-
-
     deleteSchedule(){
-
-        // e.preventDefault();
         axios.post(`/user/removeAllCoursesFromPlan?planname=${this.state.value+1}`)
             .then((response) =>{
             })
             .catch((error) =>{
             })
-
         window.location.reload();
     }
 
@@ -279,18 +239,11 @@ class Schedule extends Component{
 
         const {classes} = this.props;
         const {value, vertical, horizontal, openS, redirect} = this.state;
-        // console.log(this.props.coursesA)
-
 
         if (redirect) {
-            console.log("redirect")
             return <Redirect to='/'/>;
         } else {
-            // console.log(this.props.coursesA)
-
-
             return (<div className={"Main"}>
-
 
                     <AppBar position="static">
                         <Toolbar>
@@ -305,16 +258,8 @@ class Schedule extends Component{
                         </Toolbar>
                     </AppBar>
 
-
-                    {/*<button onClick={() => this.props.history.push('/ad')}>GGGG</button>*/}
-
-
-
                     <div className={"Left-panel"}>
-
                         <OnButton AddButtonComponent={AddButton}/>
-
-
                         <div className={"Delete-course"}>
                             <button onClick={ () =>  this.handleClickOpen2(this.state.value) }><Icon name=" fa-times-circle" style={Isize}/><br/>Delete Course<br/></button>
 
@@ -444,4 +389,3 @@ Schedule.propTypes = {
 };
 
 export default  withStyles(styles)(Schedule, LogoutButton);
-// export default LogoutButton

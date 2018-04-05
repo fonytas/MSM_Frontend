@@ -5,9 +5,6 @@
 }
 
 
-
-
-
 .S-footer{
     position: relative;
     background: url("https://image.ibb.co/emTA57/pinkwatercolor.jpg");
@@ -17,20 +14,16 @@
 }
 
 
-
 .Left-panel button {
     width: 8.1rem;
     height: 4rem;
-
     vertical-align: middle;
-
     border-radius: 8px;
     border-color: black;
-    font-family: "Geneva";
+    font-family: 'Roboto', sans-serif;
     font-size: 0.8rem ;
     display: block;
     text-align: center;
-
     color: #7f0000;
     background-color:#f7f3ed;
     -webkit-transition: all 0.3s ease;
@@ -41,96 +34,48 @@
 }
 
 
-
-
 .Left-panel button:hover,.Left-panel button:active,.Left-panel button:focus {
     background: #E7D3D9;
 
 }
 
 .S-body{
-    position: fixed;
+    /*position: fixed;*/
     position: center;
     margin-left: 4rem;
-    /*margin-right: 1rem;*/
-
-
-
     width:90%;
     height:75%;
     border: solid #e23c52 0.1rem;
     border-radius: 8px;
     background-color:white;
-
-
 }
-
 
 
 .Left-panel{
     width: 13%;
     height: 90%;
-    /*margin: 1rem;*/
     padding-left: 1.5rem;
     padding-top: 4rem;
     float: left;
     font-size: 2rem;
-    /*background-color:  #e23c52;*/
-    /*border: solid black 0.05rem;*/
     border-radius: 8px;
-
-
-
 }
 
 
 .Mid-panel {
-
     position: fixed;
     display: inline-block;
     float: left;
-
     height: 89%;
     width: 80%;
-
     margin: 1rem;
-
-
-
-    /*border: solid #2f4f4f 0.05rem;*/
-
     background-color: #f7f3ed;
-
-
 }
 
 
-/*.Right-panel {*/
-    /*border-radius: 8px;*/
-    /*display: inline-block;*/
-    /*float: right;*/
-
-    /*width: 20%;*/
-    /*height: 90%;*/
-
-    /*margin: 1rem;*/
-    /*border: solid black 0.05rem;*/
-
-    /*overflow: scroll;*/
-    /*background-color:  #e23c52;*/
-
-/*}*/
-
 .Table{
-
-    /*font-family: "Geneva";*/
     font-size: 0.3rem;
-
     height: 630px;
-
-    /*margin: 1rem;*/
-
-
 }
 
 
@@ -139,19 +84,13 @@
     width: 90%;
     height: 20%;
     margin: 1rem;
-    font-family: "Geneva";
-
+    font-family: 'Roboto', sans-serif;
     border-radius: 8px;
     background-color: white;
 
-
 }
 
-.switch {
 
-    padding-left: 3rem;
-
-}
 
 
 

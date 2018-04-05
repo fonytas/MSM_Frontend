@@ -1,15 +1,8 @@
 body {
-
-
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
-  /*position: relative;*/
-  /*top: 4rem;*/
-
-  /*overflow: scroll;*/
-  /*background-image: url("https://images.unsplash.com/photo-1520545255830-2511979f3636?ixlib=rb-0.3.5&s=afd42a9d444abb3a5bccf3521192b17b&auto=format&fit=crop&w=1971&q=80");*/
   background-size: cover;
   background-image: url("https://image.ibb.co/j6P1QS/library_Blur.jpgS");
 }

@@ -26,7 +26,6 @@ class Login extends Component{
         this.setState({password: evt.target.value});
     }
 
-
     login(e){
         e.preventDefault();
 
@@ -37,33 +36,22 @@ class Login extends Component{
 
         axios.post("/login", urlencode(loginParams))
             .then((response) => {
-                console.log(response)
                 if (response.data.role === "admin"){
-                    // console.log("I am admin")
-
                     this.setState({isAdmin: true})
                 }
-
                 else{
 
                     this.props.history.push('/Schedule');
                 }
-
-
             })
             .catch((error) => {
                 alert("Username or Password are incorrect, Please try again.");
-                console.log(error.response.data);
-                // this.setState({ redirect: true })
                 window.location.reload();
             })
     }
 
-
     render() {
-        const {classes} = this.props
         const {redirect, isAdmin} = this.state
-
 
         if (redirect) {
             console.log("Pls redirect")
@@ -80,8 +68,6 @@ class Login extends Component{
             return (
 
                 <div className={"parentDiv"}>
-
-                    {/*<button onClick={() => this.props.history.push('/admin')}>GG</button>*/}
                     <div className="leftBox">
                         <img className="logo" src="https://image.flaticon.com/icons/svg/295/295128.svg"/>
 

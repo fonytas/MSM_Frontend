@@ -15,9 +15,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
     BrowserRouter as Router,
     Route,
-    // Link,
-    // Redirect,
-    // withRouter,
 } from 'react-router-dom'
 
 
@@ -25,8 +22,6 @@ import DayTimeTable from "./DayTimeTable";
 import {createMuiTheme} from "material-ui";
 import axios from "./AxiosConfig";
 import Admin from "./Admin";
-// import Login from "./Login";
-
 
 const theme = createMuiTheme({
     palette: {
@@ -44,7 +39,6 @@ const theme = createMuiTheme({
         },
     }
 })
-
 
 
 class Mother extends Component{
@@ -68,18 +62,13 @@ class Mother extends Component{
         }
     }
 
-
-
     isAuthen = (name) =>{
         this.setState({whoAmI: name})
         axios.get("/user/getplan")
             .then((response) =>{
-
-
                 this.setState({coursesA: response.data[0].courses})
                 this.setState({coursesB: response.data[1].courses})
                 this.setState({coursesC: response.data[2].courses})
-                // console.log(response.data[0])
             })
             .catch((error) => {
                 this.setState({ redirect: true })
@@ -90,7 +79,6 @@ class Mother extends Component{
 
 
     saveCourse = (value) => {
-        console.log("Saved !")
         let data ;
 
         if (value === 0){
@@ -112,40 +100,28 @@ class Mother extends Component{
 
 
     onSetPlan = (plan) => {
-
         this.setState({plan: plan})
     }
     onAddCourse = (course, val) => {
 
-        console.log("call on add course")
-
         if (val === 0){
             this.state.temporaryCourseA.push(course)
-            // this.state.coursesA.push(course)
-            // this.state.todoA.push(course)
         }
         else if (val ===1){
             this.state.temporaryCourseB.push(course)
-
         }
-
         else if (val ===2){
             this.state.temporaryCourseC.push(course)
-
         }
-
 
 
     }
     setTodo= (todo,val) =>{
-
         this.setState({todo: todo})
-
     }
 
     changeColor = () =>{
         var randomColor = require('randomcolor');
-
         this.setState({isColor: randomColor()})
     }
     
@@ -154,11 +130,8 @@ class Mother extends Component{
     }
     onDeleteCourse = (val) => {
 
-        console.log(this.state.todo)
-
         if (this.state.todo.length !== 0){
             if (val === 0){
-                // console.log("2")
                 this.setState({coursesA: []})
                 this.setState({temporaryCourseA: this.state.todo})
 
@@ -256,10 +229,6 @@ class Mother extends Component{
                         />)
                     }}/>
 
-                    {/*<Route exact path="/Admin" render={(props) => {*/}
-                        {/*return (<Admin/>)*/}
-
-                    {/*}}/>*/}
 
                 </div>
             )
@@ -277,17 +246,8 @@ function MainApp(){
                 <Mother/>
                 <Route exact path="/register" component={App} />
                 <Route exact path="/" component={Login} />
-
                 <Route exact path ="/DayTimeTable" component={DayTimeTable}/>
                 <Route exact path="/admin" component={Admin} />
-
-
-
-
-
-
-
-
 
             </div>
 
